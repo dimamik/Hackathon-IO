@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    // Prettier
+    "formatter.prettier",
+    // Github Pull requests
+    "GitHub.vscode-pull-request-github",
+
+    // VS Code Icons
+    "vscode-icons-team.vscode-icons"
+  ]
+}

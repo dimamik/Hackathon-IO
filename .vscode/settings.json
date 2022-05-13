@@ -1,0 +1,7 @@
+{
+  "[javascript][typescript][json][html][css][jsonc][javascriptreact][typescriptreact][vue][handlebars]": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.bracketPairColorization.enabled": true
+}
