@@ -20,10 +20,7 @@ export interface MapContextType {
   verticalBars: Map<string, Player>;
   boxes: Map<string, Player>;
   playingNow: Player | null;
-  setPlayingNow: (player: Player) => void;
-  setHorizontaBars: (map: Map<string, Player>) => void;
-  setVerticalBars: (map: Map<string, Player>) => void;
-  setBoxes: (map: Map<string, Player>) => void;
+  setMapState: (mapState: MapState) => void;
 }
 
 // const mapState = {
