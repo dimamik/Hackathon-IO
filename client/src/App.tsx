@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import HomeScreen from './screen/HomeScreen';
+import Header from './components/Header/Header';
+import HomeScreen from './screens/HomeScreen/HomeScreen';
 import MapProvider from './context/Context';
-import BoardScreen from './screen/BoardScreen';
-import ConfigurationScreen from './screen/ConfigurationScreen';
-import QuestionComponents from './components/QuestionComponents';
+import BoardScreen from './screens/Board/BoardScreen';
+import ConfigurationScreen from './screens/Configuration/ConfigurationScreen';
+import QuestionComponents from './components/Modals/QuestionComponents';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import WaitingForPlayer from './components/WaitingForPlayer';
+import WaitingForPlayer from './components/Modals/WaitingForPlayer';
 
 function App() {
   // const [roomId, setRoomId] = useState('');
@@ -55,7 +54,6 @@ function App() {
             <Route path="/question" element={<QuestionComponents />} />
             <Route path='/waiting' element={<WaitingForPlayer />} />
           </Routes>
-          {/* <Footer /> */}
         </div>
       </MapProvider>
     </BrowserRouter>

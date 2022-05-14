@@ -1,12 +1,12 @@
 import { useContext, useState } from 'react';
-import { MapContext } from '../context/Context';
-import Board from '../components/Board';
-import PlayerStats from '../components/Statistics/PlayerStats';
+import { MapContext } from '../../context/Context';
+import Board from '../../components/Board/Board';
+import PlayerStats from '../../components/Statistics/PlayerStats';
 import { useLocation } from 'react-router-dom';
 import Modal from 'react-modal';
-import Question from '../components/QuestionComponents';
+import Question from '../../components/Modals/QuestionComponents';
 import './BoardScreen.css';
-import WaitingForPlayer from '../components/WaitingForPlayer';
+import WaitingForPlayer from '../../components/Modals/WaitingForPlayer';
 
 Modal.setAppElement('#root');
 

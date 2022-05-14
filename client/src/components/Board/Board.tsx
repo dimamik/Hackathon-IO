@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { MapProps, BoardFrontend, Coordinates } from '../types';
-import { MapContext } from '../context/Context';
+import { MapProps, BoardFrontend, Coordinates } from '../../types';
+import { MapContext } from '../../context/Context';
 import './Map.css';
 
 type RowProps = {

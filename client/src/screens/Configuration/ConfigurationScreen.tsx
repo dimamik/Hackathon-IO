@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './Configuration.css';
-import { MapContext } from '../context/Context';
+import { MapContext } from '../../context/Context';
 
 function ConfigurationScreen() {
   const [width, setWidth] = useState(0);
