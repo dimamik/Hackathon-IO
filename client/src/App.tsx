@@ -18,13 +18,14 @@ function App() {
     <BrowserRouter>
       <MapProvider>
         <Header />
-        <div className='background'>
+        <div className='mainBackground'>
           <Routes>
             <Route path="/" element={<HomeScreen />} />
             <Route path="/home" element={<HomeScreen />} />
             <Route path="/board" element={<BoardScreen />} />
+            <Route path='/configuration' element={<ConfigurationScreen />} />
           </Routes>
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </MapProvider>
     </BrowserRouter>

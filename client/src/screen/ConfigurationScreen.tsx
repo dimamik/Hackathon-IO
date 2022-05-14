@@ -18,7 +18,7 @@ function ConfigurationScreen() {
                         <div className='settingTitle'>
                             <p>【Map size】</p>
                         </div>
-                        <div className='horizontalSettingOptions'>
+                        <div className='verticalSettingOptions'>
                             <div className='row'>
                                 <p>Width</p><input type='text'></input>
                             </div>
