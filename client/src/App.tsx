@@ -9,6 +9,7 @@ import BoardScreen from './screen/BoardScreen';
 import ConfigurationScreen from './screen/ConfigurationScreen';
 import QuestionComponents from './components/QuestionComponents';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import WaitingForPlayer from './components/WaitingForPlayer';
 
 function App() {
   // const [roomId, setRoomId] = useState('');
@@ -52,6 +53,7 @@ function App() {
             <Route path="/board" element={<BoardScreen />} />
             <Route path="/configuration" element={<ConfigurationScreen />} />
             <Route path="/question" element={<QuestionComponents />} />
+            <Route path='/waiting' element={<WaitingForPlayer />} />
           </Routes>
           {/* <Footer /> */}
         </div>
