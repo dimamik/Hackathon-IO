@@ -3,22 +3,23 @@ import { Container, Row, Col } from 'react-bootstrap'
 
 function QuestionComponents() {
   return (
-  
-    <Container>
-      <Row>
-        <div className='questionNavbar'>
-        <Col>
-          [１]　ｑｕｅｓｔｉｏｎ
-        </Col>
-        <Col className='rightCenter'>
-          <div className='closeQuestion'>
-            X
+    <div className='questionPanel'>
+      <Container>
+        <Row>
+          <div className='questionNavbar'>
+          <Col>
+            [１]　ｑｕｅｓｔｉｏｎ
+          </Col>
+          <Col className='rightCenter'>
+            <div className='closeQuestion'>
+              X
+            </div>
+          </Col>
           </div>
-        </Col>
-        </div>
 
-      </Row>
-    </Container>
+        </Row>
+      </Container>
+    </div>
   )
 }
 
