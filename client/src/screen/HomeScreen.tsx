@@ -1,9 +1,10 @@
 import React from 'react'
+import PlayerStats from '../components/Statistics/PlayerStats'
 
 function HomeScreen() {
   return (
     <div>
-      HOME
+      <PlayerStats />
     </div>
   )
 }
