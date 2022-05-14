@@ -6,6 +6,7 @@ const initMapContext: MapContextType = {
   verticalBars: new Map<string, Player>(),
   boxes: new Map<string, Player>(),
   playingNow: null,
+  roomId: null,
   setMapState: (mapState: MapState) => {},
 };
 
@@ -16,9 +17,7 @@ type Props = {
 };
 
 export default class MapProvider extends React.Component<Props> {
-  state: MapState = mapStateMock
-
-  
+  state: MapState = mapStateMock;
 
   setMapState = (mapState: MapState) => {
     this.setState(mapState);
@@ -32,6 +31,7 @@ export default class MapProvider extends React.Component<Props> {
           verticalBars: this.state.verticalBars,
           boxes: this.state.boxes,
           playingNow: this.state.playingNow,
+          roomId: this.state.roomId,
           setMapState: this.setMapState,
         }}>
         {this.props.children}

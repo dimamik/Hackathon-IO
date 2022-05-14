@@ -1,6 +1,6 @@
 .questionNavbar {
   color: white;
-  background-color: #E4AFD9;
+  background-color: #e4afd9;
   text-align: left;
   height: 20%;
   width: 40%;
@@ -10,9 +10,30 @@
   position: relative;
 }
 
+.questionPanel {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.title {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.title > p {
+  font-size: 20px;
+}
+
+.question > p {
+  letter-spacing: normal;
+  font-size: 20px;
+}
+
 .closeQuestion {
   color: black;
-  background-color: #C697C0;
+  background-color: #c697c0;
 }
 
 .rightCenter {
@@ -20,28 +41,38 @@
   border-width: thin;
   border-style: solid;
   border-color: #000;
-  background-color: #C697C0;
+  background-color: #c697c0;
   margin-right: 10px;
-
 }
 
 .leftCenter {
   text-align: left;
 }
 
-
 .questionPanel {
-  background-color: #FCCCFC;
+  background-color: #fcccfc;
+}
 
+.answers {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
 }
 
 .dolphinContainer {
   position: absolute;
   right: 20px;
-
 }
 
-.dolphin{
+.dolphin {
   width: 50px;
   height: auto;
+}
+
+.button {
+  width: 100px;
+  height: 53px;
+  background: #e6b0d4;
+  border-right: 3px solid #000000;
+  border-bottom: 3px solid black;
 }
