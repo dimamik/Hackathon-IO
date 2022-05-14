@@ -70,11 +70,11 @@ p {
   padding: 10px;
   justify-content: space-around;
   width: 70%;
-
+  align-items: center;
 }
 
 .button {
-  width: 182px;
+  width: 250px;
   height: 53px;
   background: #e6b0d4;
   border-right: 3px solid #000000;
