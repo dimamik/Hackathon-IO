@@ -1,6 +1,4 @@
-import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { MapContext } from '../context/Context';
 import './HomeScreen.css';
 
 function HomeScreen() {

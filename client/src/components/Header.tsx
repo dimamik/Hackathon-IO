@@ -1,8 +1,7 @@
-import React from 'react';
-import './Header.css';
 import navbarIcon from '../assets/images/navbarIcon.png';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav } from 'react-bootstrap';
+import './Header.css';
 
 function Header() {
   return (
@@ -21,7 +20,7 @@ function Header() {
             <LinkContainer to="/home">
               <Nav.Link>
                 <div className="container">
-                  <div >【&nbsp;H&nbsp;o&nbsp;m&nbsp;e&nbsp;】</div>
+                  <div>【&nbsp;H&nbsp;o&nbsp;m&nbsp;e&nbsp;】</div>
                 </div>
               </Nav.Link>
             </LinkContainer>
