@@ -1,5 +1,6 @@
-import { Player } from './Player';
+import { Player, PlayerFrontend } from './Player';
 import { Move } from '../types';
+import { mapValues } from 'lodash-es';
 
 type CoordinateY = number;
 type CoordinateX = number;
@@ -17,7 +18,7 @@ export class Board {
   vertical: CoordinateMap<Player> = {};
   boxes: CoordinateMap<Player> = {};
 
-  makeMove(player: Player, {coordinates, type}: Move) {
+  makeMove(player: Player, { coordinates, type }: Move) {
     switch (type) {
       case 'horizontal':
         this.horizontal[coordinates] = player;
@@ -30,23 +31,17 @@ export class Board {
 
   toFrontendBoard() {
     return new BoardFrontend(this, null);
-    };
   }
 }
 
-type PlayerFrontend = 0 | 1;
-
-
-export class BoardFrontend {
-  horizontal: CoordinateMap<PlayerFrontend> = {};
-  vertical: CoordinateMap<PlayerFrontend> = {};
-  boxes: CoordinateMap<PlayerFrontend> = {};
+class BoardFrontend {
+  horizontal: CoordinateMap<PlayerFrontend>;
+  vertical: CoordinateMap<PlayerFrontend>;
+  boxes: CoordinateMap<PlayerFrontend>;
 
   constructor(backendBoard: Board, player0: Player) {
-    this.horizontal = Object.fromEntries().horizontal;
-  }
-
-  makeMove(coordinates: Coordinates, type: 'horizontal' | 'vertical') {
-    this.board.makeMove(this.player, {coordinates, type});
+    this.horizontal = mapValues(backendBoard.horizontal, player => player!.id);
+    this.vertical = mapValues(backendBoard.vertical, player => player!.id);
+    this.boxes = mapValues(backendBoard.boxes, player => player!.id);
   }
 }

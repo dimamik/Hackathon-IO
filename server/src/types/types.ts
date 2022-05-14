@@ -3,10 +3,7 @@ import { Board, Coordinates, Player } from './game';
 
 // Model types
 
-
 type Lines = 'horizontal' | 'vertical';
-
-
 
 export type Move = {
   coordinates: Coordinates;

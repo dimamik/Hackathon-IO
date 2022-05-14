@@ -27,7 +27,6 @@ function App() {
     console.log(roomId);
     const joinParams = { roomId };
     socket.emit('join', joinParams);
-
   };
 
   const sendSomething = () => {

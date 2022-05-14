@@ -44,28 +44,21 @@ export const playRound = (roomId: string, move: Move) => {
 
   rooms[roomId].players[0]?.socket.emit('round', {
     board: newBoard,
-    isMyMove: !rooms[roomId].currentPlayer == rooms[roomId].players[0],
+    isMyMove: !(rooms[roomId].currentPlayer == rooms[roomId].players[0]),
   } as csRoundParams);
 
   rooms[roomId].players[1]?.socket.emit('round', {
     board: newBoard,
-    isMyMove: !rooms[roomId].currentPlayer == rooms[roomId].players[1],
+    isMyMove: !(rooms[roomId].currentPlayer == rooms[roomId].players[1]),
   } as csRoundParams);
 };
 
 const makeMove = (move: Move, roomId: string) => {
-  // TODO Add logic to make move
-  const board = rooms[roomId].board;
-  const player = rooms[roomId].currentPlayer;
-  const players = rooms[roomId].players;
-
-  const id = player == players[0] ? 0 : 1;
-
-  board.makeMove({}, move);
-  if (move.type === 'horizontal') {
-    board.horizontal[move.coordinates] = id;
-  } else {
-    board.vertical[move.coordinates] = id;
+  if (!rooms[roomId]) {
+    throw new Error('Room does not exist');
   }
+  const board = rooms[roomId].board;
+
+  board.makeMove(rooms[roomId].currentPlayer, move);
   return board;
 };

@@ -15,7 +15,7 @@ export const handleJoin: JoinHandler = (socket, joinParams) => {
     throw new Error('Room is not ready to start game');
   }
 
-  rooms[roomId].joinRoom({ socket } as Player);
+  rooms[roomId].joinRoom({ socket, id: 1 } as Player);
   socket.join(roomId);
 
   // There we need to initialize game

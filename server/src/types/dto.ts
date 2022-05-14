@@ -2,7 +2,10 @@ import { QuizParams, Move } from './types';
 import { Board } from './game';
 
 export type csCreateParams = {
-  boardSize: string;
+  width: number;
+  height: number;
+  maxPoints: number;
+  maxTime: number;
   quizParams: QuizParams;
   isLocal: boolean;
 };
