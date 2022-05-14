@@ -3,22 +3,13 @@ import { MapContext } from '../context/Context';
 import Board from '../components/Board'
 import { mapStateMock } from '../types/BoardTypes';
 import './BoardScreen.css'
+import PlayerStats from '../components/Statistics/PlayerStats';
 
 function BoardScreen() {
   const {setMapState} = useContext(MapContext)
   return (
     <div className='board-container'>
-      <div className='turn-info-container'>
-        * your turn / enemy turn goes here *
-      </div>
-      <div className='stats-container'>
-        <div className='player-score-container'>
-          your score
-        </div>
-        <div className='player-score-container'>
-          enemy score
-        </div>
-      </div>
+      <PlayerStats />
       <div className='grey-border'>
         <div className='white-border'>
           <div className='grey-border'>
