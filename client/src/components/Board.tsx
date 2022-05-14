@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Map.css';
-import { MapProps, MapState } from '../types/Map';
+import { MapProps, MapState } from '../types/BoardTypes';
+import { MapContext } from '../context/Context';
 
 interface RowProps{
   y: number,
-  width: number
+  width: number,
+  mapState: MapState
 }
 
 interface ObjectProps{
   y: number,
-  x: number
+  x: number,
+  mapState: MapState
 }
 
 function Dot(props: ObjectProps){
@@ -28,7 +31,7 @@ function horizontalClick(event: React.MouseEvent<HTMLDivElement>){
 
 function HorizontalBar(props: ObjectProps){
   const thisPosition = `${props.y},${props.x}`
-  const mapState = context.mapState as MapState
+  const mapState = props.mapState
   if(mapState.horizontalBars.get(thisPosition)  !== undefined){ 
     // this bar is selected
     const playerClass = mapState.horizontalBars.get(thisPosition)?.id === 0 ?
@@ -57,7 +60,7 @@ function verticalClick(event: React.MouseEvent<HTMLDivElement>){
 
 function VerticalBar(props: ObjectProps){
   const thisPosition = `${props.y},${props.x}`
-  const mapState = context.mapState as MapState
+  const mapState = props.mapState
   if(mapState.verticalBars.get(thisPosition) !== undefined){ 
     // this bar is selected
     const playerClass = mapState.verticalBars.get(thisPosition)?.id === 0 ?
@@ -78,7 +81,7 @@ function VerticalBar(props: ObjectProps){
 
 function Box(props: ObjectProps){
   const thisPosition = `${props.y},${props.x}`
-  const mapState = context.mapState as MapState
+  const mapState = props.mapState
   if(mapState.boxes.get(thisPosition) !== undefined){
     const boxPlayer = mapState.boxes.get(thisPosition)?.id
     const boxClass = boxPlayer === 0 ?
@@ -101,9 +104,9 @@ function Box(props: ObjectProps){
 function DotRow(props: RowProps) {
   const cols = []
   for(let x = 0; x < props.width; x++){
-    cols.push(<Dot y={props.y} x={x} key={`dot:${props.y},${x}`}/>)
+    cols.push(<Dot mapState={props.mapState} y={props.y} x={x} key={`dot:${props.y},${x}`}/>)
     if(x !== props.width-1){
-      cols.push(<HorizontalBar y={props.y} x={x} key={`horizontal_bar:${props.y},${x}`}/>)
+      cols.push(<HorizontalBar mapState={props.mapState} y={props.y} x={x} key={`horizontal_bar:${props.y},${x}`}/>)
     }
   }
 
@@ -117,9 +120,9 @@ function DotRow(props: RowProps) {
 function SquareRow(props: RowProps) {
   var cols = []
   for(let x = 0; x < props.width; x++){
-    cols.push(<VerticalBar y={props.y} x={x} key={`vertical_bar:${props.y},${x}`}/>)
+    cols.push(<VerticalBar mapState={props.mapState} y={props.y} x={x} key={`vertical_bar:${props.y},${x}`}/>)
     if(x !== props.width-1){
-      cols.push(<Box y={props.y} x={x} key={`square:${props.y},${x}`}/>)
+      cols.push(<Box mapState={props.mapState} y={props.y} x={x} key={`square:${props.y},${x}`}/>)
     }
   }
   
@@ -130,13 +133,15 @@ function SquareRow(props: RowProps) {
   )
 }
 
-function Map(props: MapProps) {
+function Board(props: MapProps) {
+  const mapState = useContext(MapContext)
+
   var rows = []
 
   for(let y = 0; y < props.height; y++){
-    rows.push(<DotRow width={props.width} y={y} key={`dot_row:${y}`}/>)
+    rows.push(<DotRow mapState={mapState} width={props.width} y={y} key={`dot_row:${y}`}/>)
     if(y !== props.height-1){
-      rows.push(<SquareRow width={props.width} y={y} key={`square_row:${y}`}/>)
+      rows.push(<SquareRow mapState={mapState} width={props.width} y={y} key={`square_row:${y}`}/>)
     }
   }
 
@@ -147,4 +152,4 @@ function Map(props: MapProps) {
   )
 }
 
-export default Map;
+export default Board;
