@@ -1,18 +1,29 @@
 export interface MapProps {
-  height: number,
-  width: number
+  height: number;
+  width: number;
 }
 
 export interface Player {
-  id: number,
-  socket: string
+  id: number;
+  socket: string;
 }
 
 export interface MapState {
-  horizontalBars: Map<string, Player>,
-  verticalBars: Map<string, Player>,
-  boxes: Map<string, Player>,
-  playingNow: Player
+  horizontalBars: Map<string, Player>;
+  verticalBars: Map<string, Player>;
+  boxes: Map<string, Player>;
+  playingNow: Player | null;
+}
+
+export interface MapContextType {
+  horizontalBars: Map<string, Player>;
+  verticalBars: Map<string, Player>;
+  boxes: Map<string, Player>;
+  playingNow: Player | null;
+  setPlayingNow: (player: Player) => void;
+  setHorizontaBars: (map: Map<string, Player>) => void;
+  setVerticalBars: (map: Map<string, Player>) => void;
+  setBoxes: (map: Map<string, Player>) => void;
 }
 
 // const mapState = {
