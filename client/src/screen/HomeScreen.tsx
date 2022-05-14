@@ -4,6 +4,13 @@ import { MapContext } from '../context/Context';
 import './HomeScreen.css';
 
 function HomeScreen() {
+  const submitJoinId = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') {
+      // Join the game here
+      console.log('Joining game...');
+    }
+  };
+
   return (
     <div className="home-screen-container">
       <div className="title-container">【~~　ＶａｐｏｒＷＩＥＴ　~~】</div>
@@ -15,7 +22,11 @@ function HomeScreen() {
       <div className="room-id-hint-container">【Ｏｒ　ｉｎｓｅｒｔ　ｒｏｏｍ　ｉｄ】</div>
       <div className="room-id-container">
         <div className="input-spacer"></div>
-        <input className="room-id-input" placeholder="Type here ..." type="text"></input>
+        <input
+          className="room-id-input"
+          placeholder="Type here ..."
+          onKeyUp={submitJoinId}
+          type="text"></input>
         <div className="input-reset-container">
           <a className="no-decor">
             <div className="input-reset"></div>
