@@ -2,7 +2,7 @@ import React from 'react'
 
 function PlayerScore() {
   return (
-    <div>PlayerScore</div>
+    <div>【Ｙｏｕｒ　ｓｃｏｒｅ】:</div>
   )
 }
 
