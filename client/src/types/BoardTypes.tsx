@@ -1,3 +1,5 @@
+import { Socket } from 'socket.io-client';
+
 export interface MapProps {
   height: number;
   width: number;
@@ -22,6 +24,7 @@ export interface MapContextType {
   boxes: Map<string, Player>;
   playingNow: Player | null;
   roomId: string | null;
+  socket: Socket | null;
   setMapState?: (mapState: MapState) => void;
 }
 

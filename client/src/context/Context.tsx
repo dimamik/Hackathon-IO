@@ -7,6 +7,7 @@ const initMapContext: MapContextType = {
   boxes: new Map<string, Player>(),
   playingNow: null,
   roomId: null,
+  socket: null,
   setMapState: (mapState: MapState) => {},
 };
 
@@ -32,6 +33,7 @@ export default class MapProvider extends React.Component<Props> {
           boxes: this.state.boxes,
           playingNow: this.state.playingNow,
           roomId: this.state.roomId,
+          socket: this.state.socket,
           setMapState: this.setMapState,
         }}>
         {this.props.children}
