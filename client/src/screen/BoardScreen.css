@@ -1,31 +1,32 @@
-.board-container{
+.board-container {
   display: flex;
+  height: calc(100vh - 70px);
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-size: cover;
-  background-image:  url('../assets/images/boardScreenBackground.png');
+  background-image: url('../assets/images/boardScreenBackground.png');
 }
 
-.map-container{
+.map-container {
   margin: 0 auto;
   padding: 10px;
   background-color: rgb(215, 180, 204);
 }
 
-.turn-info-container{
+.turn-info-container {
   color: white;
   padding: 20px;
 }
 
-.player-score-container{
+.player-score-container {
   color: white;
   padding: 20px;
   flex-grow: 1;
   text-align: center;
 }
 
-.stats-container{
+.stats-container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -33,15 +34,15 @@
   width: 100%;
 }
 
-.grey-border{
+.grey-border {
   border: rgb(200, 200, 200) solid 2px;
 }
 
-.white-border{
+.white-border {
   border: rgb(250, 240, 250) solid 4px;
 }
 
-.violet-border{
+.violet-border {
   border: rgb(215, 180, 204) solid 8px;
   background-color: rgb(180, 150, 180);
   padding: 2px;
