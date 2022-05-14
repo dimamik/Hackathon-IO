@@ -21,7 +21,7 @@ function Header() {
             <LinkContainer to="/home">
               <Nav.Link>
                 <div className="container">
-                  <p>【Home】</p>
+                  <div>【 H o m e 】</div>
                 </div>
               </Nav.Link>
             </LinkContainer>
