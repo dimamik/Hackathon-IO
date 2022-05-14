@@ -32,7 +32,7 @@ p {
   background-color: #c697c0;
   border-right: 3px solid #444;
   border-bottom: 3px solid #444;
-  width: 20px;
+  width: 25px;
   height: 50%;
   margin-right: 10px;
 }
@@ -53,6 +53,7 @@ p {
 
 .settingTitle {
   font-size: 20px;
+  margin-top: 20px;
 }
 
 .verticalSettingOptions {
@@ -60,17 +61,20 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
-.row {
+.inputRow {
   display: flex;
   flex-direction: row;
   padding: 10px;
-  /* justify-content: space-around; */
+  justify-content: space-around;
+  width: 70%;
+  align-items: center;
 }
 
 .button {
-  width: 182px;
+  width: 250px;
   height: 53px;
   background: #e6b0d4;
   border-right: 3px solid #000000;

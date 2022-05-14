@@ -1,11 +1,11 @@
 .board-container {
   display: flex;
-  height: calc(100vh - 70px);
+  min-height: 95vh;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   background-size: cover;
-  background-image: url('../assets/images/boardScreenBackground.png');
+  background-image: linear-gradient(#110036, #B40BA2);
 }
 
 .map-container {
@@ -46,4 +46,28 @@
   border: rgb(215, 180, 204) solid 8px;
   background-color: rgb(180, 150, 180);
   padding: 2px;
+}
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
+.mymodal {
+}
+
+.myoverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
 }

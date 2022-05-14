@@ -1,3 +1,5 @@
+import { ClientSocket } from './sockets';
+import { io } from 'socket.io-client';
 import { BoardFrontend, Player } from './types';
 
 export interface MapProps {
@@ -9,6 +11,7 @@ export interface MapState {
   board: BoardFrontend;
   roomId: string | null;
   playingNow: Player | null;
+  socket: ClientSocket | null;
 }
 
 export interface MapContextType {
@@ -37,4 +40,5 @@ export const mapStateMock: MapState = {
   },
   playingNow: 0,
   roomId: '',
+  socket: io('http://localhost:4000'),
 };
