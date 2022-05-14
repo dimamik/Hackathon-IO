@@ -30,16 +30,16 @@ export class Board {
   }
 
   toFrontendBoard() {
-    return new BoardFrontend(this, null);
+    return new BoardFrontend(this);
   }
 }
 
-class BoardFrontend {
+export class BoardFrontend {
   horizontal: CoordinateMap<PlayerFrontend>;
   vertical: CoordinateMap<PlayerFrontend>;
   boxes: CoordinateMap<PlayerFrontend>;
 
-  constructor(backendBoard: Board, player0: Player) {
+  constructor(backendBoard: Board) {
     this.horizontal = mapValues(backendBoard.horizontal, player => player!.id);
     this.vertical = mapValues(backendBoard.vertical, player => player!.id);
     this.boxes = mapValues(backendBoard.boxes, player => player!.id);

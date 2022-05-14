@@ -1,10 +1,9 @@
-import React, { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { MapContext } from '../context/Context';
 import Board from '../components/Board';
-import { mapStateMock } from '../types/BoardTypes';
-import './BoardScreen.css';
 import PlayerStats from '../components/Statistics/PlayerStats';
 import { useLocation } from 'react-router-dom';
+import './BoardScreen.css';
 
 export interface BoardProps {
   width: number;
@@ -15,7 +14,7 @@ export interface BoardProps {
 
 function BoardScreen() {
   const location = useLocation();
-  const props: BoardProps = location.state;
+  const props: BoardProps = location.state; // TODO: ???????
 
   const { setMapState } = useContext(MapContext);
   return (
@@ -30,9 +29,9 @@ function BoardScreen() {
           </div>
         </div>
       </div>
-      <br/>
+      <br />
       &nbsp;
-      <br/>
+      <br />
     </div>
   );
 }
