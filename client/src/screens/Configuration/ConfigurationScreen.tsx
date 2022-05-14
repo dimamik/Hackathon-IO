@@ -1,28 +1,34 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Configuration.css';
 import { MapContext } from '../../context/Context';
-import { connect } from 'socket.io-client';
-import { scCreatedParams, MapContextType } from '../types';
+import { scCreatedParams, MapContextType } from '../../types';
+import './Configuration.css';
 
-const create = ({gameConfig: {maxPoints, time, width, height}, mapState: {socket}, setRoomId}: MapContextType, callback: ()=> void) => {
+const create = (
+  {
+    gameConfig: { maxPoints, time, width, height },
+    mapState: { socket },
+    setRoomId,
+  }: MapContextType,
+  callback: () => void,
+) => {
   socket?.emit('create', {
     width,
     height,
     maxPoints,
     maxTime: time,
     quizParams: {
-      question: "", 
-      answers: []
+      question: '',
+      answers: [],
     },
-    isLocal: false
+    isLocal: false,
   });
 
   socket?.on('created', (params: scCreatedParams) => {
-    console.log("received created", params.roomID);
-    setRoomId!(params.roomID)
+    console.log('received created', params.roomID);
+    setRoomId!(params.roomID);
     callback();
-  })
+  });
 };
 
 function ConfigurationScreen() {
@@ -32,7 +38,7 @@ function ConfigurationScreen() {
   const [time, setTime] = useState(10);
   const [multiplayer, setMultiplayer] = useState(false);
   const context = useContext(MapContext);
-  const {mapState, setRoomId} = context
+  const { mapState, setRoomId } = context;
   const navigate = useNavigate();
 
   const isValid = true || (width && height && maxPoints && time);
@@ -53,11 +59,17 @@ function ConfigurationScreen() {
             <div className="verticalSettingOptions">
               <div className="inputRow">
                 <p>Width</p>
-                <input type="text" defaultValue={width} onChange={e => setWidth(Number(e.target.value))}></input>
+                <input
+                  type="text"
+                  defaultValue={width}
+                  onChange={e => setWidth(Number(e.target.value))}></input>
               </div>
               <div className="inputRow">
                 <p>Height</p>
-                <input type="text" defaultValue={height} onChange={e => setHeight(Number(e.target.value))}></input>
+                <input
+                  type="text"
+                  defaultValue={height}
+                  onChange={e => setHeight(Number(e.target.value))}></input>
               </div>
             </div>
             <div className="settingTitle">
@@ -73,17 +85,25 @@ function ConfigurationScreen() {
               </div>
               <div className="inputRow">
                 <p>Time for move</p>
-                <input defaultValue={time} type="text" onChange={e => setTime(Number(e.target.value))}></input>
-              
+                <input
+                  defaultValue={time}
+                  type="text"
+                  onChange={e => setTime(Number(e.target.value))}></input>
               </div>
               <div className="inputRow">
                 <div>Ｍｕｌｔｉｐｌａｙｅｒ</div>
-                <input type="checkbox" onChange={e => setMultiplayer((e.target.checked))}></input>
+                <input
+                  type="checkbox"
+                  onChange={e => setMultiplayer(e.target.checked)}></input>
               </div>
             </div>
             <div className="buttonContainer">
-              <button type="button" className="button" disabled={!isValid} onClick={() => create(context, () => navigate('/board'))}>
-                P l a y 
+              <button
+                type="button"
+                className="button"
+                disabled={!isValid}
+                onClick={() => create(context, () => navigate('/board'))}>
+                P l a y
               </button>
             </div>
           </div>

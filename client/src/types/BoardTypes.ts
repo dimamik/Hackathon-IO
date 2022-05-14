@@ -1,6 +1,6 @@
 import { ClientSocket } from './sockets';
 import { io } from 'socket.io-client';
-import { BoardFrontend, Player } from './types';
+import { BoardFrontend } from './types';
 import { csRoundParams } from './dto';
 
 export interface MapState {
@@ -15,10 +15,10 @@ export type GameConfig = {
   height: number;
   time: number;
   maxPoints: number;
-}
+};
 
 export interface MapContextType {
-  gameConfig: GameConfig
+  gameConfig: GameConfig;
   mapState: MapState;
   setRoomId: (roomId: string) => void;
   setMapconfig: (width: number, height: number, maxPoints: number, time: number) => void;
@@ -44,7 +44,7 @@ export const mapStateMock: MapState = {
       '4,4': -1,
     },
     height: 1,
-    width: 1
+    width: 1,
   },
   isMyMove: true,
   roomID: '',
@@ -56,4 +56,4 @@ export const gameConfigMock: GameConfig = {
   height: 10,
   maxPoints: 50,
   time: 100,
-}
+};

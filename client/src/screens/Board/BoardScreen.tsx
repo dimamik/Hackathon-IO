@@ -1,14 +1,11 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { MapContext } from '../../context/Context';
 import Board from '../../components/Board/Board';
 import PlayerStats from '../../components/Statistics/PlayerStats';
-import { useLocation } from 'react-router-dom';
 import Modal from 'react-modal';
 import Question from '../../components/Modals/QuestionComponents';
 import './BoardScreen.css';
-import { scCreatedParams, MapContextType, csRoundParams, Move } from '../types';
-import { joinPaths } from 'react-router/lib/router';
-
+import { csRoundParams } from '../../types';
 
 Modal.setAppElement('#root');
 
@@ -20,13 +17,12 @@ export interface BoardProps {
 }
 
 function BoardScreen() {
-  const {mapState, setParams} = useContext(MapContext);
+  const { mapState, setParams } = useContext(MapContext);
 
   mapState.socket?.on('round', (ev: csRoundParams) => {
-    setParams(ev)
+    setParams(ev);
     // TODO: wypierdolic modal z oczekiwaniem
-  })
-
+  });
 
   const [isOpen, setIsOpen] = useState(false);
   function toggleModal() {

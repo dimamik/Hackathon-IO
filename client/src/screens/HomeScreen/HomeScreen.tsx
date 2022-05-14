@@ -1,13 +1,13 @@
 import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { MapContext } from '../../context/Context';
-import { csRoundParams } from '../types';
+import { csRoundParams } from '../../types';
 import './HomeScreen.css';
 
 function HomeScreen() {
-  const [idInput, setIdInput] = useState("");
+  const [idInput, setIdInput] = useState('');
   const navigate = useNavigate();
-  const {mapState, setParams, setRoomId} = useContext(MapContext);
+  const { mapState, setParams, setRoomId } = useContext(MapContext);
 
   const submitJoinId = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter') {
@@ -17,14 +17,14 @@ function HomeScreen() {
       const roomID = idInput.replaceAll(' ', '');
       setRoomId(roomID);
       socket?.emit('join', {
-        roomID
-      })
+        roomID,
+      });
 
-      socket?.on('round', (ev: csRoundParams) =>{
-        // teraz routuj do mapy 
-        setParams(ev)
-        navigate('/board')
-      })
+      socket?.on('round', (ev: csRoundParams) => {
+        // teraz routuj do mapy
+        setParams(ev);
+        navigate('/board');
+      });
     }
   };
 
@@ -42,8 +42,8 @@ function HomeScreen() {
         <input
           className="room-id-input"
           placeholder="Type here ..."
-          onChange={(event) => {
-            setIdInput(event.target.value)
+          onChange={event => {
+            setIdInput(event.target.value);
           }}
           onKeyUp={submitJoinId}
           type="text"></input>

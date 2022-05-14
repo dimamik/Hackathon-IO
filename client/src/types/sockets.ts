@@ -1,4 +1,4 @@
-import { Socket } from 'socket.io';
+import { Socket } from 'socket.io-client';
 import {
   csCreateParams,
   csJoinParams,
@@ -9,7 +9,7 @@ import {
 } from './dto';
 
 type WrapWithSocket<TFunction extends (...args: any) => any> = (
-  socket: ServerSocket,
+  socket: ClientSocket,
   ...args: [...Parameters<TFunction>]
 ) => ReturnType<TFunction>;
 
