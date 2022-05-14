@@ -16,6 +16,7 @@ export interface MapState {
   boxes: Map<string, Player>;
   roomId: string | null;
   playingNow: Player | null;
+  socket: Socket | null;
 }
 
 export interface MapContextType {
@@ -46,6 +47,8 @@ export const mapStateMock: MapState = {
     ['4,4', { id: -1, socket: '' }],
   ]),
   playingNow: { id: 0, socket: 'lorem' },
+  roomId: null,
+  socket: null,
 };
 
 export function computeEnclosedBoxes(

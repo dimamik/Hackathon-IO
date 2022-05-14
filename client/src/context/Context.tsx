@@ -1,4 +1,5 @@
 import React from 'react';
+import { io } from 'socket.io-client';
 import { MapContextType, MapState, mapStateMock, Player } from '../types/BoardTypes';
 
 const initMapContext: MapContextType = {
@@ -7,7 +8,7 @@ const initMapContext: MapContextType = {
   boxes: new Map<string, Player>(),
   playingNow: null,
   roomId: null,
-  socket: null,
+  socket: io('http://localhost:4000'),
   setMapState: (mapState: MapState) => {},
 };
 
