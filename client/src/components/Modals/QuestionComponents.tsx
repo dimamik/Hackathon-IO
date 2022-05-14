@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import dolphin from '../assets/images/dolphin.png';
+import dolphin from '../../assets/images/dolphin.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './QuestionComponents.css';
 

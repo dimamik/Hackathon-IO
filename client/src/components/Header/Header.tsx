@@ -1,4 +1,4 @@
-import navbarIcon from '../assets/images/navbarIcon.png';
+import navbarIcon from '../../assets/images/navbarIcon.png';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav } from 'react-bootstrap';
 import './Header.css';

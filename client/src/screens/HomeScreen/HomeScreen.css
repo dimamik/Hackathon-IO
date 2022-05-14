@@ -10,7 +10,7 @@
 .home-screen-container{
   height: calc(100vh - 70px);
   background-size: cover;
-  background-image: url('../assets/images/homeScreenBackground.jpg');
+  background-image: url('../../assets/images/homeScreenBackground.jpg');
   display: flex;
   flex-direction: column;
   align-items: center;

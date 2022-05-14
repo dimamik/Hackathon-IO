@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import reset from '../assets/images/reset.jpeg'
+import reset from '../../assets/images/reset.jpeg'
 import './HomeScreen.css';
 
 function HomeScreen() {

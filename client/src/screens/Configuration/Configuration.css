@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   min-height: 95vh;
-  background-image: url('../assets/images/configurationBackground.png');
+  background-image: url('../../assets/images/configurationBackground.png');
 }
 
 p {
