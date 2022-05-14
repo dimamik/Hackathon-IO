@@ -26,7 +26,7 @@ function Header() {
                             </LinkContainer>
                             <LinkContainer to="/board">
                                 <Nav.Link>
-                                    <div className="container">【Board】</div>
+                                    <div className="container">【Ｂｏａｒｄ】</div>
                                 </Nav.Link>
                             </LinkContainer>
                         </div>
