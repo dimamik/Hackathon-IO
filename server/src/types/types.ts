@@ -3,21 +3,20 @@ type CoordinateX = number;
 
 export type Coordinates = `${CoordinateY},${CoordinateX}`;
 
-type Lines = 'horizontal' | 'vertical';
-type Boxes = 'Boxes';
-
-export type Player = 0 | 1;
 
 export type CoordinateMap = {
   [key: Coordinates]: Player;
 };
 
 export type Board = {
-  [key in Lines | Boxes]: CoordinateMap;
+  horizontal: CoordinateMap;
+  vertical: CoordinateMap;
+  boxes: CoordinateMap;
 };
 
 export type MoveParams = {
-  [key in Lines]?: Player;
+  horizontal?: Player | undefined;
+  vertical?: Player | undefined;
 };
 
 // TODO:
@@ -27,5 +26,45 @@ export type SettingParams = {
 };
 
 export type JoinParams = {};
+export type QuizResponseParams = {};
 
-// export type Sockett = Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>
+// FRONT TYPES
+
+export interface MapProps {
+  height: number;
+  width: number;
+}
+
+export interface Player {
+  id: string;
+}
+
+export type BoardFrontend = Board & { currentPlayer: Player } & MapProps;
+
+export type QuizParams = {
+  question: string;
+  answers: string[];
+}
+
+export type ServerToClientDTO = {
+  board: BoardFrontend;
+  currentPlayer: Player;
+  quizParams: QuizParams;
+};
+
+// SOCKET TYPES
+
+export type Room = {
+  id: string;
+  board: Board;
+  players: Player[];
+  currentPlayer: Player;
+  isQuizActive: boolean;
+};
+
+export type ServerToClientEvents = {
+  board: ()
+};
+
+
+

@@ -1,5 +1,5 @@
-import { MoveParams } from 'src/types';
+import { MoveHandler } from 'src/types';
 
-export const handleMove = (socket, moveParams: MoveParams) => {
+export const handleMove: MoveHandler = (socket, moveParams) => {
   console.log(moveParams);
 };
