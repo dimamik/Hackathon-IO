@@ -11,13 +11,41 @@ import QuestionComponents from './components/QuestionComponents';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  const [count, setCount] = useState(0);
+  // const [roomId, setRoomId] = useState('');
+
+  // const socket = io('http://localhost:4000');
+
+  // socket.on('created', ({ roomId }) => {
+  //   console.log(roomId);
+  // });
+
+  // socket.on('round', ({ board, isMyMove }) => {
+  //   console.log(isMyMove);
+  //   console.log(board);
+  // });
+
+  // const create = () => {
+  //   socket.emit('create', {});
+  // };
+
+  // const join = () => {
+  //   console.log(roomId);
+  //   const joinParams = { roomId };
+  //   socket.emit('join', joinParams);
+  // };
+
+  // const sendSomething = () => {
+  //   // Write to local storage
+  //   // localStorage.setItem('test', 'Hello there');
+  //   console.log(localStorage.getItem('test'));
+  //   socket.emit('create', {});
+  // };
 
   return (
     <BrowserRouter>
       <MapProvider>
         <Header />
-        <div className='mainBackground'>
+        <div className="mainBackground">
           <Routes>
             <Route path="/" element={<HomeScreen />} />
             <Route path="/home" element={<HomeScreen />} />
