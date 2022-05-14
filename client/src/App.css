@@ -37,6 +37,12 @@
   }
 }
 
+.background{
+  background-image: url('./assets/images/photo.png');
+  margin: 0;
+  padding: 0;
+}
+
 button {
   font-size: calc(10px + 2vmin);
 }
