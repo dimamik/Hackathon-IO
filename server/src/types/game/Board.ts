@@ -1,6 +1,6 @@
 import { Player, PlayerFrontend } from './Player';
 import { Move } from '../types';
-import { mapValues } from 'lodash-es';
+import { mapValues } from 'lodash';
 
 type CoordinateY = number;
 type CoordinateX = number;
