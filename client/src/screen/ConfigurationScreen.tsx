@@ -69,7 +69,7 @@ function ConfigurationScreen() {
               <Link
                 to="/board"
                 state={{ width: width, height: height, maxPoints: maxPoints, time: time }}>
-                <button type="button" className="button" disabled={!isValid}>
+                <button type="button" className="playButton" disabled={!isValid}>
                   P l a y 
                 </button>
               </Link>

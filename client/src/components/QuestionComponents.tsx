@@ -8,12 +8,12 @@ function QuestionComponents() {
   return (
     <Container fluid>
       <div className="questionNavbar">
-        <Row className="justify-content-md-center">
-          <Col className="leftCenter">[１]　ｑｕｅｓｔｉｏｎ</Col>
-          <Col xs="auto" className="rightCenter">
-            <div className="closeQuestion">X</div>
-          </Col>
-        </Row>
+        <div className="bar">
+          <div className="barTitle">
+            <div>[１]　Q u e s t i o n</div>
+          </div>
+          <div className="closeIcon">X</div>
+        </div>
 
         <div className="questionPanel">
           <div className="title">
@@ -26,21 +26,21 @@ function QuestionComponents() {
             <img src={dolphin} className="dolphin" />
           </div>
           <div className="answers">
-            <div>
+            
               <button type="button" className="button">
                 Click Me!
               </button>
-            </div>
-            <div>
+            
+            
               <button type="button" className="button">
                 Click Me!
               </button>
-            </div>
-            <div>
+            
+            
               <button type="button" className="button">
                 Click Me!
               </button>
-            </div>
+            
           </div>
         </div>
       </div>
