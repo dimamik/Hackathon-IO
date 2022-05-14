@@ -24,11 +24,11 @@ function ConfigurationScreen() {
               <p>【Map size】</p>
             </div>
             <div className="verticalSettingOptions">
-              <div className="row">
+              <div className="inputRow">
                 <p>Width</p>
-                <input type="text" onChange={e => setWidth(Number(e.target.value))} className='confInput' ></input>
+                <input type="text" onChange={e => setWidth(Number(e.target.value))}></input>
               </div>
-              <div className="row">
+              <div className="inputRow">
                 <p>Height</p>
                 <input type="text" onChange={e => setHeight(Number(e.target.value))}></input>
               </div>
@@ -37,13 +37,13 @@ function ConfigurationScreen() {
               <p>【Parameters】</p>
             </div>
             <div className="verticalSettingOptions">
-              <div className="row">
+              <div className="inputRow">
                 <p>Max points</p>
                 <input
                   type="text"
                   onChange={e => setMaxPoints(Number(e.target.value))}></input>
               </div>
-              <div className="row">
+              <div className="inputRow">
                 <p>Time for move</p>
                 <input type="text" onChange={e => setTime(Number(e.target.value))}></input>
               </div>
