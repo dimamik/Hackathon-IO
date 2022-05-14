@@ -2,7 +2,7 @@ import React from 'react'
 
 function Turn() {
   return (
-    <div>【Ｙｏｕｒ　ｔｏｕｒ】</div>
+    <div>【Ｙｏｕｒ　ｔurn】</div>
   )
 }
 

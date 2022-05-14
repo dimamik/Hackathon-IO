@@ -32,17 +32,3 @@ a {
     text-align: center;
 }
 
-.questionNavbar {
-    color: white;
-    background-color: #E4AFD9;
-    text-align: left;
-}
-
-.closeQuestion {
-    color: black;
-    background-color: #C697C0;
-}
-
-.rightCenter {
-    text-align: right;
-}
