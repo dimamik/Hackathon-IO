@@ -1,8 +1,5 @@
 {
   "recommendations": [
-    // Prettier
-    "esbenp.prettier-vscode",
-
     // Github Pull requests
     "GitHub.vscode-pull-request-github",
 
