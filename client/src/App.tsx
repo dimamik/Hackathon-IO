@@ -6,7 +6,9 @@ import Footer from './components/Footer';
 import HomeScreen from './screen/HomeScreen';
 import MapProvider from './context/Context';
 import Board from './screen/Board';
+import ConfigurationScreen from './screen/ConfigurationScreen';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 function App() {
