@@ -100,7 +100,7 @@ function ConfigurationScreen() {
             <div className="buttonContainer">
               <button
                 type="button"
-                className="button"
+                className="playButton"
                 disabled={!isValid}
                 onClick={() => create(context, () => navigate('/board'))}>
                 P l a y

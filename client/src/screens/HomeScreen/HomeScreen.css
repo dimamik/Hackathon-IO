@@ -24,17 +24,19 @@
   padding: 10px;
   padding-left: 20px;
   padding-right: 20px;
-  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 1);
+  border-right: 3px solid black;
+  border-bottom: 3px solid black;
+  border-top: 2px solid white;
+  border-left: 2px solid white;
 }
 
 .create-room-inner{
-  border-color: rgb(210, 170, 210);
-  border-style: solid;
-  border-width: 2px;
-  border-right-width: 5px;
-  padding: 7px;
-  padding-left: 15px;
-  padding-right: 15px;
+  color: white;
+  background: rgb(215, 120, 160);
+  border-right: 2px solid #D8A5D3;
+  border-bottom: 2px solid #D8A5D3;
+  border-left: 2px solid #D8A5D3;
+  border-top: 2px solid #D8A5D3;
   font-size: 40px;
 }
 
@@ -43,7 +45,7 @@
 }
 
 .room-id-hint-container{
-  margin-top: 100px;
+  margin-top: 10%;
   margin-bottom: 15px;
   color: white;
   font-size: 30px;
@@ -51,19 +53,24 @@
 
 .room-id-container{
   font-size: 35px;
+  background-color: rgb(220, 180, 210);
   display: flex;
   flex-direction: row;
-  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 1);
+  align-items: center;
+  height: 50px;
+  border-left: white 4px solid;
+  border-top: white 4px solid;
+  border-bottom: black 4px solid;
+  border-right: black 4px solid;
 }
 
 .room-id-input{
+  font-size: large;
   background: transparent;
   border: none;
   outline-width: 0;
   color: white; 
   background-color: rgb(220, 180, 210);
-  border-left: white 4px solid;
-  border-top: white 4px solid;
 }
 
 .input-spacer{
@@ -77,15 +84,24 @@
 }
 
 .input-reset-container{
-  width: 50px;
-  border-top: white 4px solid;
-  background-color: rgb(220, 180, 210);
+  display: flex;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+  background-color: rgb(190, 150, 190);
+  border-bottom: black 3px solid;
+  border-right: black 3px solid;
 }
 
-.input-reset{
-  margin: 10px;
-  width: 30px;
-  height: 30px;
-  background-color: rgb(190, 150, 190);
-  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 1);
+.confirmImg {
+  width: 100%;
+  height: 100%;
 }
+
+.modalView {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} 
