@@ -26,4 +26,4 @@ function WaitingForPlayer() {
     )
 }
 
-export default WaitingForPlayer
+export default WaitingForPlayer;

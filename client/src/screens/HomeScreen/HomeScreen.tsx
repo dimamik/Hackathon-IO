@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { MapContext } from '../../context/Context';
 import { csRoundParams } from '../types';
 import './HomeScreen.css';
+import reset from '../../assets/images/reset.jpeg';
 
 function HomeScreen() {
   const [idInput, setIdInput] = useState("");
@@ -33,7 +34,7 @@ function HomeScreen() {
       <div className="title-container">【~~　ＶａｐｏｒＷＩＥＴ　~~】</div>
       <Link className="no-decor" to="/configuration">
         <div className="create-room-button">
-          <div className="create-room-inner">[１]　Ｃｒｅａｔｅ　ｒｏｏｍ</div>
+          <button type='button' className="create-room-inner">[１]　Ｃｒｅａｔｅ　ｒｏｏｍ</button>
         </div>
       </Link>
       <div className="room-id-hint-container">【Ｏｒ　ｉｎｓｅｒｔ　ｒｏｏｍ　ｉｄ】</div>
@@ -41,16 +42,14 @@ function HomeScreen() {
         <div className="input-spacer"></div>
         <input
           className="room-id-input"
-          placeholder="Type here ..."
+          placeholder="T y p e   h e r e ..."
           onChange={(event) => {
             setIdInput(event.target.value)
           }}
           onKeyUp={submitJoinId}
           type="text"></input>
         <div className="input-reset-container">
-          <a className="no-decor">
-            <div className="input-reset"></div>
-          </a>
+           <img src={reset} className='confirmImg'></img>
         </div>
         <div className="input-spacer"></div>
       </div>

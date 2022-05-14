@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import Modal from 'react-modal';
 import Question from '../../components/Modals/QuestionComponents';
 import './BoardScreen.css';
+import WaitingForPlayer from '../../components/Modals/WaitingForPlayer';
 import { scCreatedParams, MapContextType, csRoundParams, Move } from '../types';
 import { joinPaths } from 'react-router/lib/router';
 
@@ -22,16 +23,20 @@ export interface BoardProps {
 function BoardScreen() {
   const {mapState, setParams} = useContext(MapContext);
 
+  const [isQuestionOpen, setIsQuestionOpen] = useState(false);
+  function toggleQuestionModal() {
+    setIsQuestionOpen(!isQuestionOpen);
+  }
+  const [isWaitingOpen, setIsWaitingOpen] = useState(true);
+  function toggleWaitingModal() {
+    setIsWaitingOpen(!isWaitingOpen);
+  }
+
   mapState.socket?.on('round', (ev: csRoundParams) => {
     setParams(ev)
     // TODO: wypierdolic modal z oczekiwaniem
   })
 
-
-  const [isOpen, setIsOpen] = useState(false);
-  function toggleModal() {
-    setIsOpen(!isOpen);
-  }
   return (
     <div className="board-container">
       <PlayerStats />
@@ -47,11 +52,14 @@ function BoardScreen() {
       <br />
       &nbsp;
       <br />
-      <button onClick={toggleModal}>Toggle modal</button>
-      <Modal isOpen={isOpen} onRequestClose={toggleModal} className="mymodal">
+      <button onClick={toggleWaitingModal}>Toggle modal</button>
+      <Modal isOpen={isQuestionOpen} onRequestClose={toggleQuestionModal} className="mymodal">
         <Question />
       </Modal>
-    </div>
+      <Modal isOpen={isWaitingOpen} onRequestClose={toggleWaitingModal} className="mymodal">
+        <WaitingForPlayer />
+      </Modal>
+    </div>    
   );
 }
 
