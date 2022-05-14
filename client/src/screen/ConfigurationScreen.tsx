@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './Configuration.css';
+import { MapContext } from '../context/Context';
 
 function ConfigurationScreen() {
   const [width, setWidth] = useState(0);
@@ -8,6 +9,17 @@ function ConfigurationScreen() {
   const [maxPoints, setMaxPoints] = useState(0);
   const [time, setTime] = useState(0);
   const [multiplayer, setMultiplayer] = useState(false);
+  const mapState = useContext(MapContext);
+
+  const create = (params: any) => {
+    const socket = mapState.socket;
+    socket?.emit('create', {
+      width: width,
+      height: height,
+      maxPoints: maxPoints,
+      maxTime: time,
+    });
+  };
 
   const isValid = width & height & maxPoints & time;
   return (

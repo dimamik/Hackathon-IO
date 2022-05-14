@@ -26,6 +26,14 @@ function horizontalClick(event: React.MouseEvent<HTMLDivElement>){
   const target = event.target as HTMLDivElement
   const x = parseInt(target.getAttribute('data-x') as string)
   const y = parseInt(target.getAttribute('data-y') as string)
+  const mapState = useContext(MapContext);
+
+  
+  // mapState.socket?.emit('move', {
+    
+  // })
+  
+
   console.log("Horizontal click", y, x)
 }
 

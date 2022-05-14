@@ -1,5 +1,5 @@
 import { Socket } from 'socket.io-client';
-
+import { io } from 'socket.io-client';
 export interface MapProps {
   height: number;
   width: number;
@@ -26,7 +26,7 @@ export interface MapContextType {
   playingNow: Player | null;
   roomId: string | null;
   socket: Socket | null;
-  setMapState?: (mapState: MapState) => void;
+  setMapState: (mapState: MapState) => void;
 }
 
 export const mapStateMock: MapState = {
@@ -48,7 +48,7 @@ export const mapStateMock: MapState = {
   ]),
   playingNow: { id: 0, socket: 'lorem' },
   roomId: null,
-  socket: null,
+  socket: io('http://localhost:4000'),
 };
 
 export function computeEnclosedBoxes(
