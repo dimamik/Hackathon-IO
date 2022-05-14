@@ -1,4 +1,5 @@
-import { Board, QuizParams, Move } from './types';
+import { QuizParams, Move } from './types';
+import { Board } from './game';
 
 export type csCreateParams = {
   boardSize: string;
@@ -7,11 +8,11 @@ export type csCreateParams = {
 };
 
 export type scCreatedParams = {
-  roomId: string;
+  roomID: string;
 };
 
 export type csJoinParams = {
-  roomId: string;
+  roomID: string;
 };
 
 export type csRoundParams = {

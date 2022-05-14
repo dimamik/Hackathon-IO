@@ -6,11 +6,29 @@ import { io, Socket } from 'socket.io-client';
 function App() {
   const [count, setCount] = useState(0);
 
+  const [roomId, setRoomId] = useState('');
+
   const socket = io('http://localhost:4000');
 
   socket.on('created', ({ roomId }) => {
     console.log(roomId);
   });
+
+  socket.on('round', ({ board, isMyMove }) => {
+    console.log(isMyMove);
+    console.log(board);
+  });
+
+  const create = () => {
+    socket.emit('create', {});
+  };
+
+  const join = () => {
+    console.log(roomId);
+    const joinParams = { roomId };
+    socket.emit('join', joinParams);
+
+  };
 
   const sendSomething = () => {
     // Write to local storage
@@ -21,35 +39,14 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => sendSomething()}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer">
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer">
-            Vite Docs
-          </a>
-        </p>
-      </header>
+      <button type="button" onClick={() => create()}>
+        Create{' '}
+      </button>
+      <br />
+      <input type="text" value={roomId} onChange={e => setRoomId(e.target.value)} />
+      <button type="button" onClick={() => join()}>
+        Join
+      </button>
     </div>
   );
 }

@@ -1,5 +1,6 @@
-import { MoveHandler } from 'src/types';
+import { MoveHandler } from '../types';
+import { playRound } from '../logic/game';
 
 export const handleMove: MoveHandler = (socket, moveParams) => {
-  console.log(moveParams);
+  playRound(moveParams.roomID, moveParams.move);
 };
