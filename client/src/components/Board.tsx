@@ -1,163 +1,160 @@
-import React, { useContext, useEffect, useState } from 'react';
-import './Map.css';
-import { MapProps, MapState } from '../types/BoardTypes';
+import React, { useContext } from 'react';
+import { MapProps, BoardFrontend, Coordinates } from '../types';
 import { MapContext } from '../context/Context';
+import './Map.css';
 
-interface RowProps{
-  y: number,
-  width: number,
-  mapState: MapState
+type RowProps = {
+  y: number;
+  width: number;
+  board: BoardFrontend;
+};
+
+type HorizontalBarProps = ObjectProps & { rows: BoardFrontend['horizontal'] };
+type VerticalBarProps = ObjectProps & { columns: BoardFrontend['vertical'] };
+type BoxProps = ObjectProps & { boxes: BoardFrontend['boxes'] };
+
+type ObjectProps = {
+  x: number;
+  y: number;
+};
+
+function Dot(props: ObjectProps) {
+  return <div className="map-dot" data-y={props.y} data-x={props.x} />;
 }
 
-interface ObjectProps{
-  y: number,
-  x: number,
-  mapState: MapState
-}
-
-function Dot(props: ObjectProps){
-  return (
-    <div className='map-dot' data-y={props.y} data-x={props.x}/>
-  )
-}
-
-function horizontalClick(event: React.MouseEvent<HTMLDivElement>){
+function horizontalClick(event: React.MouseEvent<HTMLDivElement>) {
   // send click event to the server
-  const target = event.target as HTMLDivElement
-  const x = parseInt(target.getAttribute('data-x') as string)
-  const y = parseInt(target.getAttribute('data-y') as string)
+  const target = event.target as HTMLDivElement;
+  const x = parseInt(target.getAttribute('data-x') as string);
+  const y = parseInt(target.getAttribute('data-y') as string);
   const mapState = useContext(MapContext);
 
-  
   // mapState.socket?.emit('move', {
-    
+
   // })
-  
 
-  console.log("Horizontal click", y, x)
+  console.log('Horizontal click', y, x);
 }
 
-function HorizontalBar(props: ObjectProps){
-  const thisPosition = `${props.y},${props.x}`
-  const mapState = props.mapState
-  if(mapState.horizontalBars.get(thisPosition)  !== undefined){ 
+function HorizontalBar({ x, y, rows }: HorizontalBarProps) {
+  const thisPosition: Coordinates = `${y},${x}`;
+  if (rows[thisPosition] !== undefined) {
     // this bar is selected
-    const playerClass = mapState.horizontalBars.get(thisPosition)?.id === 0 ?
-      "bar-player0"
-      : "bar-player1"
+    const playerClass = rows[thisPosition] === 0 ? 'bar-player0' : 'bar-player1';
 
-    return(
-      <div className={`map-bar map-bar-selected map-horizontal-bar ${playerClass}`} data-y={props.y} data-x={props.x}/>
-    )
-  }
-  else{
+    return (
+      <div
+        className={`map-bar map-bar-selected map-horizontal-bar ${playerClass}`}
+        data-y={y}
+        data-x={x}
+      />
+    );
+  } else {
     // this bar was not clicked before
     return (
-      <div onClick={horizontalClick} className={`map-bar map-horizontal-bar`} data-y={props.y} data-x={props.x}/>
-    )
+      <div
+        onClick={horizontalClick}
+        className={`map-bar map-horizontal-bar`}
+        data-y={y}
+        data-x={x}
+      />
+    );
   }
 }
 
-function verticalClick(event: React.MouseEvent<HTMLDivElement>){
+function verticalClick(event: React.MouseEvent<HTMLDivElement>) {
   // send click event to the server
-  const target = event.target as HTMLDivElement
-  const x = parseInt(target.getAttribute('data-x') as string)
-  const y = parseInt(target.getAttribute('data-y') as string)
-  console.log("Vertical click", y, x)
+  const target = event.target as HTMLDivElement;
+  const x = parseInt(target.getAttribute('data-x') as string);
+  const y = parseInt(target.getAttribute('data-y') as string);
+  console.log('Vertical click', y, x);
 }
 
-function VerticalBar(props: ObjectProps){
-  const thisPosition = `${props.y},${props.x}`
-  const mapState = props.mapState
-  if(mapState.verticalBars.get(thisPosition) !== undefined){ 
+function VerticalBar({ x, y, columns }: VerticalBarProps) {
+  const thisPosition: Coordinates = `${y},${x}`;
+  if (columns[thisPosition] !== undefined) {
     // this bar is selected
-    const playerClass = mapState.verticalBars.get(thisPosition)?.id === 0 ?
-    "bar-player0"
-    : "bar-player1"
+    const playerClass = columns[thisPosition] === 0 ? 'bar-player0' : 'bar-player1';
 
-    return(
-      <div className={`map-bar map-bar-selected map-vertical-bar ${playerClass}`} data-y={props.y} data-x={props.x}/>
-    )
-  }
-  else{
+    return (
+      <div
+        className={`map-bar map-bar-selected map-vertical-bar ${playerClass}`}
+        data-y={y}
+        data-x={x}
+      />
+    );
+  } else {
     // this bar was not clicked before
     return (
-      <div onClick={verticalClick} className={`map-bar map-vertical-bar`} data-y={props.y} data-x={props.x}/>
-    )
+      <div
+        onClick={verticalClick}
+        className={`map-bar map-vertical-bar`}
+        data-y={y}
+        data-x={x}
+      />
+    );
   }
 }
 
-function Box(props: ObjectProps){
-  const thisPosition = `${props.y},${props.x}`
-  const mapState = props.mapState
-  if(mapState.boxes.get(thisPosition) !== undefined){
-    const boxPlayer = mapState.boxes.get(thisPosition)?.id
-    const boxClass = boxPlayer === 0 ?
-      "map-box-player0"
-      : (boxPlayer === 1 ? 
-          "map-box-player1"
-          : "map-box-neutral"
-        );
-    return(
-      <div className={`map-box ${boxClass}`}/>
-    )
-  }
-  else{
-    return (
-      <div className='map-box'/>
-    )
+function Box({ x, y, boxes }: BoxProps) {
+  const thisPosition: Coordinates = `${y},${x}`;
+  if (boxes[thisPosition] !== undefined) {
+    const boxPlayer = boxes[thisPosition];
+    const boxClass =
+      boxPlayer === 0
+        ? 'map-box-player0'
+        : boxPlayer === 1
+        ? 'map-box-player1'
+        : 'map-box-neutral';
+    return <div className={`map-box ${boxClass}`} />;
+  } else {
+    return <div className="map-box" />;
   }
 }
 
-function DotRow(props: RowProps) {
-  const cols = []
-  for(let x = 0; x < props.width; x++){
-    cols.push(<Dot mapState={props.mapState} y={props.y} x={x} key={`dot:${props.y},${x}`}/>)
-    if(x !== props.width-1){
-      cols.push(<HorizontalBar mapState={props.mapState} y={props.y} x={x} key={`horizontal_bar:${props.y},${x}`}/>)
+function DotRow({ width, y, board }: RowProps) {
+  const cols = [];
+  for (let x = 0; x < width; x++) {
+    cols.push(<Dot y={y} x={x} key={`dot:${y},${x}`} />);
+    if (x !== width - 1) {
+      cols.push(
+        <HorizontalBar rows={board.horizontal} y={y} x={x} key={`horizontal_bar:${y},${x}`} />,
+      );
     }
   }
 
-  return (
-    <div className='map-row map-dot-row'>
-      {cols}
-    </div>
-  )
+  return <div className="map-row map-dot-row">{cols}</div>;
 }
 
-function SquareRow(props: RowProps) {
-  var cols = []
-  for(let x = 0; x < props.width; x++){
-    cols.push(<VerticalBar mapState={props.mapState} y={props.y} x={x} key={`vertical_bar:${props.y},${x}`}/>)
-    if(x !== props.width-1){
-      cols.push(<Box mapState={props.mapState} y={props.y} x={x} key={`square:${props.y},${x}`}/>)
-    }
-  }
-  
-  return(
-    <div className='map-row map-square-row'>
-      {cols}
-    </div>
-  )
-}
-
-function Board(props: MapProps) {
-  const mapState = useContext(MapContext)
-
-  var rows = []
-
-  for(let y = 0; y < props.height; y++){
-    rows.push(<DotRow mapState={mapState} width={props.width} y={y} key={`dot_row:${y}`}/>)
-    if(y !== props.height-1){
-      rows.push(<SquareRow mapState={mapState} width={props.width} y={y} key={`square_row:${y}`}/>)
+function SquareRow({ width, y, board }: RowProps) {
+  const cols = [];
+  for (let x = 0; x < width; x++) {
+    cols.push(
+      <VerticalBar columns={board.vertical} y={y} x={x} key={`vertical_bar:${y},${x}`} />,
+    );
+    if (x !== width - 1) {
+      cols.push(<Box boxes={board.boxes} y={y} x={x} key={`square:${y},${x}`} />);
     }
   }
 
-  return(
-    <div className='map-container'>
-      {rows}
-    </div>
-  )
+  return <div className="map-row map-square-row">{cols}</div>;
+}
+
+function Board({ width, height }: MapProps) {
+  const { mapState } = useContext(MapContext);
+
+  const rows = [];
+
+  for (let y = 0; y < height; y++) {
+    rows.push(<DotRow board={mapState.board} width={width} y={y} key={`dot_row:${y}`} />);
+    if (y !== height - 1) {
+      rows.push(
+        <SquareRow board={mapState.board} width={width} y={y} key={`square_row:${y}`} />,
+      );
+    }
+  }
+
+  return <div className="map-container">{rows}</div>;
 }
 
 export default Board;

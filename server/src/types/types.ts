@@ -1,5 +1,5 @@
 import { ServerSocket } from './sockets';
-import { Board, Coordinates, Player } from './game';
+import { BoardFrontend, Coordinates, Player } from './game';
 
 // Model types
 
@@ -10,15 +10,13 @@ export type Move = {
   type: Lines;
 };
 
-// TODO:
+// TODO: remove below?
 // FRONT TYPES
 
 export interface MapProps {
   height: number;
   width: number;
 }
-
-export type BoardFrontend = Board & { currentPlayer: Player } & MapProps;
 
 export type QuizParams = {
   question: string;

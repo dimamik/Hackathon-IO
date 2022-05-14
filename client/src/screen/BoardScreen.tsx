@@ -1,12 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { MapContext } from '../context/Context';
 import Board from '../components/Board';
-import { mapStateMock } from '../types/BoardTypes';
-import './BoardScreen.css';
 import PlayerStats from '../components/Statistics/PlayerStats';
 import { useLocation } from 'react-router-dom';
 import Modal from 'react-modal';
 import Question from '../components/QuestionComponents';
+import './BoardScreen.css';
 
 Modal.setAppElement('#root');
 
@@ -19,7 +18,7 @@ export interface BoardProps {
 
 function BoardScreen() {
   const location = useLocation();
-  const props: BoardProps = location.state;
+  const props: BoardProps = location.state; // TODO: ???????
 
   const [isOpen, setIsOpen] = useState(false);
   function toggleModal() {

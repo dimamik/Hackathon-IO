@@ -1,14 +1,8 @@
 import React from 'react';
-import { io } from 'socket.io-client';
-import { MapContextType, MapState, mapStateMock, Player } from '../types/BoardTypes';
+import { MapContextType, MapState, mapStateMock } from '../types/';
 
 const initMapContext: MapContextType = {
-  horizontalBars: new Map<string, Player>(),
-  verticalBars: new Map<string, Player>(),
-  boxes: new Map<string, Player>(),
-  playingNow: null,
-  roomId: null,
-  socket: io('http://localhost:4000'),
+  mapState: mapStateMock,
   setMapState: (mapState: MapState) => {},
 };
 
@@ -29,12 +23,7 @@ export default class MapProvider extends React.Component<Props> {
     return (
       <MapContext.Provider
         value={{
-          horizontalBars: this.state.horizontalBars,
-          verticalBars: this.state.verticalBars,
-          boxes: this.state.boxes,
-          playingNow: this.state.playingNow,
-          roomId: this.state.roomId,
-          socket: this.state.socket,
+          mapState: this.state,
           setMapState: this.setMapState,
         }}>
         {this.props.children}

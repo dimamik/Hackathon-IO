@@ -1,72 +1,21 @@
-import { Socket } from 'socket.io-client';
-import { io } from 'socket.io-client';
-export interface MapProps {
-  height: number;
-  width: number;
-}
-
-export interface Player {
-  id: number;
-  socket: string;
-}
-
-export interface MapState {
-  horizontalBars: Map<string, Player>;
-  verticalBars: Map<string, Player>;
-  boxes: Map<string, Player>;
-  roomId: string | null;
-  playingNow: Player | null;
-  socket: Socket | null;
-}
-
-export interface MapContextType {
-  horizontalBars: Map<string, Player>;
-  verticalBars: Map<string, Player>;
-  boxes: Map<string, Player>;
-  playingNow: Player | null;
-  roomId: string | null;
-  socket: Socket | null;
-  setMapState: (mapState: MapState) => void;
-}
-
-export const mapStateMock: MapState = {
-  verticalBars: new Map([
-    ['2,4', { id: 1, socket: 'lorem' }],
-    ['3,5', { id: 0, socket: 'lorem' }],
-    ['2,7', { id: 0, socket: 'lorem' }],
-  ]),
-  horizontalBars: new Map([
-    ['4,3', { id: 0, socket: 'lorem' }],
-    ['4,6', { id: 1, socket: 'lorem' }],
-    ['5,7', { id: 1, socket: 'lorem' }],
-    ['7,1', { id: 0, socket: 'lorem' }],
-  ]),
-  boxes: new Map([
-    ['5,3', { id: 0, socket: 'lorem' }],
-    ['2,5', { id: 1, socket: 'lorem' }],
-    ['4,4', { id: -1, socket: '' }],
-  ]),
-  playingNow: { id: 0, socket: 'lorem' },
-  roomId: null,
-  socket: io('http://localhost:4000'),
-};
+import { Coordinates, MapState, BoardFrontend } from '../types';
 
 export function computeEnclosedBoxes(
-  mapState: MapState,
-  clickedPosition: string,
+  { board }: MapState,
+  clickedPosition: Coordinates,
   clickHorizontal: boolean,
   mapWidth: number,
   mapHeight: number,
 ): Array<string> {
   if (clickHorizontal) {
-    if (mapState.horizontalBars.get(clickedPosition) === undefined) {
-      throw Error(
+    if (board.horizontal[clickedPosition] === undefined) {
+      throw new Error(
         'Clicked position has to be saved to map state before calling computeEnclosedBoxes',
       );
     }
   } else {
-    if (mapState.verticalBars.get(clickedPosition) === undefined) {
-      throw Error(
+    if (board.vertical[clickedPosition] === undefined) {
+      throw new Error(
         'Clicked position has to be saved to map state before calling computeEnclosedBoxes',
       );
     }
@@ -89,10 +38,10 @@ export function computeEnclosedBoxes(
     );
   };
 
-  let enclosedBoxes = Array<string>();
+  const enclosedBoxes: string[] = [];
 
   const searchEnclosedBoxes = (
-    mapState: MapState,
+    board: BoardFrontend,
     fromPosition: [number, number],
     mapHeight: number,
     mapWidth: number,
@@ -103,24 +52,24 @@ export function computeEnclosedBoxes(
     // If at any point in time a box is extracted from the queue that is not on the map
     // (outside of map bounds) that means map has been left and the area is not enclosed
 
-    const positionToEncoding = (position: [number, number]): string => {
-      return position[0].toString() + ',' + position[1].toString();
+    const positionToEncoding = (position: [number, number]): Coordinates => {
+      return `${position[0]},${position[1]}`;
     };
 
     const boxNeighbours = (boxPosition: [number, number]): Array<[number, number]> => {
       const result = new Array<[number, number]>();
-      if (!mapState.horizontalBars.has(positionToEncoding(boxPosition))) {
+      if (!board.horizontal[positionToEncoding(boxPosition)]) {
         result.push([boxPosition[0] - 1, boxPosition[1]]);
       }
-      if (!mapState.verticalBars.has(positionToEncoding(boxPosition))) {
+      if (!board.vertical[positionToEncoding(boxPosition)]) {
         result.push([boxPosition[0], boxPosition[1] - 1]);
       }
       const boxOnTheRight: [number, number] = [boxPosition[0], boxPosition[1] + 1];
       const boxOnTheBottom: [number, number] = [boxPosition[0] + 1, boxPosition[1]];
-      if (!mapState.verticalBars.has(positionToEncoding(boxOnTheRight))) {
+      if (!board.vertical[positionToEncoding(boxOnTheRight)]) {
         result.push(boxOnTheRight);
       }
-      if (!mapState.horizontalBars.has(positionToEncoding(boxOnTheBottom))) {
+      if (!board.horizontal[positionToEncoding(boxOnTheBottom)]) {
         result.push(boxOnTheBottom);
       }
       return result;
@@ -146,12 +95,12 @@ export function computeEnclosedBoxes(
   };
 
   if (boxIsInMap(boxOnePosition)) {
-    enclosedBoxes.push(...searchEnclosedBoxes(mapState, boxOnePosition, mapHeight, mapWidth));
+    enclosedBoxes.push(...searchEnclosedBoxes(board, boxOnePosition, mapHeight, mapWidth));
   }
 
   if (boxIsInMap(boxTwoPosition)) {
-    enclosedBoxes.push(...searchEnclosedBoxes(mapState, boxTwoPosition, mapHeight, mapWidth));
+    enclosedBoxes.push(...searchEnclosedBoxes(board, boxTwoPosition, mapHeight, mapWidth));
   }
 
-  return Array<string>();
+  return [];
 }

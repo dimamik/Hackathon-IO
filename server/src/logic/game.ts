@@ -1,5 +1,5 @@
 import rooms from '../db/rooms';
-import { Board, csRoundParams, Move } from '../types';
+import { csRoundParams, Move } from '../types';
 import { isQuiz } from './quiz';
 import { validateMove } from './validate';
 
@@ -12,14 +12,16 @@ export const startGame = (roomID: string) => {
     throw new Error('Room is not ready to start game');
   }
 
+  const board = room.board.toFrontendBoard();
+
   console.log('Hello there');
   room.players[0]?.socket.emit('round', {
-    board: room.board,
+    board,
     isMyMove: true,
   } as csRoundParams);
 
   room.players[1]?.socket.emit('round', {
-    board: room.board,
+    board,
     isMyMove: false,
   } as csRoundParams);
 };
@@ -57,8 +59,10 @@ const makeMove = (move: Move, roomId: string) => {
   if (!rooms[roomId]) {
     throw new Error('Room does not exist');
   }
+
+  // TODO: deepcopy if we plan to add bot.
   const board = rooms[roomId].board;
 
   board.makeMove(rooms[roomId].currentPlayer, move);
-  return board;
+  return board.toFrontendBoard();
 };

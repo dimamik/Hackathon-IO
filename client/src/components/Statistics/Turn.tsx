@@ -1,9 +1,5 @@
-import React from 'react'
-
 function Turn() {
-  return (
-    <div>【Ｙｏｕｒ t u r n】</div>
-  )
+  return <div>【Ｙｏｕｒ　ｔurn】</div>;
 }
 
-export default Turn
+export default Turn;
