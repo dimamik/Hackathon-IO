@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: calc(100vh - 70px);
+  min-height: 95vh;
   background-image: url('../assets/images/configurationBackground.png');
 }
 

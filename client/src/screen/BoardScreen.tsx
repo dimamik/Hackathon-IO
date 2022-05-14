@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom';
 import Modal from 'react-modal';
 import Question from '../components/QuestionComponents';
 import './BoardScreen.css';
+import WaitingForPlayer from '../components/WaitingForPlayer';
 
 Modal.setAppElement('#root');
 
@@ -20,10 +21,15 @@ function BoardScreen() {
   const location = useLocation();
   const props: BoardProps = location.state; // TODO: ???????
 
-  const [isOpen, setIsOpen] = useState(false);
-  function toggleModal() {
-    setIsOpen(!isOpen);
+  const [isQuestionOpen, setIsQuestionOpen] = useState(false);
+  function toggleQuestionModal() {
+    setIsQuestionOpen(!isQuestionOpen);
   }
+  const [isWaitingOpen, setIsWaitingOpen] = useState(true);
+  function toggleWaitingModal() {
+    setIsWaitingOpen(!isWaitingOpen);
+  }
+
   const { setMapState } = useContext(MapContext);
   return (
     <div className="board-container">
@@ -40,9 +46,12 @@ function BoardScreen() {
       <br />
       &nbsp;
       <br />
-      <button onClick={toggleModal}>Toggle modal</button>
-      <Modal isOpen={isOpen} onRequestClose={toggleModal} className="mymodal">
+      <button onClick={toggleWaitingModal}>Toggle modal</button>
+      <Modal isOpen={isQuestionOpen} onRequestClose={toggleQuestionModal} className="mymodal">
         <Question />
+      </Modal>
+      <Modal isOpen={isWaitingOpen} onRequestClose={toggleWaitingModal} className="mymodal">
+        <WaitingForPlayer />
       </Modal>
     </div>
   );

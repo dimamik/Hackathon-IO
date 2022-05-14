@@ -2,7 +2,7 @@ import React from 'react'
 
 function WaitingForPlayer() {
     return (
-        <div className="background">
+        <div className="modalView">
             <div className="settingsWindow">
                 <div className="bar">
                     <div className="barTitle">
