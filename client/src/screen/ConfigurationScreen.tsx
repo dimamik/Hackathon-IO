@@ -7,6 +7,7 @@ function ConfigurationScreen() {
   const [height, setHeight] = useState(0);
   const [maxPoints, setMaxPoints] = useState(0);
   const [time, setTime] = useState(0);
+  const [multiplayer, setMultiplayer] = useState(false);
 
   const isValid = width & height & maxPoints & time;
   return (
@@ -47,13 +48,17 @@ function ConfigurationScreen() {
                 <p>Time for move</p>
                 <input type="text" onChange={e => setTime(Number(e.target.value))}></input>
               </div>
+              <div className="inputRow">
+                <div>Ｍｕｌｔｉｐｌａｙｅｒ</div>
+                <input type="checkbox" onChange={e => setMultiplayer((e.target.checked))}></input>
+              </div>
             </div>
             <div className="buttonContainer">
               <Link
                 to="/board"
                 state={{ width: width, height: height, maxPoints: maxPoints, time: time }}>
                 <button type="button" className="button" disabled={!isValid}>
-                  Click Me!
+                  P l a y 
                 </button>
               </Link>
             </div>
