@@ -8,7 +8,7 @@ function ConfigurationScreen() {
                 <div className='settingsWindow'>
                     <div className='bar'>
                         <div className='barTitle'>
-                            <p >
+                            <p>
                                 [１]　Configuration
                             </p>
                         </div>
