@@ -20,10 +20,10 @@ export interface MapContextType {
   verticalBars: Map<string, Player>;
   boxes: Map<string, Player>;
   playingNow: Player | null;
-  setMapState: (mapState: MapState) => void;
+  setMapState?: (mapState: MapState) => void;
 }
 
-const mapState : MapState = {
+export const mapStateMock : MapState = {
   verticalBars: new Map([
     ['2,4', {id: 1, socket: 'lorem'}],
     ['3,5', {id: 0, socket: 'lorem'}],

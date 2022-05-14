@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapContextType, MapState, Player } from '../types/Map';
+import { MapContextType, MapState, mapStateMock, Player } from '../types/BoardTypes';
 
 const initMapContext: MapContextType = {
   horizontalBars: new Map<string, Player>(),
@@ -16,12 +16,9 @@ type Props = {
 };
 
 export default class MapProvider extends React.Component<Props> {
-  state: MapState = {
-    horizontalBars: new Map<string, Player>(),
-    verticalBars: new Map<string, Player>(),
-    boxes: new Map<string, Player>(),
-    playingNow: null,
-  };
+  state: MapState = mapStateMock
+
+  
 
   setMapState = (mapState: MapState) => {
     this.setState(mapState);
