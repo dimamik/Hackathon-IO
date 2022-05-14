@@ -1,15 +1,12 @@
 import React from 'react';
-import { MapContextType, MapState, Player } from '../types/Map';
+import { MapContextType, MapState, mapStateMock, Player } from '../types/BoardTypes';
 
 const initMapContext: MapContextType = {
   horizontalBars: new Map<string, Player>(),
   verticalBars: new Map<string, Player>(),
   boxes: new Map<string, Player>(),
   playingNow: null,
-  setPlayingNow: (player: Player) => {},
-  setHorizontaBars: (map: Map<string, Player>) => {},
-  setVerticalBars: (map: Map<string, Player>) => {},
-  setBoxes: (map: Map<string, Player>) => {},
+  setMapState: (mapState: MapState) => {},
 };
 
 export const MapContext = React.createContext<MapContextType>(initMapContext);
@@ -19,24 +16,12 @@ type Props = {
 };
 
 export default class MapProvider extends React.Component<Props> {
-  state: MapState = {
-    horizontalBars: new Map<string, Player>(),
-    verticalBars: new Map<string, Player>(),
-    boxes: new Map<string, Player>(),
-    playingNow: null,
-  };
+  state: MapState = mapStateMock
 
-  setPlayingNow = (player: Player) => {
-    this.setState({ ...this.state, playingNow: player });
-  };
-  setHorizontaBars = (map: Map<string, Player>) => {
-    this.setState({ ...this.state, horizontalBars: map });
-  };
-  setVerticalBars = (map: Map<string, Player>) => {
-    this.setState({ ...this.state, verticalBars: map });
-  };
-  setBoxes = (map: Map<string, Player>) => {
-    this.setState({ ...this.state, boxes: map });
+  
+
+  setMapState = (mapState: MapState) => {
+    this.setState(mapState);
   };
 
   render() {
@@ -47,10 +32,7 @@ export default class MapProvider extends React.Component<Props> {
           verticalBars: this.state.verticalBars,
           boxes: this.state.boxes,
           playingNow: this.state.playingNow,
-          setPlayingNow: this.setPlayingNow,
-          setHorizontaBars: this.setHorizontaBars,
-          setVerticalBars: this.setVerticalBars,
-          setBoxes: this.setBoxes,
+          setMapState: this.setMapState,
         }}>
         {this.props.children}
       </MapContext.Provider>

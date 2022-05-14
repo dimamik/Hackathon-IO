@@ -2,7 +2,7 @@ import React from 'react'
 
 function EnemyScore() {
   return (
-    <div>EnemyScore</div>
+    <div>【Ｅｎｅｍｙ　ｓｃｏｒｅ】: </div>
   )
 }
 
