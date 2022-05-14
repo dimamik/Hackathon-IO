@@ -8,6 +8,10 @@ function App() {
 
   const socket = io('http://localhost:4000');
 
+  socket.on('created', ({ roomId }) => {
+    console.log(roomId);
+  });
+
   const sendSomething = () => {
     // Write to local storage
     // localStorage.setItem('test', 'Hello there');

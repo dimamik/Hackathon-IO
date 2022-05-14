@@ -5,13 +5,7 @@ import { handleCreate } from './services/create';
 import { handleJoin } from './services/join';
 import { handleMove } from './services/move';
 import { handleQuizResponse } from './services/quizResponse';
-import {
-  SettingParams,
-  JoinParams,
-  MoveParams,
-  ServerToClientEvents,
-  ClientToServerEvents,
-} from './types';
+import { ServerSocket } from './types';
 
 const main = async () => {
   const app = express();
@@ -25,13 +19,11 @@ const main = async () => {
     },
   });
 
-  io.on('connection', (socket: Socket<ClientToServerEvents, ServerToClientEvents>) => {
-    socket.on('create', (settingsParams: SettingParams) =>
-      handleCreate(socket, settingsParams),
-    );
-    socket.on('join', (joinParams: JoinParams) => handleJoin(socket, joinParams));
+  io.on('connection', (socket: ServerSocket) => {
+    socket.on('create', settingsParams => handleCreate(socket, settingsParams));
+    socket.on('join', joinParams => handleJoin(socket, joinParams));
 
-    socket.on('move', (moveParams: MoveParams) => handleMove(socket, moveParams));
+    socket.on('move', moveParams => handleMove(socket, moveParams));
     socket.on('quizResponse', quizResponseParams =>
       handleQuizResponse(socket, quizResponseParams),
     );

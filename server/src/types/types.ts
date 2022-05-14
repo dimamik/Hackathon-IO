@@ -1,22 +1,24 @@
+// Model types
 type CoordinateY = number;
 type CoordinateX = number;
 
 export type Coordinates = `${CoordinateY},${CoordinateX}`;
 
-
 export type CoordinateMap = {
   [key: Coordinates]: Player;
 };
 
-export type Board = {
-  horizontal: CoordinateMap;
-  vertical: CoordinateMap;
-  boxes: CoordinateMap;
-};
+type Lines = 'horizontal' | 'vertical';
 
-export type MoveParams = {
-  horizontal?: Player | undefined;
-  vertical?: Player | undefined;
+export class Board {
+  horizontal: CoordinateMap = {};
+  vertical: CoordinateMap = {};
+  boxes: CoordinateMap = {};
+}
+
+export type Move = {
+  coordinates: Coordinates;
+  type: Lines;
 };
 
 // TODO:
@@ -35,16 +37,16 @@ export interface MapProps {
   width: number;
 }
 
-export interface Player {
+export type Player = {
   id: string;
-}
+};
 
 export type BoardFrontend = Board & { currentPlayer: Player } & MapProps;
 
 export type QuizParams = {
   question: string;
   answers: string[];
-}
+};
 
 export type ServerToClientDTO = {
   board: BoardFrontend;
@@ -52,19 +54,18 @@ export type ServerToClientDTO = {
   quizParams: QuizParams;
 };
 
-// SOCKET TYPES
-
-export type Room = {
-  id: string;
-  board: Board;
-  players: Player[];
+export class Room {
+  readonly id: string;
+  readonly board: Board = new Board();
+  readonly players: Player[] = [];
   currentPlayer: Player;
-  isQuizActive: boolean;
-};
+  isQuizActive: boolean = false;
 
-export type ServerToClientEvents = {
-  board: ()
-};
-
-
-
+  constructor(roomId: string, currentPlayer?: Player) {
+    this.id = roomId;
+    if (currentPlayer) {
+      this.players.push(currentPlayer);
+      this.currentPlayer = currentPlayer;
+    }
+  }
+}

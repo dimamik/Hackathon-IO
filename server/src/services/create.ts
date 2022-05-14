@@ -1,10 +1,11 @@
 import { generateRandomRoomId } from '../utils/randomGenerator';
-import { CreateHandler } from 'src/types';
+import { CreateHandler, Player, scCreatedParams } from 'src/types';
+import rooms from '../db/rooms';
+import { Room } from '../types';
 
 export const handleCreate: CreateHandler = (socket, settings) => {
-
   const roomID = generateRandomRoomId();
-  socket.emit('')
+  rooms[roomID] = new Room(roomID, { id: socket.id } as Player);
   socket.join(roomID);
-  console.log(socket.id);
+  socket.emit('created', { roomId: roomID } as scCreatedParams);
 };

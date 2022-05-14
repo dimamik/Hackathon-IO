@@ -1,20 +1,33 @@
 import { Socket } from 'socket.io';
-import { SettingParams, JoinParams, MoveParams, QuizResponseParams } from './types';
+import {
+  csCreateParams,
+  csJoinParams,
+  csMoveParams,
+  csQuizParams,
+  scCreatedParams,
+} from './dto';
+
+export type ServerSocket = Socket<ClientToServerEvents, ServerToClientEvents>;
+export type ClientSocket = Socket<ServerToClientEvents, ClientToServerEvents>;
 
 type WrapWithSocket<TFunction extends (...args: any) => any> = (
-  socket: Socket<ServerToClientEvents, ClientToServerEvents>,
+  socket: ServerSocket,
   ...args: [...Parameters<TFunction>]
 ) => ReturnType<TFunction>;
 
-type CreateCallback = (settingParams: SettingParams) => void;
-type JoinCallback = (joinParams: JoinParams) => void;
-type MoveCallback = (moveParams: MoveParams) => void;
-type QuizResponseCallback = (quizResponseParams: QuizResponseParams) => void;
+type CreateCallback = (settingParams: csCreateParams) => void;
+type JoinCallback = (joinParams: csJoinParams) => void;
+type MoveCallback = (moveParams: csMoveParams) => void;
+type QuizResponseCallback = (quizResponseParams: csQuizParams) => void;
+
+type CreatedCallback = (createdParams: scCreatedParams) => void;
 
 export type CreateHandler = WrapWithSocket<CreateCallback>;
 export type JoinHandler = WrapWithSocket<JoinCallback>;
 export type MoveHandler = WrapWithSocket<MoveCallback>;
 export type QuizResponseHandler = WrapWithSocket<QuizResponseCallback>;
+
+export type CreatedHandler = WrapWithSocket<CreatedCallback>;
 
 export type ClientToServerEvents = {
   create: CreateCallback;
@@ -23,4 +36,6 @@ export type ClientToServerEvents = {
   quizResponse: QuizResponseCallback;
 };
 
-export type ServerToClientEvents = {};
+export type ServerToClientEvents = {
+  created: CreatedCallback;
+};
