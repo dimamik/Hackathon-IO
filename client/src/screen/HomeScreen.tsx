@@ -7,13 +7,11 @@ function HomeScreen() {
   return (
     <div className="home-screen-container">
       <div className="title-container">【~~　ＶａｐｏｒＷＩＥＴ　~~】</div>
-      <a href="#" className="no-decor">
-        <Link to="/configuration">
-          <div className="create-room-button">
-            <div className="create-room-inner">[１]　Ｃｒｅａｔｅ　ｒｏｏｍ</div>
-          </div>
-        </Link>
-      </a>
+      <Link className="no-decor" to="/configuration">
+        <div className="create-room-button">
+          <div className="create-room-inner">[１]　Ｃｒｅａｔｅ　ｒｏｏｍ</div>
+        </div>
+      </Link>
       <div className="room-id-hint-container">【Ｏｒ　ｉｎｓｅｒｔ　ｒｏｏｍ　ｉｄ】</div>
       <div className="room-id-container">
         <div className="input-spacer"></div>
