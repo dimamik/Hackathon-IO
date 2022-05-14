@@ -7,9 +7,8 @@ import HomeScreen from './screen/HomeScreen';
 import MapProvider from './context/Context';
 import BoardScreen from './screen/BoardScreen';
 import ConfigurationScreen from './screen/ConfigurationScreen';
+import QuestionComponents from './components/QuestionComponents';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
 
 function App() {
   const [count, setCount] = useState(0);
@@ -23,7 +22,8 @@ function App() {
             <Route path="/" element={<HomeScreen />} />
             <Route path="/home" element={<HomeScreen />} />
             <Route path="/board" element={<BoardScreen />} />
-            <Route path='/configuration' element={<ConfigurationScreen />} />
+            <Route path="/configuration" element={<ConfigurationScreen />} />
+            <Route path="/question" element={<QuestionComponents />} />
           </Routes>
           {/* <Footer /> */}
         </div>

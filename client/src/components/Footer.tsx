@@ -7,9 +7,7 @@ function Footer() {
         <footer>
             <Container>
                 <Row>
-                    <Col className='footer'>
-                        Copyright &copy; ~~VaporWIET~~
-                    </Col>
+                <Col><div className='footer'>Copyright &copy; ~~VaporWIET~~</div></Col>
                 </Row>
             </Container>
         </footer>
