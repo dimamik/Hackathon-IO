@@ -1,26 +1,51 @@
-import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import './QuestionComponents.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import dolphin from '../assets/images/dolphin.png';
 
 function QuestionComponents() {
   return (
-    <div className='questionPanel'>
-      <Container>
-        <Row>
-          <div className='questionNavbar'>
-          <Col>
-            [１]　ｑｕｅｓｔｉｏｎ
+    <Container fluid>
+      <div className="questionNavbar">
+        <Row className="justify-content-md-center">
+          <Col className="leftCenter">[１]　ｑｕｅｓｔｉｏｎ</Col>
+          <Col xs="auto" className="rightCenter">
+            <div className="closeQuestion">X</div>
           </Col>
-          <Col className='rightCenter'>
-            <div className='closeQuestion'>
-              X
-            </div>
-          </Col>
-          </div>
-
         </Row>
-      </Container>
-    </div>
-  )
+
+        <div className="questionPanel">
+          <div className="title">
+            <p>Question</p>
+          </div>
+          <div className="question">
+            <p>Dokąd nocą tupta jez?</p>
+          </div>
+          <div className="dolphinContainer">
+            <img src={dolphin} className="dolphin" />
+          </div>
+          <div className="answers">
+            <div>
+              <button type="button" className="button">
+                Click Me!
+              </button>
+            </div>
+            <div>
+              <button type="button" className="button">
+                Click Me!
+              </button>
+            </div>
+            <div>
+              <button type="button" className="button">
+                Click Me!
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  );
 }
 
-export default QuestionComponents
+export default QuestionComponents;
