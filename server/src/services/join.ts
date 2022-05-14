@@ -1,5 +1,8 @@
-import { JoinParams } from '../types/types';
+import { JoinHandler } from '../types';
 
-export const handleJoin = (socket, joinParams: JoinParams) => {
+export const handleJoin: JoinHandler = (socket, joinParams) => {
+  
+
+
   console.log(joinParams);
 };
