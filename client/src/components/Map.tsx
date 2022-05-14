@@ -1,30 +1,37 @@
 import React from 'react';
 import './Map.css';
-import { MapProps } from '../types/Map';
+import { MapProps, MapState } from '../types/Map';
 
 interface RowProps{
   y: number,
   width: number
 }
 
-function Dot(props){
+interface ObjectProps{
+  y: number,
+  x: number
+}
+
+function Dot(props: ObjectProps){
   return (
     <div className='map-dot' data-y={props.y} data-x={props.x}/>
   )
 }
 
-function horizontalClick(event){
+function horizontalClick(event: React.MouseEvent<HTMLDivElement>){
   // send click event to the server
-  const x = parseInt(event.target.getAttribute('data-x'))
-  const y = parseInt(event.target.getAttribute('data-y'))
+  const target = event.target as HTMLDivElement
+  const x = parseInt(target.getAttribute('data-x') as string)
+  const y = parseInt(target.getAttribute('data-y') as string)
   console.log("Horizontal click", y, x)
 }
 
-function HorizontalBar(props){
+function HorizontalBar(props: ObjectProps){
   const thisPosition = `${props.y},${props.x}`
-  if(props.mapState['horizontal_bars'][thisPosition] !== undefined){ 
+  const mapState = context.mapState as MapState
+  if(mapState.horizontalBars.get(thisPosition)  !== undefined){ 
     // this bar is selected
-    const playerClass = props.mapState['horizontal_bars'][thisPosition] === 0 ?
+    const playerClass = mapState.horizontalBars.get(thisPosition)?.id === 0 ?
       "bar-player0"
       : "bar-player1"
 
@@ -40,18 +47,20 @@ function HorizontalBar(props){
   }
 }
 
-function verticalClick(event){
+function verticalClick(event: React.MouseEvent<HTMLDivElement>){
   // send click event to the server
-  const x = parseInt(event.target.getAttribute('data-x'))
-  const y = parseInt(event.target.getAttribute('data-y'))
+  const target = event.target as HTMLDivElement
+  const x = parseInt(target.getAttribute('data-x') as string)
+  const y = parseInt(target.getAttribute('data-y') as string)
   console.log("Vertical click", y, x)
 }
 
-function VerticalBar(props){
+function VerticalBar(props: ObjectProps){
   const thisPosition = `${props.y},${props.x}`
-  if(props.mapState['vertical_bars'][thisPosition] !== undefined){ 
+  const mapState = context.mapState as MapState
+  if(mapState.verticalBars.get(thisPosition) !== undefined){ 
     // this bar is selected
-    const playerClass = props.mapState['vertical_bars'][thisPosition] === 0 ?
+    const playerClass = mapState.verticalBars.get(thisPosition)?.id === 0 ?
     "bar-player0"
     : "bar-player1"
 
@@ -67,13 +76,14 @@ function VerticalBar(props){
   }
 }
 
-function Box(props){
+function Box(props: ObjectProps){
   const thisPosition = `${props.y},${props.x}`
-  if(props.mapState['boxes'][thisPosition] !== undefined){
-    const mapState = props.mapState['boxes'][thisPosition]
-    const boxClass = mapState === 0 ?
+  const mapState = context.mapState as MapState
+  if(mapState.boxes.get(thisPosition) !== undefined){
+    const boxPlayer = mapState.boxes.get(thisPosition)?.id
+    const boxClass = boxPlayer === 0 ?
       "map-box-player0"
-      : (mapState === 1 ? 
+      : (boxPlayer === 1 ? 
           "map-box-player1"
           : "map-box-neutral"
         );
@@ -91,9 +101,9 @@ function Box(props){
 function DotRow(props: RowProps) {
   const cols = []
   for(let x = 0; x < props.width; x++){
-    cols.push(<Dot y={props.y} x={x} mapState={props.mapState} key={`dot:${props.y},${x}`}/>)
+    cols.push(<Dot y={props.y} x={x} key={`dot:${props.y},${x}`}/>)
     if(x !== props.width-1){
-      cols.push(<HorizontalBar y={props.y} x={x} mapState={props.mapState} key={`horizontal_bar:${props.y},${x}`}/>)
+      cols.push(<HorizontalBar y={props.y} x={x} key={`horizontal_bar:${props.y},${x}`}/>)
     }
   }
 
@@ -107,9 +117,9 @@ function DotRow(props: RowProps) {
 function SquareRow(props: RowProps) {
   var cols = []
   for(let x = 0; x < props.width; x++){
-    cols.push(<VerticalBar y={props.y} x={x} mapState={props.mapState} key={`vertical_bar:${props.y},${x}`}/>)
+    cols.push(<VerticalBar y={props.y} x={x} key={`vertical_bar:${props.y},${x}`}/>)
     if(x !== props.width-1){
-      cols.push(<Box y={props.y} x={x} mapState={props.mapState} key={`square:${props.y},${x}`}/>)
+      cols.push(<Box y={props.y} x={x} key={`square:${props.y},${x}`}/>)
     }
   }
   
