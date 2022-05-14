@@ -19,7 +19,7 @@ function App() {
           <Route path="/home" element={<HomeScreen />} />
           <Route path="/board" element={<Board />} />
         </Routes>
-        {/* <Footer /> */}
+        <Footer />
       </MapProvider>
     </BrowserRouter>
   );

@@ -11,6 +11,9 @@
     display: flex;
     align-items: center;
     color: white;
+}
+
+a {
     text-decoration: none;
 }
 
