@@ -3,12 +3,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-size: contain;
+  background-size: cover;
   background-image:  url('../assets/images/boardScreenBackground.png');
-}
-
-.board-container::after{
-  content: "<br/>";
 }
 
 .map-container{

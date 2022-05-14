@@ -1,0 +1,90 @@
+.title-container{
+  text-align: center;
+  color: white;
+  padding: 20px;
+  font-size: 50px;
+  padding-top: 60px;
+}
+
+.home-screen-container{
+  height: calc(100vh - 70px);
+  background-size: cover;
+  background-image: url('../assets/images/homeScreenBackground.jpg');
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+}
+
+.create-room-button{
+  margin-top: 50px;
+  color: white;
+  background-color: rgb(215, 120, 160); 
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-shadow: 5px 5px 0px 0px rgba(0, 0, 0, 1);
+}
+
+.create-room-inner{
+  border-color: rgb(210, 170, 210);
+  border-style: solid;
+  border-width: 2px;
+  border-right-width: 5px;
+  padding: 7px;
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 40px;
+}
+
+.no-decor{
+  text-decoration: none;
+}
+
+.room-id-hint-container{
+  margin-top: 60px;
+  margin-bottom: 15px;
+  color: white;
+  font-size: 30px;
+}
+
+.room-id-container{
+  font-size: 35px;
+  display: flex;
+  flex-direction: row;
+  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 1);
+}
+
+.room-id-input{
+  background: transparent;
+  border: none;
+  outline-width: 0;
+  color: white; 
+  background-color: rgb(220, 180, 210);
+  border-left: white 4px solid;
+  border-top: white 4px solid;
+}
+
+.input-spacer{
+  width: 4px;
+  background-color: rgb(220, 180, 210);
+}
+
+.room-id-input:focus{
+  outline-width: 0 !important;
+  box-shadow: none !important;
+}
+
+.input-reset-container{
+  width: 50px;
+  border-top: white 4px solid;
+  background-color: rgb(220, 180, 210);
+}
+
+.input-reset{
+  margin: 10px;
+  width: 30px;
+  height: 30px;
+  background-color: rgb(190, 150, 190);
+  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 1);
+}
