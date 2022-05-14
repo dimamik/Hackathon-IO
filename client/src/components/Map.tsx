@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './Map.css';
 import { MapProps, MapState } from '../types/Map';
+import { MapContext } from '../context/Context';
 
 interface RowProps{
   y: number,
@@ -28,7 +29,7 @@ function horizontalClick(event: React.MouseEvent<HTMLDivElement>){
 
 function HorizontalBar(props: ObjectProps){
   const thisPosition = `${props.y},${props.x}`
-  const mapState = context.mapState as MapState
+  const mapState = useContext(MapContext)
   if(mapState.horizontalBars.get(thisPosition)  !== undefined){ 
     // this bar is selected
     const playerClass = mapState.horizontalBars.get(thisPosition)?.id === 0 ?
@@ -57,7 +58,7 @@ function verticalClick(event: React.MouseEvent<HTMLDivElement>){
 
 function VerticalBar(props: ObjectProps){
   const thisPosition = `${props.y},${props.x}`
-  const mapState = context.mapState as MapState
+  const mapState = useContext(MapContext)
   if(mapState.verticalBars.get(thisPosition) !== undefined){ 
     // this bar is selected
     const playerClass = mapState.verticalBars.get(thisPosition)?.id === 0 ?
@@ -78,7 +79,7 @@ function VerticalBar(props: ObjectProps){
 
 function Box(props: ObjectProps){
   const thisPosition = `${props.y},${props.x}`
-  const mapState = context.mapState as MapState
+  const mapState = useContext(MapContext)
   if(mapState.boxes.get(thisPosition) !== undefined){
     const boxPlayer = mapState.boxes.get(thisPosition)?.id
     const boxClass = boxPlayer === 0 ?
