@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import HomeScreen from './screen/HomeScreen';
 import MapProvider from './context/Context';
 import Board from './screen/Board';
+import ConfigurationScreen from './screen/ConfigurationScreen';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomeScreen />} />
           <Route path="/home" element={<HomeScreen />} />
+          <Route path='/configuration' element={<ConfigurationScreen />} />
           <Route path="/board" element={<Board />} />
         </Routes>
         <Footer />
