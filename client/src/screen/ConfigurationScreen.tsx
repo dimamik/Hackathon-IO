@@ -15,7 +15,7 @@ function ConfigurationScreen() {
         <div className="settingsWindow">
           <div className="bar">
             <div className="barTitle">
-              <p>[１]　Configuration</p>
+              <div>[１]　C o n f i g u r a t i o n</div>
             </div>
             <div className="closeIcon">X</div>
           </div>
@@ -26,7 +26,7 @@ function ConfigurationScreen() {
             <div className="verticalSettingOptions">
               <div className="row">
                 <p>Width</p>
-                <input type="text" onChange={e => setWidth(Number(e.target.value))}></input>
+                <input type="text" onChange={e => setWidth(Number(e.target.value))} className='confInput' ></input>
               </div>
               <div className="row">
                 <p>Height</p>
