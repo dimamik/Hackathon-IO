@@ -1,22 +1,28 @@
 import { ClientSocket } from './sockets';
 import { io } from 'socket.io-client';
 import { BoardFrontend, Player } from './types';
-
-export interface MapProps {
-  height: number;
-  width: number;
-}
+import { csRoundParams } from './dto';
 
 export interface MapState {
   board: BoardFrontend;
-  roomId: string | null;
-  playingNow: Player | null;
+  roomID: string | null;
+  isMyMove: boolean;
   socket: ClientSocket | null;
 }
 
+export type GameConfig = {
+  width: number;
+  height: number;
+  time: number;
+  maxPoints: number;
+}
+
 export interface MapContextType {
+  gameConfig: GameConfig
   mapState: MapState;
-  setMapState?: (mapState: MapState) => void;
+  setRoomId: (roomId: string) => void;
+  setMapconfig: (width: number, height: number, maxPoints: number, time: number) => void;
+  setParams: (params: csRoundParams) => void;
 }
 
 export const mapStateMock: MapState = {
@@ -37,8 +43,17 @@ export const mapStateMock: MapState = {
       '2,5': 1,
       '4,4': -1,
     },
+    height: 1,
+    width: 1
   },
-  playingNow: 0,
-  roomId: '',
+  isMyMove: true,
+  roomID: '',
   socket: io('http://localhost:4000'),
 };
+
+export const gameConfigMock: GameConfig = {
+  width: 10,
+  height: 10,
+  maxPoints: 50,
+  time: 100,
+}

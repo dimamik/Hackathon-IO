@@ -3,8 +3,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 95vh;
-  background-image: url('../../assets/images/configurationBackground.png');
+  height: calc(100vh - 70px);
+  background-image: url('../assets/images/configurationBackground.png');
 }
 
 p {
@@ -48,7 +48,6 @@ p {
   flex-direction: column;
   width: 100%;
   justify-content: center;
-  align-items: center;
   text-align: center;
 }
 
@@ -74,7 +73,7 @@ p {
   align-items: center;
 }
 
-.playButton {
+.button {
   width: 250px;
   height: 53px;
   background: #e6b0d4;
@@ -84,8 +83,4 @@ p {
 
 .buttonContainer {
   padding: 30px;
-}
-
-.hugeTitle {
-  font-size: 30px;
 }

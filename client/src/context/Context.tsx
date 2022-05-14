@@ -1,9 +1,12 @@
 import React from 'react';
-import { MapContextType, MapState, mapStateMock } from '../types/';
+import { MapContextType, MapState, mapStateMock, csRoundParams, gameConfigMock } from '../types/';
 
 const initMapContext: MapContextType = {
+  gameConfig: gameConfigMock,
   mapState: mapStateMock,
-  setMapState: (mapState: MapState) => {},
+  setMapconfig: (width: number, height: number, maxPoints: number, time: number) => {},
+  setRoomId: (roomId) => {},
+  setParams: (params: csRoundParams) => {},
 };
 
 export const MapContext = React.createContext<MapContextType>(initMapContext);
@@ -13,21 +16,63 @@ type Props = {
 };
 
 export default class MapProvider extends React.Component<Props> {
-  state: MapState = mapStateMock;
+  state = {    
+    mapState: mapStateMock,
+    config: gameConfigMock,
+  }
 
-  setMapState = (mapState: MapState) => {
-    this.setState(mapState);
-  };
+  setRoundParams = (params: csRoundParams) => {
+    console.log(params);
+    this.setState({
+      mapState: {
+        ...this.state.mapState,
+        board: params.board,
+        isMyMove: params.isMyMove
+      },
+      config: this.state.config
+    })
+  }
+
+  setMapconfig = (width: number, height: number, maxPoints: number,
+    time: number) => {
+      this.setState({
+        mapState: this.state.mapState,
+        config: {
+          ...this.state.config,
+          width,
+          height, 
+          maxPoints, 
+          time
+        },
+      })
+    }
+
+  setRoomId = (roomID: string) => {
+    this.setState({
+      mapState: {
+        ...this.state.mapState,
+        roomID
+      },
+      config: this.state.config,
+    })
+  }
 
   render() {
     return (
       <MapContext.Provider
         value={{
-          mapState: this.state,
-          setMapState: this.setMapState,
+          gameConfig: this.state.config,
+          mapState: this.state.mapState,
+          setParams: this.setRoundParams,
+          setMapconfig: this.setMapconfig,
+          setRoomId: this.setRoomId,
         }}>
         {this.props.children}
       </MapContext.Provider>
     );
   }
 }
+function BoardFrontend(board: any, BoardFrontend: any) {
+  throw new Error('Function not implemented.');
+}
+

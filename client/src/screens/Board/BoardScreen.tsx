@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { MapContext } from '../../context/Context';
 import Board from '../../components/Board/Board';
 import PlayerStats from '../../components/Statistics/PlayerStats';
@@ -6,7 +6,9 @@ import { useLocation } from 'react-router-dom';
 import Modal from 'react-modal';
 import Question from '../../components/Modals/QuestionComponents';
 import './BoardScreen.css';
-import WaitingForPlayer from '../../components/Modals/WaitingForPlayer';
+import { scCreatedParams, MapContextType, csRoundParams, Move } from '../types';
+import { joinPaths } from 'react-router/lib/router';
+
 
 Modal.setAppElement('#root');
 
@@ -18,19 +20,18 @@ export interface BoardProps {
 }
 
 function BoardScreen() {
-  const location = useLocation();
-  const props: BoardProps = location.state; // TODO: ???????
+  const {mapState, setParams} = useContext(MapContext);
 
-  const [isQuestionOpen, setIsQuestionOpen] = useState(false);
-  function toggleQuestionModal() {
-    setIsQuestionOpen(!isQuestionOpen);
-  }
-  const [isWaitingOpen, setIsWaitingOpen] = useState(true);
-  function toggleWaitingModal() {
-    setIsWaitingOpen(!isWaitingOpen);
-  }
+  mapState.socket?.on('round', (ev: csRoundParams) => {
+    setParams(ev)
+    // TODO: wypierdolic modal z oczekiwaniem
+  })
 
-  const { setMapState } = useContext(MapContext);
+
+  const [isOpen, setIsOpen] = useState(false);
+  function toggleModal() {
+    setIsOpen(!isOpen);
+  }
   return (
     <div className="board-container">
       <PlayerStats />
@@ -38,7 +39,7 @@ function BoardScreen() {
         <div className="white-border">
           <div className="grey-border">
             <div className="violet-border">
-              <Board width={props.width} height={props.height} />
+              <Board />
             </div>
           </div>
         </div>
@@ -46,12 +47,9 @@ function BoardScreen() {
       <br />
       &nbsp;
       <br />
-      <button onClick={toggleWaitingModal}>Toggle modal</button>
-      <Modal isOpen={isQuestionOpen} onRequestClose={toggleQuestionModal} className="mymodal">
+      <button onClick={toggleModal}>Toggle modal</button>
+      <Modal isOpen={isOpen} onRequestClose={toggleModal} className="mymodal">
         <Question />
-      </Modal>
-      <Modal isOpen={isWaitingOpen} onRequestClose={toggleWaitingModal} className="mymodal">
-        <WaitingForPlayer />
       </Modal>
     </div>
   );

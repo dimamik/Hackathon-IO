@@ -1,5 +1,4 @@
 import { JoinHandler } from '../types';
-import { io } from '../';
 import rooms from '../db/rooms';
 import { Player } from '../types';
 import { startGame } from '../logic/game';

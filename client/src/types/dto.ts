@@ -1,4 +1,5 @@
-import { BoardFrontend, QuizParams, Move } from './types';
+import { QuizParams, Move } from './types';
+import { BoardFrontend } from './game';
 
 export type csCreateParams = {
   width: number;

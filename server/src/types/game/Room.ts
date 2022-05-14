@@ -4,7 +4,7 @@ import { Player } from './Player';
 
 export class Room {
   readonly id: string;
-  readonly board: Board = new Board();
+  readonly board: Board;
   readonly players: [Player, Player] = [null, null];
   currentPlayer: Player;
   roomSettings: csCreateParams;
@@ -16,6 +16,7 @@ export class Room {
       this.players[0] = firstPlayer;
       this.currentPlayer = firstPlayer;
     }
+    this.board = new Board(roomSettings.height, roomSettings.width);
     this.roomSettings = roomSettings;
   }
 
@@ -23,3 +24,4 @@ export class Room {
     this.players[1] = secondPlayer;
   }
 }
+
