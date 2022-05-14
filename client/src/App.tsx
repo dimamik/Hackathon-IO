@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import './App.css';
 import { BrowserRouter, Route,Routes } from 'react-router-dom'
-// import Header from './components/Header's
-// import Footer from './components/Footer'
+import Header from './components/Header'
+import Footer from './components/Footer'
 import HomeScreen from './screen/HomeScreen';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
 
   return (
     <BrowserRouter>
-        {/* <Header /> */}
+        <Header />
             <Routes>
               <Route path="/" element={<HomeScreen />} />
             </Routes>
