@@ -16,7 +16,9 @@ yarn dev
 ```
 
 # To run the frontend
+
 ## Need to have:
+
 - yarn & node (version>=12.2.0)
 
 ```shell
