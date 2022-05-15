@@ -35,13 +35,6 @@ export const playRound = (roomId: string, move: Move) => {
   // Validate move
   validateMove(board, move, boardHeight, boardWidth);
 
-  // Change current player
-  if (rooms[roomId].currentPlayer == rooms[roomId].players[0]) {
-    rooms[roomId].currentPlayer = rooms[roomId].players[1];
-  } else {
-    rooms[roomId].currentPlayer = rooms[roomId].players[0];
-  }
-
   // Do we need to activate quiz?
 
   // We don't need this - if BFS returns at least
