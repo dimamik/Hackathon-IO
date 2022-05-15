@@ -42,9 +42,9 @@ function ConfigurationScreen() {
   const navigate = useNavigate();
 
   const onClick = () => {
-    setShouldShowModal(true)
-    create(context, () => navigate('/board'))
-  }
+    setShouldShowModal(true);
+    create(context, () => navigate('/board'));
+  };
 
   const isValid = true || (width && height && maxPoints && time);
   return (

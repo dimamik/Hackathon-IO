@@ -15,7 +15,7 @@ export type GameConfig = {
   height: number;
   time: number;
   maxPoints: number;
-  shouldShowModal: boolean,
+  shouldShowModal: boolean;
 };
 
 export interface MapContextType {

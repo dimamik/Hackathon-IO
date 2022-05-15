@@ -19,6 +19,8 @@ export class Board {
   boxes: CoordinateMap<Player> = {};
   width: number;
   height: number;
+  firstPlayerScore: number;
+  secondPlayerScore: number;
 
   constructor(height: number, width: number) {
     this.width = width;
@@ -132,6 +134,10 @@ export class Board {
 
     return enclosedBoxes;
   }
+
+  addEnclosedBoxes(boxes: Board['boxes']) {
+    this.boxes = { ...this.boxes, ...boxes };
+  }
 }
 
 export class BoardFrontend {
@@ -140,6 +146,8 @@ export class BoardFrontend {
   boxes: CoordinateMap<PlayerFrontend>;
   width: number;
   height: number;
+  firstPlayerScore: number;
+  secondPlayerScore: number;
 
   constructor(backendBoard: Board) {
     this.horizontal = mapValues(backendBoard.horizontal, player => player!.id);
@@ -147,5 +155,7 @@ export class BoardFrontend {
     this.boxes = mapValues(backendBoard.boxes, player => player!.id);
     this.height = backendBoard.height;
     this.width = backendBoard.width;
+    this.firstPlayerScore = backendBoard.firstPlayerScore;
+    this.secondPlayerScore = backendBoard.firstPlayerScore;
   }
 }
