@@ -1,8 +1,9 @@
-import React from 'react';
 import EnemyScore from './EnemyScore';
 import PlayerScore from './PlayerScore';
 import Turn from './Turn';
 import { Container, Row, Col } from 'react-bootstrap';
+import { MapContext } from '../../context/Context';
+import { useContext } from 'react';
 import './Statiscs.css';
 
 interface Props {
@@ -11,6 +12,11 @@ interface Props {
 }
 
 function PlayerStats(props: Props) {
+  const { gameConfig } = useContext(MapContext);
+  const yourPoints =
+    gameConfig.playerID == 0 ? props.firstPlayerScore : props.secondPlayerScore;
+  const enemyPoints =
+    gameConfig.playerID == 1 ? props.firstPlayerScore : props.secondPlayerScore;
   return (
     <Container fluid>
       <div className="flexDisplay">
@@ -21,11 +27,11 @@ function PlayerStats(props: Props) {
         </Row>
         <Row>
           <Col>
-            <PlayerScore points={props.firstPlayerScore} />
+            <PlayerScore points={yourPoints} />
           </Col>
           <Col></Col>
           <Col>
-            <EnemyScore points={props.secondPlayerScore} />
+            <EnemyScore points={enemyPoints} />
           </Col>
         </Row>
       </div>
