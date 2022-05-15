@@ -1,0 +1,82 @@
+{
+  "quizs": [
+    {
+      "question": "Odpowiedz A jest poprawna (indeksy od 0)",
+      "answers": ["A", "B", "C", "D"],
+      "correctAnswer": 0,
+      "points": 1
+    },
+    {
+      "question": "Odpowiedz B jest poprawna (indeksy od 0)",
+      "answers": ["A", "B", "C", "D"],
+      "correctAnswer": 1,
+      "points": 3
+    },
+    {
+      "question": "Odpowiedz C jest poprawna (indeksy od 0)",
+      "answers": ["A", "B", "C", "D"],
+      "correctAnswer": 2,
+      "points": 5
+    },
+    {
+      "question": "Odpowiedz A jest poprawna (indeksy od 0)",
+      "answers": ["A", "B", "C", "D"],
+      "correctAnswer": 0,
+      "points": 3
+    },
+    {
+      "question": "Odpowiedz B jest poprawna (indeksy od 0)",
+      "answers": ["A", "B", "C", "D"],
+      "correctAnswer": 1,
+      "points": 1
+    },
+    {
+      "question": "Odpowiedz C jest poprawna (indeksy od 0)",
+      "answers": ["A", "B", "C", "D"],
+      "correctAnswer": 2,
+      "points": 5
+    },
+    {
+      "question": "Odpowiedz A jest poprawna (indeksy od 0)",
+      "answers": ["A", "B", "C", "D"],
+      "correctAnswer": 0,
+      "points": 1
+    },
+    {
+      "question": "Odpowiedz B jest poprawna (indeksy od 0)",
+      "answers": ["A", "B", "C", "D"],
+      "correctAnswer": 1,
+      "points": 1
+    },
+    {
+      "question": "Odpowiedz C jest poprawna (indeksy od 0)",
+      "answers": ["A", "B", "C", "D"],
+      "correctAnswer": 2,
+      "points": 1
+    },
+    {
+      "question": "AAA",
+      "answers": ["A", "V", "v", "v"],
+      "points": 1,
+      "correctAnswer": 0
+    },
+    {
+      "question": "AAA",
+      "answers": ["A", "V", "v", "v"],
+      "points": 1,
+      "correctAnswer": 0
+    },
+    {
+      "question": "AAA",
+      "answers": ["A", "V", "v", "v"],
+      "points": 1,
+      "correctAnswer": 0
+    },
+    {
+      "question": "AAABC",
+      "answers": ["A", "V", "v", "v"],
+      "points": 1,
+      "correctAnswer": 0
+    }
+  ]
+}

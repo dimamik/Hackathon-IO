@@ -1,5 +1,5 @@
 import { csCreateParams } from '../dto';
-import { Board } from './Board';
+import { Board, Coordinates } from './Board';
 import { Player } from './Player';
 
 export class Room {
@@ -9,6 +9,7 @@ export class Room {
   currentPlayer: Player;
   roomSettings: csCreateParams;
   isQuizActive: boolean = false;
+  enclosedByMoveBoxes: Array<Coordinates>;
 
   constructor(roomId: string, roomSettings: csCreateParams, firstPlayer?: Player) {
     this.id = roomId;

@@ -7,24 +7,28 @@ import {
   gameConfigMock,
 } from '../types/';
 
-const initMapContext: MapContextType = {
-  gameConfig: gameConfigMock,
-  mapState: mapStateMock,
-  setMapconfig: (width: number, height: number, maxPoints: number, time: number) => {},
-  setRoomId: (roomId) => {},
-  setParams: (params: csRoundParams, shouldShowModal: boolean) => {},
-  setShouldShowModal: (shouldShowModal: boolean) => {},
+const initMapContext: () => MapContextType = () => {
+  return {
+    gameConfig: gameConfigMock,
+    mapState: mapStateMock(),
+    setMapconfig: (width: number, height: number, maxPoints: number, time: number) => {},
+    setRoomId: roomId => {},
+    setParams: (params: csRoundParams, shouldShowModal: boolean) => {},
+    setShouldShowModal: (shouldShowModal: boolean) => {},
+  };
 };
 
-export const MapContext = React.createContext<MapContextType>(initMapContext);
+export const MapContext = React.createContext<MapContextType>(initMapContext());
+export const SecondPlayerMapContext = React.createContext<MapContextType>(initMapContext());
 
 type Props = {
+  contextInstance: React.Context<MapContextType>;
   children: React.ReactNode;
 };
 
 export default class MapProvider extends React.Component<Props> {
   state = {
-    mapState: mapStateMock,
+    mapState: mapStateMock(),
     config: gameConfigMock,
   };
 
@@ -38,10 +42,10 @@ export default class MapProvider extends React.Component<Props> {
       },
       config: {
         ...this.state.config,
-        shouldShowModal
-      }
-    })
-  }
+        shouldShowModal,
+      },
+    });
+  };
 
   setMapconfig = (width: number, height: number, maxPoints: number, time: number) => {
     this.setState({
@@ -71,24 +75,24 @@ export default class MapProvider extends React.Component<Props> {
       mapState: this.state.mapState,
       config: {
         ...this.state.config,
-        shouldShowModal
+        shouldShowModal,
       },
-    })
-  }
+    });
+  };
 
   render() {
     return (
-      <MapContext.Provider
+      <this.props.contextInstance.Provider
         value={{
           gameConfig: this.state.config,
           mapState: this.state.mapState,
           setParams: this.setRoundParams,
           setMapconfig: this.setMapconfig,
           setRoomId: this.setRoomId,
-          setShouldShowModal: this.setShouldShowModal
+          setShouldShowModal: this.setShouldShowModal,
         }}>
         {this.props.children}
-      </MapContext.Provider>
+      </this.props.contextInstance.Provider>
     );
   }
 }

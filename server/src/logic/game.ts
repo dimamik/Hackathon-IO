@@ -1,6 +1,6 @@
 import rooms from '../db/rooms';
-import { BoardFrontend, Coordinates, csRoundParams, Move } from '../types';
-import { isQuiz } from './quiz';
+import { BoardFrontend, Coordinates, scRoundParams, Move, Board, Player } from '../types';
+import { startQuiz } from './quiz';
 import { validateMove } from './validate';
 
 export const startGame = (roomID: string) => {
@@ -15,15 +15,15 @@ export const startGame = (roomID: string) => {
   const board = room.board.toFrontendBoard();
 
   console.log('Hello there');
-  room.players[0]?.socket.emit('round', {
+  room.players[0]?.socket?.emit('round', {
     board,
     isMyMove: true,
-  } as csRoundParams);
+  } as scRoundParams);
 
-  room.players[1]?.socket.emit('round', {
+  room.players[1]?.socket?.emit('round', {
     board,
     isMyMove: false,
-  } as csRoundParams);
+  } as scRoundParams);
 };
 
 export const playRound = (roomId: string, move: Move) => {
@@ -46,7 +46,7 @@ export const playRound = (roomId: string, move: Move) => {
   // }
 
   // Make move on board
-  const [enclosedBoxes, newBoard]: [Array<Coordinates>, BoardFrontend] = makeMove(
+  const [enclosedBoxes, boardWithMoveMade]: [Array<Coordinates>, BoardFrontend] = makeMove(
     move,
     roomId,
     boardHeight,
@@ -57,6 +57,10 @@ export const playRound = (roomId: string, move: Move) => {
   // need to run the quiz
   if (enclosedBoxes.length > 0) {
     console.log(enclosedBoxes);
+    rooms[roomId].enclosedByMoveBoxes = enclosedBoxes;
+
+    startQuiz(rooms[roomId]);
+    return;
     // All the boxes that will be awarded in this quiz
     // are in the `enclosedBoxes` list, but they are
     // not drawn on the map yet
@@ -64,15 +68,15 @@ export const playRound = (roomId: string, move: Move) => {
 
   // Emit move to players
 
-  rooms[roomId].players[0]?.socket.emit('round', {
-    board: newBoard,
+  rooms[roomId].players[0]?.socket?.emit('round', {
+    board: boardWithMoveMade,
     isMyMove: !(rooms[roomId].currentPlayer == rooms[roomId].players[0]),
-  } as csRoundParams);
+  } as scRoundParams);
 
-  rooms[roomId].players[1]?.socket.emit('round', {
-    board: newBoard,
+  rooms[roomId].players[1]?.socket?.emit('round', {
+    board: boardWithMoveMade,
     isMyMove: !(rooms[roomId].currentPlayer == rooms[roomId].players[1]),
-  } as csRoundParams);
+  } as scRoundParams);
 
   if (rooms[roomId].currentPlayer == rooms[roomId].players[0]) {
     rooms[roomId].currentPlayer = rooms[roomId].players[1];
@@ -86,7 +90,7 @@ const makeMove = (
   roomId: string,
   boardHeight: number,
   boardWidth: number,
-): [Array<Coordinates>, BoardFrontend] => {
+): [Coordinates[], BoardFrontend] => {
   if (!rooms[roomId]) {
     throw new Error('Room does not exist');
   }
@@ -95,10 +99,15 @@ const makeMove = (
   const board = rooms[roomId].board;
 
   board.makeMove(rooms[roomId].currentPlayer, move);
-  const enclosedBoxes: Array<Coordinates> = board.getEnclosedBoxes(
-    move,
-    boardHeight,
-    boardWidth,
-  );
-  return [enclosedBoxes, board.toFrontendBoard()];
+  const enclosedBoxesArr = board.getEnclosedBoxes(move, boardHeight, boardWidth);
+
+  const enclosedBoxes: Board['boxes'] = {};
+
+  const nullPLayer: Player = { id: -1, socket: null };
+
+  enclosedBoxesArr.forEach(box => (enclosedBoxes[box] = nullPLayer));
+
+  board.addEnclosedBoxes(enclosedBoxes);
+
+  return [enclosedBoxesArr, board.toFrontendBoard()];
 };

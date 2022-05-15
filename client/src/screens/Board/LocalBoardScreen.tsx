@@ -1,10 +1,11 @@
 import { useContext, useState } from 'react';
-import { MapContext } from '../../context/Context';
+import { MapContext, SecondPlayerMapContext } from '../../context/Context';
 import Board from '../../components/Board/Board';
 import PlayerStats from '../../components/Statistics/PlayerStats';
 import Modal from 'react-modal';
 import Question from '../../components/Modals/QuestionComponents';
 import './BoardScreen.css';
+import './LocalBoardScreen.css';
 import { csRoundParams } from '../../types';
 import WaitingForPlayer from '../../components/Modals/WaitingForPlayer';
 import GameOver from '../../components/Modals/GameOverComponts';
@@ -19,15 +20,15 @@ export interface BoardProps {
   time: number;
 }
 
-function BoardScreen() {
-  const { mapState, setParams, gameConfig } = useContext(MapContext);
+function LocalBoardScreen() {
+  const firstPlayerMapState = useContext(MapContext);
+  const secondPlayerMapState = useContext(SecondPlayerMapContext);
 
   const [isQuestionOpen, setIsQuestionOpen] = useState(false);
   function toggleQuestionModal() {
     setIsQuestionOpen(!isQuestionOpen);
   }
-
-  const [isWaitingOpen, setIsWaitingOpen] = useState(gameConfig.shouldShowModal);
+  const [isWaitingOpen, setIsWaitingOpen] = useState(false);
   function toggleWaitingModal() {
     setIsWaitingOpen(!isWaitingOpen);
   }
@@ -36,9 +37,24 @@ function BoardScreen() {
     setIsGameOver(!isGameOver);
   }
 
-  mapState.socket?.on('round', (ev: csRoundParams) => {
-    setIsWaitingOpen(false);
-    setParams(ev, false);
+  const firstPlayerBoard = <Board contextInstance={MapContext} />;
+  const secondPlayerBoard = <Board contextInstance={SecondPlayerMapContext} />;
+
+  firstPlayerMapState.mapState.socket?.on('round', (ev: csRoundParams) => {
+    firstPlayerMapState.setParams(ev, false);
+    // TODO: wypierdolic modal z oczekiwaniem
+    const displayStyle = ev.isMyMove ? '2' : '1';
+    document
+      .querySelector('#first-player-board-container')
+      ?.setAttribute('style', `z-index: ${displayStyle};`);
+  });
+
+  secondPlayerMapState.mapState.socket?.on('round', (ev: csRoundParams) => {
+    secondPlayerMapState.setParams(ev, false);
+    const displayStyle = ev.isMyMove ? '2' : '1';
+    document
+      .querySelector('#second-player-board-container')
+      ?.setAttribute('style', `z-index: ${displayStyle};`);
   });
 
   return (
@@ -48,7 +64,10 @@ function BoardScreen() {
         <div className="white-border">
           <div className="grey-border">
             <div className="violet-border">
-              <Board contextInstance={MapContext} />
+              <div className="multiple-boards-container">
+                <div id="first-player-board-container">{firstPlayerBoard}</div>
+                <div id="second-player-board-container">{secondPlayerBoard}</div>
+              </div>
             </div>
           </div>
         </div>
@@ -56,11 +75,9 @@ function BoardScreen() {
       <br />
       &nbsp;
       <br />
+      <button onClick={toggleWaitingModal}>Toggle modal</button>
       <Modal isOpen={isQuestionOpen} onRequestClose={toggleQuestionModal} className="mymodal">
         <Question />
-      </Modal>
-      <Modal isOpen={isWaitingOpen} onRequestClose={toggleWaitingModal} className="mymodal">
-        <WaitingForPlayer roomID={mapState.roomID} />
       </Modal>
       <Modal isOpen={isGameOver} onRequestClose={toggleGameOverModal} className="mymodal">
         <GameOver />
@@ -69,4 +86,4 @@ function BoardScreen() {
   );
 }
 
-export default BoardScreen;
+export default LocalBoardScreen;
