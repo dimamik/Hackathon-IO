@@ -2,34 +2,28 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
 function GameOverComponts() {
-  const btn = { backgroundColor: '#FCCCFC' };
-  const textColor = { color: '#000000' };
   return (
-    <Container>
-      <div className="questionNavbar" style={textColor}>
-        <Row className="justify-content-md-center">
-          <Col className="leftCenter">【ＧＡＭＥ　ＯＶＥＲ】</Col>
-          <Col xs="auto" className="rightCenter">
-            <div className="closeQuestion">X</div>
-          </Col>
-        </Row>
-
-        <div style={btn}>
-          <Row className="pt-2">
-            <Col>【Ｗｉｎ】:</Col>
-          </Row>
-          <Row>
-            <Col>【Ｓｃｏｒｅ　Ｆｉｒｓｔ　Ｐｌａｙｅｒ】:</Col>
-          </Row>
-          <Row>
-            <Col>【Ｓｃｏｒｅ　Ｓｅｃｏｎｄ　Ｐｌａｙｅｒ】:</Col>
-          </Row>
-          <Row className="pb-2">
-            <Col>【Ｎｕｍｂｅｒ　ｏｆ　ｒｏｕｎｄ】:</Col>
-          </Row>
+    <div className="modalView">
+      <div className="settingsWindow">
+        <div className="bar">
+          <div className="barTitle">
+            <div>[１]　Ｇａｍｅ　ｏｖｅｒ</div>
+          </div>
+          <div className="closeIcon">X</div>
+        </div>
+        <div className="internalWindow">
+          <div className="settingTitle hugeTitle">
+            <p>【】</p>
+          </div>
+          <div className='inputRow'>
+            <div className="settingTitle">
+              <p></p>
+              <p></p>
+            </div>
+          </div>
         </div>
       </div>
-    </Container>
+    </div >
   );
 }
 
