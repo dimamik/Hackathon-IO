@@ -27,6 +27,7 @@ function BoardScreen() {
   const [questions, setQuestions] = useState<Quiz[]>([]);
   const [quizActive, setQuizActive] = useState(false);
   const [isWaitingOpen, setIsWaitingOpen] = useState(gameConfig.shouldShowModal);
+  const [isGameOver, setIsGameOver] = useState(false);
 
   useEffect(() => {
     firstQuestion();
@@ -39,7 +40,6 @@ function BoardScreen() {
   function toggleWaitingModal() {
     setIsWaitingOpen(!isWaitingOpen);
   }
-  const [isGameOver, setIsGameOver] = useState(false);
   function toggleGameOverModal() {
     setIsGameOver(!isGameOver);
   }
@@ -48,7 +48,7 @@ function BoardScreen() {
     setIsWaitingOpen(false);
     setParams(ev, false);
   });
-
+  false;
   const closeModal = (correct: boolean) => {
     let newPoints = currentTurnPoints;
     if (currentQuestion) {
