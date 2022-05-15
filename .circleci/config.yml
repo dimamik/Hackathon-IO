@@ -10,8 +10,8 @@ jobs:
       - node/install:
           install-yarn: true
           node-version: '16.13'
-      - run: yarn add prettier
-      - run: cd server/;  yarn prettier --check ../
+      - run: cd server/; yarn add prettier
+      - run: yarn prettier --check ../
 workflows:
   test_my_app:
     jobs:
