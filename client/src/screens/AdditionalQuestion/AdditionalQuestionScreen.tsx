@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useContext } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function AdditionalQuestionScreen() {
   const [question, setQuestion] = useState('');
@@ -9,8 +10,42 @@ function AdditionalQuestionScreen() {
   const [firstAnswer, setFirstAnswer] = useState('');
   const [secondAnswer, setSecondAnswer] = useState('');
   const [thirdAnswer, setThirdAnswer] = useState('');
+  const navigate = useNavigate();
 
-  const onClick = () => {};
+  const submitAnswers = async () => {
+    console.log('Hello in submit answers');
+    const answers = [correctAnswer, firstAnswer, secondAnswer, thirdAnswer];
+    // Shuffle the array\
+    const shuffle = (array: any) => {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    };
+    const shuffledAnswers = shuffle(answers);
+
+    // Get index of correct answer
+    const correctAnswerIndex = shuffledAnswers.indexOf(correctAnswer);
+
+    const quiz = {
+      question: question,
+      answers: shuffledAnswers,
+      correctAnswerIndex: correctAnswerIndex,
+      point: point,
+    };
+
+    await axios({
+      method: 'post',
+      url: 'http://localhost:4000/add_question',
+      headers: {},
+      data: {
+        quiz: quiz, // This is the body part
+      },
+    });
+
+    navigate('/home');
+  };
   const isValid = question && correctAnswer && firstAnswer && secondAnswer && thirdAnswer;
   return (
     <form>
@@ -95,7 +130,7 @@ function AdditionalQuestionScreen() {
                 <button
                   type="button"
                   className="creatQuestion"
-                  onClick={onClick}
+                  onClick={submitAnswers}
                   disabled={!isValid}>
                   Ｃｒｅａｔｅ Ｑｕｅｓｔｉｏｎ
                 </button>

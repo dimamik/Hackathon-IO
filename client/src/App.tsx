@@ -11,19 +11,23 @@ import QuestionComponents from './components/Modals/QuestionComponents';
 import GameOverComponts from './components/Modals/GameOverComponts';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Sound from 'react-sound';
-import backgroundSound from './assets/sounds/backgroundSound.mp3'
+import backgroundSound from './assets/sounds/backgroundSound.mp3';
 
+import AdditionalQuestionScreen from './screens/AdditionalQuestion/AdditionalQuestionScreen';
 
 function App() {
   const [isPlaying, setIsPlaying] = useState(true);
 
   return (
     <BrowserRouter>
-
       <MapProvider contextInstance={MapContext}>
         <MapProvider contextInstance={SecondPlayerMapContext}>
           <Header />
-          <Sound url={backgroundSound} playStatus={isPlaying ? 'PLAYING' : 'PAUSED'} playFromPosition={0} />
+          <Sound
+            url={backgroundSound}
+            playStatus={isPlaying ? 'PLAYING' : 'PAUSED'}
+            playFromPosition={0}
+          />
           <div className="mainBackground">
             <Routes>
               <Route path="/" element={<HomeScreen />} />
@@ -32,6 +36,7 @@ function App() {
               <Route path="/boardLocal" element={<LocalBoardScreen />} />
               <Route path="/configuration" element={<ConfigurationScreen />} />
               <Route path="/question" element={<QuestionComponents />} />
+              <Route path="/add" element={<AdditionalQuestionScreen />} />
             </Routes>
             {/* <Footer /> */}
           </div>

@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { MapContext, SecondPlayerMapContext } from '../../context/Context';
 import { scCreatedParams, MapContextType } from '../../types';
 import './Configuration.css';
-import Sound from 'react-sound';
-import backgroundSound from '../../assets/sounds/backgroundSound.mp3';
 
 const createLocal = (
   {
@@ -62,12 +60,20 @@ const create = (
 function ConfigurationScreen() {
   const [width, setWidth] = useState(5);
   const [height, setHeight] = useState(5);
-  const [maxPoints, setMaxPoints] = useState(10);
+  const [maxPoints, setMaxPoints] = useState(5);
   const [time, setTime] = useState(10);
+  const [isMaxPointsChecked, setMaxPointsChecked] = useState(false);
   const context = useContext(MapContext);
   const setShouldShowModal = context.setShouldShowModal;
   const secondPlayerContext = useContext(SecondPlayerMapContext);
   const navigate = useNavigate();
+
+  const handleOnChange = () => {
+    setMaxPointsChecked(!isMaxPointsChecked);
+    if (!isMaxPointsChecked) {
+      setMaxPoints(width * height);
+    }
+  };
 
   const isValid = width && height && maxPoints && time;
   return (
@@ -105,11 +111,30 @@ function ConfigurationScreen() {
             </div>
             <div className="verticalSettingOptions">
               <div className="inputRow">
-                <p>Max points</p>
-                <input
-                  type="text"
-                  defaultValue={maxPoints}
-                  onChange={e => setMaxPoints(Number(e.target.value))}></input>
+                <div>
+                  <p>Max points</p>
+                </div>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                  }}>
+                  <input
+                    type="text"
+                    defaultValue={maxPoints}
+                    value={maxPoints}
+                    onChange={e => setMaxPoints(Number(e.target.value))}
+                    style={{
+                      width: '100%',
+                    }}></input>
+                </div>
+                <div>
+                  <p>Till end</p>
+                  <input
+                    type="checkbox"
+                    checked={isMaxPointsChecked}
+                    onChange={handleOnChange}></input>
+                </div>
               </div>
               <div className="inputRow">
                 <p>Time for move</p>
