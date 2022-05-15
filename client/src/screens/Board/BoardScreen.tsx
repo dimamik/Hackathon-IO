@@ -101,7 +101,6 @@ function BoardScreen() {
             </div>
           </div>
         </div>
-        x
       </div>
       <br />
       &nbsp;

@@ -35,8 +35,7 @@ function App() {
               <Route path="/board" element={<BoardScreen />} />
               <Route path="/boardLocal" element={<LocalBoardScreen />} />
               <Route path="/configuration" element={<ConfigurationScreen />} />
-              <Route path="/question" element={<QuestionComponents />} />
-              <Route path="/add" element={<AdditionalQuestionScreen />} />
+              <Route path="/add_question" element={<AdditionalQuestionScreen />} />
             </Routes>
             {/* <Footer /> */}
           </div>
