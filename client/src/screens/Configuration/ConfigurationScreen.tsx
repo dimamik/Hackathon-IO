@@ -9,6 +9,7 @@ const createLocal = (
     gameConfig: { maxPoints, time, width, height },
     mapState: { socket },
     setRoomId,
+    setPlayerID,
   }: MapContextType,
   secondPlayerMapState: MapContextType,
   callback: () => void,
@@ -21,13 +22,15 @@ const createLocal = (
     isLocal: false,
   });
 
-  socket?.on('created', (params: scCreatedParams) => {
-    console.log('received created', params.roomID);
-    setRoomId!(params.roomID);
-    secondPlayerMapState.setRoomId(params.roomID);
+  socket?.on('created', async (params: scCreatedParams) => {
+    await setRoomId(params.roomID);
+    await setPlayerID(0);
+    await secondPlayerMapState.setRoomId(params.roomID);
+
     secondPlayerMapState.mapState.socket?.emit('join', {
       roomID: params.roomID,
     });
+    await secondPlayerMapState.setPlayerID(1);
     callback();
   });
 };
@@ -38,6 +41,7 @@ const create = (
     mapState: { socket },
     setRoomId,
     setShouldShowModal,
+    setPlayerID,
   }: MapContextType,
   callback: () => void,
 ) => {
@@ -50,9 +54,9 @@ const create = (
     isLocal: false,
   });
 
-  socket?.on('created', (params: scCreatedParams) => {
-    console.log('received created', params.roomID);
-    setRoomId!(params.roomID);
+  socket?.on('created', async (params: scCreatedParams) => {
+    await setRoomId(params.roomID);
+    await setPlayerID(0);
     callback();
   });
 };

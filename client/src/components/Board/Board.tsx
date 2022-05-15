@@ -202,6 +202,7 @@ function SquareRow({ contextInstance, width, y, board }: RowProps) {
 function Board(props: BoardProps) {
   const {
     mapState: { board },
+    gameConfig: { playerID },
   } = useContext(props.contextInstance);
 
   const rows = [];
@@ -231,7 +232,19 @@ function Board(props: BoardProps) {
     }
   }
 
-  return <div className="map-container">{rows}</div>;
+  const playerDesc =
+    playerID === 1 ? (
+      <span className="player-cyan-color">cyan</span>
+    ) : (
+      <span className="player-magenta-color">magenta</span>
+    );
+
+  return (
+    <div className="map-container">
+      <div className="plays-as">You play as: {playerDesc}</div>
+      {rows}
+    </div>
+  );
 }
 
 export default Board;

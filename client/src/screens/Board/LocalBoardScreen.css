@@ -6,3 +6,11 @@
   grid-row: 1;
   grid-column: 1;
 }
+
+.first-player-board-container {
+  z-index: 2;
+}
+
+.second-player-board-container {
+  z-index: 1;
+}

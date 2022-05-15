@@ -6,7 +6,7 @@ import Modal from 'react-modal';
 import Question from '../../components/Modals/QuestionComponents';
 import './BoardScreen.css';
 import './LocalBoardScreen.css';
-import { csRoundParams } from '../../types';
+import { scRoundParams } from '../../types';
 import WaitingForPlayer from '../../components/Modals/WaitingForPlayer';
 import GameOver from '../../components/Modals/GameOverComponts';
 import context from 'react-bootstrap/esm/AccordionContext';
@@ -40,7 +40,7 @@ function LocalBoardScreen() {
   const firstPlayerBoard = <Board contextInstance={MapContext} />;
   const secondPlayerBoard = <Board contextInstance={SecondPlayerMapContext} />;
 
-  firstPlayerMapState.mapState.socket?.on('round', (ev: csRoundParams) => {
+  firstPlayerMapState.mapState.socket?.on('round', (ev: scRoundParams) => {
     firstPlayerMapState.setParams(ev, false);
     // TODO: wypierdolic modal z oczekiwaniem
     const displayStyle = ev.isMyMove ? '2' : '1';
@@ -49,7 +49,7 @@ function LocalBoardScreen() {
       ?.setAttribute('style', `z-index: ${displayStyle};`);
   });
 
-  secondPlayerMapState.mapState.socket?.on('round', (ev: csRoundParams) => {
+  secondPlayerMapState.mapState.socket?.on('round', (ev: scRoundParams) => {
     secondPlayerMapState.setParams(ev, false);
     const displayStyle = ev.isMyMove ? '2' : '1';
     document

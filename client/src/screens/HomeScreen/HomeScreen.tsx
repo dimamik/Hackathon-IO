@@ -8,7 +8,8 @@ import reset from '../../assets/images/reset.jpeg';
 function HomeScreen() {
   const [idInput, setIdInput] = useState('');
   const navigate = useNavigate();
-  const { mapState, setParams, setRoomId, setShouldShowModal } = useContext(MapContext);
+  const { mapState, setParams, setRoomId, setShouldShowModal, setPlayerID } =
+    useContext(MapContext);
 
   const submitJoinId = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter') {
@@ -25,6 +26,7 @@ function HomeScreen() {
       socket?.on('round', (ev: scRoundParams) => {
         // teraz routuj do mapy
         setParams(ev, false);
+        setPlayerID(1);
         // setShouldShowModal(false)
         navigate('/board');
       });

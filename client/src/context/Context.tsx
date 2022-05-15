@@ -1,12 +1,23 @@
 import React from 'react';
-import { MapContextType, mapStateMock, scRoundParams, gameConfigMock } from '../types/';
+import {
+  MapContextType,
+  MapState,
+  mapStateMock,
+  scRoundParams,
+  gameConfigMock,
+} from '../types/';
 
 const initMapContext: () => MapContextType = () => {
   return {
     gameConfig: gameConfigMock,
     mapState: mapStateMock(),
+    setPlayerID: (id: number) => {
+      return Promise.resolve(null);
+    },
     setMapconfig: (width: number, height: number, maxPoints: number, time: number) => {},
-    setRoomId: roomId => {},
+    setRoomId: roomId => {
+      return Promise.resolve(null);
+    },
     setParams: (params: scRoundParams, shouldShowModal: boolean) => {},
     setShouldShowModal: (shouldShowModal: boolean) => {},
   };
@@ -24,6 +35,23 @@ export default class MapProvider extends React.Component<Props> {
   state = {
     mapState: mapStateMock(),
     config: gameConfigMock,
+  };
+
+  setPlayerID = (id: number) => {
+    const promise = new Promise(resolve => {
+      this.setState(
+        {
+          mapState: {
+            ...this.state.mapState,
+          },
+          config: { ...this.state.config, playerID: id },
+        },
+        () => {
+          resolve(null);
+        },
+      );
+    });
+    return promise;
   };
 
   setRoundParams = (params: scRoundParams, shouldShowModal: boolean) => {
@@ -55,13 +83,21 @@ export default class MapProvider extends React.Component<Props> {
   };
 
   setRoomId = (roomID: string) => {
-    this.setState({
-      mapState: {
-        ...this.state.mapState,
-        roomID,
-      },
-      config: this.state.config,
+    const promise = new Promise(resolve => {
+      this.setState(
+        {
+          mapState: {
+            ...this.state.mapState,
+            roomID: roomID,
+          },
+          config: this.state.config,
+        },
+        () => {
+          resolve(null);
+        },
+      );
     });
+    return promise;
   };
 
   setShouldShowModal = (shouldShowModal: boolean) => {
@@ -80,6 +116,7 @@ export default class MapProvider extends React.Component<Props> {
         value={{
           gameConfig: this.state.config,
           mapState: this.state.mapState,
+          setPlayerID: this.setPlayerID,
           setParams: this.setRoundParams,
           setMapconfig: this.setMapconfig,
           setRoomId: this.setRoomId,

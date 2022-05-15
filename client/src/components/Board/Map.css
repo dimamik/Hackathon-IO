@@ -55,9 +55,21 @@
   background-color: rgb(1, 242, 255);
 }
 
+.player-magenta-color {
+  color: rgb(255, 0, 212);
+}
+
+.player-cyan-color {
+  color: rgb(1, 242, 255);
+}
+
 .map-row {
   display: flex;
   flex-direction: row;
+}
+
+.plays-as {
+  text-align: center;
 }
 
 /* .map-dot-row{
