@@ -50,13 +50,15 @@ function BoardScreen() {
   });
   false;
   const closeModal = (correct: boolean) => {
+    let newPoints = currentTurnPoints;
     if (currentQuestion) {
       if (correct) {
-        setCurrentTurnPoints(currentTurnPoints + currentQuestion.points);
+        newPoints += currentQuestion.points;
+        setCurrentTurnPoints(newPoints);
       }
       if (!nextQuestion() && mapState.roomID) {
         mapState.socket?.emit('quizResponse', {
-          points: currentTurnPoints,
+          points: newPoints,
           roomID: mapState.roomID,
         });
         setQuizActive(false);
