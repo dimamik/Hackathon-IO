@@ -8,27 +8,27 @@ import BoardScreen from './screens/Board/BoardScreen';
 import LocalBoardScreen from './screens/Board/LocalBoardScreen';
 import ConfigurationScreen from './screens/Configuration/ConfigurationScreen';
 import QuestionComponents from './components/Modals/QuestionComponents';
-import AdditionalQuestionScreen from './screens/AdditionalQuestion/AdditionalQuestionScreen';
+import GameOverComponts from './components/Modals/GameOverComponts';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
     <BrowserRouter>
-
-      <MapProvider>
-        <Header />
-        <div className="mainBackground">
-          <Routes>
-            <Route path="/" element={<HomeScreen />} />
-            <Route path="/home" element={<HomeScreen />} />
-            <Route path="/board" element={<BoardScreen />} />
-            <Route path="/configuration" element={<ConfigurationScreen />} />
-            <Route path="/question" element={<QuestionComponents />} />
-            <Route path="/add" element={<AdditionalQuestionScreen />} />
-          </Routes>
-          {/* <Footer /> */}
-        </div>
-
+      <MapProvider contextInstance={MapContext}>
+        <MapProvider contextInstance={SecondPlayerMapContext}>
+          <Header />
+          <div className="mainBackground">
+            <Routes>
+              <Route path="/" element={<HomeScreen />} />
+              <Route path="/home" element={<HomeScreen />} />
+              <Route path="/board" element={<BoardScreen />} />
+              <Route path="/boardLocal" element={<LocalBoardScreen />} />
+              <Route path="/configuration" element={<ConfigurationScreen />} />
+              <Route path="/question" element={<QuestionComponents />} />
+            </Routes>
+            {/* <Footer /> */}
+          </div>
+        </MapProvider>
       </MapProvider>
     </BrowserRouter>
   );
