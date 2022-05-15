@@ -9,10 +9,14 @@ import ConfigurationScreen from './screens/Configuration/ConfigurationScreen';
 import QuestionComponents from './components/Modals/QuestionComponents';
 import GameOverComponts from './components/Modals/GameOverComponts';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Sound from 'react-sound';
+import backgroundSound from './assets/sounds/backgroundSound.mp3'
 
 function App() {
   return (
+    
     <BrowserRouter>
+    <Sound url={backgroundSound} playStatus='PLAYING' playFromPosition={0}/>
       <MapProvider>
         <Header />
         <div className="mainBackground">
