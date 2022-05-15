@@ -37,6 +37,12 @@ export const handleQuizResponse: QuizAnswerHandler = (socket, quizResponseParams
     isMyMove: !(rooms[roomId].currentPlayer == rooms[roomId].players[1]),
   } as scRoundParams);
 
+  // Change current player
+  if (rooms[roomId].currentPlayer == rooms[roomId].players[0]) {
+    rooms[roomId].currentPlayer = rooms[roomId].players[1];
+  } else {
+    rooms[roomId].currentPlayer = rooms[roomId].players[0];
+  }
   //Emit game ended if there is no possible move, or maxPoints were obtained by someone
   const maxPoints = room.roomSettings.maxPoints;
   if (room.board.firstPlayerScore >= maxPoints) {
