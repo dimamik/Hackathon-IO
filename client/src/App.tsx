@@ -10,13 +10,20 @@ import ConfigurationScreen from './screens/Configuration/ConfigurationScreen';
 import QuestionComponents from './components/Modals/QuestionComponents';
 import GameOverComponts from './components/Modals/GameOverComponts';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Sound from 'react-sound';
+import backgroundSound from './assets/sounds/backgroundSound.mp3'
+
 
 function App() {
+  const [isPlaying, setIsPlaying] = useState(true);
+
   return (
     <BrowserRouter>
+
       <MapProvider contextInstance={MapContext}>
         <MapProvider contextInstance={SecondPlayerMapContext}>
           <Header />
+          <Sound url={backgroundSound} playStatus={isPlaying ? 'PLAYING' : 'PAUSED'} playFromPosition={0} />
           <div className="mainBackground">
             <Routes>
               <Route path="/" element={<HomeScreen />} />

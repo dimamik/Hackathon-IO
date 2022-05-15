@@ -32,6 +32,7 @@ function HomeScreen() {
   };
 
   return (
+    
     <div className="home-screen-container">
       <div className="title-container">【~~　ＶａｐｏｒＷＩＥＴ　~~】</div>
       <Link className="no-decor" to="/configuration">
