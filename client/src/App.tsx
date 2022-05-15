@@ -7,7 +7,7 @@ import MapProvider from './context/Context';
 import BoardScreen from './screens/Board/BoardScreen';
 import ConfigurationScreen from './screens/Configuration/ConfigurationScreen';
 import QuestionComponents from './components/Modals/QuestionComponents';
-import GameOverComponts from './components/Modals/GameOverComponts';
+import AdditionalQuestionScreen from './screens/AdditionalQuestion/AdditionalQuestionScreen';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
             <Route path="/board" element={<BoardScreen />} />
             <Route path="/configuration" element={<ConfigurationScreen />} />
             <Route path="/question" element={<QuestionComponents />} />
+            <Route path="/add" element={<AdditionalQuestionScreen />} />
           </Routes>
           {/* <Footer /> */}
         </div>
