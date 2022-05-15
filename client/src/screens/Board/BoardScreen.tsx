@@ -49,7 +49,8 @@ function BoardScreen() {
   mapState.socket?.on('round', (ev: scRoundParams) => {
     setIsWaitingOpen(false);
     setParams(ev, false);
-    console.log(ev.board.firstPlayerScore);
+    // console.log(ev.board.firstPlayerScore);
+    // console.log(ev.board.secondPlayerScorep);
 
     setYourPoints(ev.board.firstPlayerScore);
     setEnemyPoints(ev.board.secondPlayerScore);

@@ -30,7 +30,7 @@ function QuestionComponents(props: Props) {
 
         <div className="questionPanel">
           <div className="title">
-            <p>Question</p>
+            <p>Question 【{props.quiz.points}】</p>
           </div>
           <div className="question">
             <p>{props.quiz.question}</p>
