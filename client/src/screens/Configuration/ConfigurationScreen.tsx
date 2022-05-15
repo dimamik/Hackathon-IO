@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { MapContext } from '../../context/Context';
 import { scCreatedParams, MapContextType } from '../../types';
 import './Configuration.css';
+import Sound from 'react-sound';
+import backgroundSound from '../../assets/sounds/backgroundSound.mp3'
 
 const create = (
   {

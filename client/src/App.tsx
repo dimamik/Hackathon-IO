@@ -12,13 +12,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Sound from 'react-sound';
 import backgroundSound from './assets/sounds/backgroundSound.mp3'
 
+
 function App() {
+  const [isPlaying, setIsPlaying] = useState(true);
+
   return (
     
     <BrowserRouter>
-    <Sound url={backgroundSound} playStatus='PLAYING' playFromPosition={0}/>
       <MapProvider>
         <Header />
+        <Sound url={backgroundSound} playStatus={isPlaying ? 'PLAYING' : 'PAUSED'} playFromPosition={0} />
         <div className="mainBackground">
           <Routes>
             <Route path="/" element={<HomeScreen />} />
