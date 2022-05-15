@@ -23,9 +23,9 @@ function HomeScreen() {
       });
 
       // drugi gracz dostaje socket
-      socket?.on('round', (ev: scRoundParams) => {
+      socket?.on('round', async (ev: scRoundParams) => {
         // teraz routuj do mapy
-        setParams(ev, false);
+        await setParams(ev, false);
         setPlayerID(1);
         // setShouldShowModal(false)
         navigate('/board');
