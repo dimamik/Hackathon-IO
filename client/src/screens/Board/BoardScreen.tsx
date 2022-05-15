@@ -31,7 +31,7 @@ function BoardScreen() {
   function toggleWaitingModal() {
     setIsWaitingOpen(!isWaitingOpen);
   }
-  const [isGameOver, setIsGameOver] = useState(true);
+  const [isGameOver, setIsGameOver] = useState(false);
   function toggleGameOverModal() {
     setIsGameOver(!isGameOver);
   }
