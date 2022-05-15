@@ -70,7 +70,7 @@ export class Board {
 
     const searchEnclosedBoxes = (fromPosition: [number, number]): Array<Coordinates> => {
       const boxQueue = [fromPosition] as Array<[number, number]>;
-      const visited = new Set<[number, number]>();
+      const visited = new Set<string>();
 
       // If at any point in time a box is extracted from the queue that is not on the map
       // (outside of map bounds) that means map has been left and the area is not enclosed
@@ -101,21 +101,23 @@ export class Board {
       // The real BFS goes here
       while (boxQueue.length > 0) {
         const currentBoxPosition = boxQueue.shift() as [number, number];
+        const currentEncoding = positionToEncoding(currentBoxPosition);
         if (!boxIsInMap(currentBoxPosition)) {
           // Reached the outside of the map -- the area is not enclosed
           return new Array<Coordinates>();
         }
-        visited.add(currentBoxPosition);
+        visited.add(currentEncoding);
         const neighbours = boxNeighbours(currentBoxPosition);
         for (const neighbour of neighbours) {
-          if (!visited.has(neighbour)) {
+          const neighbourEncoding = positionToEncoding(neighbour);
+          if (!visited.has(neighbourEncoding)) {
             boxQueue.push(neighbour);
           }
         }
       }
 
       // reached all "reachable" boxes -- an area has been enclosed
-      return Array.from(visited).map(boxPosition => positionToEncoding(boxPosition));
+      return Array.from(visited).map(el => el as Coordinates);
     };
 
     const enclosedBoxes: Coordinates[] = [];

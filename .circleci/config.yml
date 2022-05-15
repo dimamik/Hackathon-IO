@@ -1,8 +1,8 @@
 version: '2.1'
 orbs:
-  node: circleci/node@x.y
+  node: circleci/node@5.0.2
 jobs:
-  install-node-example:
+  check-formatting:
     docker:
       - image: 'cimg/base:stable'
     steps:
@@ -10,8 +10,9 @@ jobs:
       - node/install:
           install-yarn: true
           node-version: '16.13'
-      - run: yarn prettier --check ../
+      - run: cd server/; yarn
+      - run: cd server/; yarn prettier --check ../
 workflows:
   test_my_app:
     jobs:
-      - install-node-example
+      - check-formatting

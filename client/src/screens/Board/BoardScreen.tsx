@@ -8,6 +8,7 @@ import './BoardScreen.css';
 import { csRoundParams } from '../../types';
 import WaitingForPlayer from '../../components/Modals/WaitingForPlayer';
 import GameOver from '../../components/Modals/GameOverComponts';
+import context from 'react-bootstrap/esm/AccordionContext';
 
 Modal.setAppElement('#root');
 
