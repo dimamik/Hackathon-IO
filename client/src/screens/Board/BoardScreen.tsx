@@ -28,6 +28,8 @@ function BoardScreen() {
   const [quizActive, setQuizActive] = useState(false);
   const [isWaitingOpen, setIsWaitingOpen] = useState(gameConfig.shouldShowModal);
   const [isGameOver, setIsGameOver] = useState(false);
+  const [yourPoints, setYourPoints] = useState(0);
+  const [enemyPoints, setEnemyPoints] = useState(0);
 
   useEffect(() => {
     firstQuestion();
@@ -47,6 +49,10 @@ function BoardScreen() {
   mapState.socket?.on('round', (ev: scRoundParams) => {
     setIsWaitingOpen(false);
     setParams(ev, false);
+    console.log(ev.board.firstPlayerScore);
+
+    setYourPoints(ev.board.firstPlayerScore);
+    setEnemyPoints(ev.board.secondPlayerScore);
   });
   false;
   const closeModal = (correct: boolean) => {
@@ -96,7 +102,7 @@ function BoardScreen() {
 
   return (
     <div className="board-container">
-      <PlayerStats />
+      <PlayerStats firstPlayerScore={yourPoints} secondPlayerScore={enemyPoints} />
       <div className="grey-border">
         <div className="white-border">
           <div className="grey-border">

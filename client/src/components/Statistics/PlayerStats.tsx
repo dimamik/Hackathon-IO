@@ -5,7 +5,12 @@ import Turn from './Turn';
 import { Container, Row, Col } from 'react-bootstrap';
 import './Statiscs.css';
 
-function PlayerStats() {
+interface Props {
+  firstPlayerScore: number;
+  secondPlayerScore: number;
+}
+
+function PlayerStats(props: Props) {
   return (
     <Container fluid>
       <div className="flexDisplay">
@@ -16,11 +21,11 @@ function PlayerStats() {
         </Row>
         <Row>
           <Col>
-            <PlayerScore />
+            <PlayerScore points={props.firstPlayerScore} />
           </Col>
           <Col></Col>
           <Col>
-            <EnemyScore />
+            <EnemyScore points={props.secondPlayerScore} />
           </Col>
         </Row>
       </div>

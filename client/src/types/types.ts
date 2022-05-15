@@ -18,6 +18,8 @@ export type BoardFrontend = {
 } & {
   width: number;
   height: number;
+  firstPlayerScore: number;
+  secondPlayerScore: number;
 };
 
 export type Move = {
