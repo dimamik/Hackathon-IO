@@ -189,8 +189,6 @@ function Board() {
     mapState: { board },
   } = useContext(MapContext);
 
-  console.log("noard", board)
-
   const rows = [];
 
   const width = board.width;
