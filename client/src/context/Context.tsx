@@ -1,5 +1,11 @@
 import React from 'react';
-import { MapContextType, MapState, mapStateMock, csRoundParams, gameConfigMock } from '../types/';
+import {
+  MapContextType,
+  MapState,
+  mapStateMock,
+  csRoundParams,
+  gameConfigMock,
+} from '../types/';
 
 const initMapContext: MapContextType = {
   gameConfig: gameConfigMock,
@@ -17,10 +23,10 @@ type Props = {
 };
 
 export default class MapProvider extends React.Component<Props> {
-  state = {    
+  state = {
     mapState: mapStateMock,
     config: gameConfigMock,
-  }
+  };
 
   setRoundParams = (params: csRoundParams, shouldShowModal: boolean) => {
     console.log(params);
@@ -28,7 +34,7 @@ export default class MapProvider extends React.Component<Props> {
       mapState: {
         ...this.state.mapState,
         board: params.board,
-        isMyMove: params.isMyMove
+        isMyMove: params.isMyMove,
       },
       config: {
         ...this.state.config,
@@ -37,29 +43,28 @@ export default class MapProvider extends React.Component<Props> {
     })
   }
 
-  setMapconfig = (width: number, height: number, maxPoints: number,
-    time: number) => {
-      this.setState({
-        mapState: this.state.mapState,
-        config: {
-          ...this.state.config,
-          width,
-          height, 
-          maxPoints, 
-          time
-        },
-      })
-    }
+  setMapconfig = (width: number, height: number, maxPoints: number, time: number) => {
+    this.setState({
+      mapState: this.state.mapState,
+      config: {
+        ...this.state.config,
+        width,
+        height,
+        maxPoints,
+        time,
+      },
+    });
+  };
 
   setRoomId = (roomID: string) => {
     this.setState({
       mapState: {
         ...this.state.mapState,
-        roomID
+        roomID,
       },
       config: this.state.config,
-    })
-  }
+    });
+  };
 
   setShouldShowModal = (shouldShowModal: boolean) => {
     this.setState({
@@ -90,4 +95,3 @@ export default class MapProvider extends React.Component<Props> {
 function BoardFrontend(board: any, BoardFrontend: any) {
   throw new Error('Function not implemented.');
 }
-

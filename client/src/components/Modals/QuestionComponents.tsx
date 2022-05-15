@@ -26,21 +26,17 @@ function QuestionComponents() {
             <img src={dolphin} className="dolphin" />
           </div>
           <div className="answers">
-            
-              <button type="button" className="button">
-                Click Me!
-              </button>
-            
-            
-              <button type="button" className="button">
-                Click Me!
-              </button>
-            
-            
-              <button type="button" className="button">
-                Click Me!
-              </button>
-            
+            <button type="button" className="button">
+              Click Me!
+            </button>
+
+            <button type="button" className="button">
+              Click Me!
+            </button>
+
+            <button type="button" className="button">
+              Click Me!
+            </button>
           </div>
         </div>
       </div>
