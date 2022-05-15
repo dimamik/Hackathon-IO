@@ -1,6 +1,5 @@
 import rooms from '../db/rooms';
-import { BoardFrontend, Coordinates, csRoundParams, Move } from '../types';
-import { isQuiz } from './quiz';
+import { BoardFrontend, Coordinates, scRoundParams, Move } from '../types';
 import { validateMove } from './validate';
 
 export const startGame = (roomID: string) => {
@@ -15,15 +14,15 @@ export const startGame = (roomID: string) => {
   const board = room.board.toFrontendBoard();
 
   console.log('Hello there');
-  room.players[0]?.socket.emit('round', {
+  room.players[0]?.socket?.emit('round', {
     board,
     isMyMove: true,
-  } as csRoundParams);
+  } as scRoundParams);
 
-  room.players[1]?.socket.emit('round', {
+  room.players[1]?.socket?.emit('round', {
     board,
     isMyMove: false,
-  } as csRoundParams);
+  } as scRoundParams);
 };
 
 export const playRound = (roomId: string, move: Move) => {
@@ -64,15 +63,15 @@ export const playRound = (roomId: string, move: Move) => {
 
   // Emit move to players
 
-  rooms[roomId].players[0]?.socket.emit('round', {
+  rooms[roomId].players[0]?.socket?.emit('round', {
     board: newBoard,
     isMyMove: !(rooms[roomId].currentPlayer == rooms[roomId].players[0]),
-  } as csRoundParams);
+  } as scRoundParams);
 
-  rooms[roomId].players[1]?.socket.emit('round', {
+  rooms[roomId].players[1]?.socket?.emit('round', {
     board: newBoard,
     isMyMove: !(rooms[roomId].currentPlayer == rooms[roomId].players[1]),
-  } as csRoundParams);
+  } as scRoundParams);
 
   if (rooms[roomId].currentPlayer == rooms[roomId].players[0]) {
     rooms[roomId].currentPlayer = rooms[roomId].players[1];
