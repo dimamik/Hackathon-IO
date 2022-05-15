@@ -48,10 +48,12 @@ function BoardScreen() {
     setIsWaitingOpen(false);
     setParams(ev, false);
   });
-
+  false;
   const closeModal = (correct: boolean) => {
-    if (currentQuestion && correct) {
-      setCurrentTurnPoints(currentTurnPoints + currentQuestion.points);
+    if (currentQuestion) {
+      if (correct) {
+        setCurrentTurnPoints(currentTurnPoints + currentQuestion.points);
+      }
       if (!nextQuestion() && mapState.roomID) {
         mapState.socket?.emit('quizResponse', {
           points: currentTurnPoints,
