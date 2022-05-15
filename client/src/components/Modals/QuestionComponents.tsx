@@ -7,7 +7,7 @@ import './QuestionComponents.css';
 
 interface Props {
   quiz: Quiz | null;
-  closeModal: (correct: boolean) => void;
+  closeModal: (correct: boolean, callback: () => void) => void;
 }
 
 function QuestionComponents(props: Props) {
@@ -15,12 +15,8 @@ function QuestionComponents(props: Props) {
 
   function onClick(index: number) {
     setShowCorrect(true);
-    props.closeModal(index === props.quiz?.correctAnswer);
+    props.closeModal(index === props.quiz?.correctAnswer, () => setShowCorrect(false));
   }
-
-  useEffect(() => {
-    console.log('DUPA');
-  }, []);
 
   return props.quiz ? (
     <Container fluid>

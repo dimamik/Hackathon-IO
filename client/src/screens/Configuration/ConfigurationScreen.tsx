@@ -26,11 +26,11 @@ const createLocal = (
     await setRoomId(params.roomID);
     await setPlayerID(0);
     await secondPlayerMapState.setRoomId(params.roomID);
+    await secondPlayerMapState.setPlayerID(1);
 
     secondPlayerMapState.mapState.socket?.emit('join', {
       roomID: params.roomID,
     });
-    await secondPlayerMapState.setPlayerID(1);
     callback();
   });
 };
