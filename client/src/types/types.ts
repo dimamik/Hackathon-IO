@@ -25,8 +25,9 @@ export type Move = {
   type: Lines;
 };
 
-// TODO: temporary
-export type QuizParams = {
+export type Quiz = {
   question: string;
   answers: string[];
+  correctAnswer: number;
+  points: number;
 };

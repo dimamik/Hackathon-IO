@@ -1,11 +1,11 @@
-import { BoardFrontend, QuizParams, Move } from './types';
+import { BoardFrontend, Quiz, Move } from './types';
+
 
 export type csCreateParams = {
   width: number;
   height: number;
   maxPoints: number;
   maxTime: number;
-  quizParams: QuizParams;
   isLocal: boolean;
 };
 
@@ -17,7 +17,7 @@ export type csJoinParams = {
   roomID: string;
 };
 
-export type csRoundParams = {
+export type scRoundParams = {
   board: BoardFrontend;
   isMyMove: boolean;
 };
@@ -31,15 +31,13 @@ export type scRejectedParams = {
   reason: string;
 };
 
+// QUIZES
+
 export type scQuizParams = {
-  question: string;
-  answers: string[];
+  questions: Quiz[];
 };
 
-export type csQuizParams = {
-  answer: number;
-};
-
-export type scQuizResultParams = {
-  isCorrect: boolean;
+export type csQuizAnswerParams = {
+  points: number;
+  roomID: string;
 };
