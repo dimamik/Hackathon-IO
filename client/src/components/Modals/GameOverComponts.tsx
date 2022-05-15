@@ -15,7 +15,7 @@ function GameOverComponts() {
           <div className="settingTitle hugeTitle">
             <p>【】</p>
           </div>
-          <div className='inputRow'>
+          <div className="inputRow">
             <div className="settingTitle">
               <p></p>
               <p></p>
@@ -23,7 +23,7 @@ function GameOverComponts() {
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 }
 

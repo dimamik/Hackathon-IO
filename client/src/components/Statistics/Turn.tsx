@@ -4,11 +4,10 @@ import React, { useContext } from 'react';
 function Turn() {
   const { mapState } = useContext(MapContext);
 
-  if(mapState.isMyMove){
-    return <div className='hugeTitle'>【Ｙｏｕｒ　ｔｕｒｎ】</div>;  
-  }
-  else{
-    return <div className='hugeTitle'>【Ｅｎｅｍｙ　ｔｕｒｎ】</div>;
+  if (mapState.isMyMove) {
+    return <div className="hugeTitle">【Ｙｏｕｒ　ｔｕｒｎ】</div>;
+  } else {
+    return <div className="hugeTitle">【Ｅｎｅｍｙ　ｔｕｒｎ】</div>;
   }
 }
 

@@ -74,6 +74,11 @@ function ConfigurationScreen() {
   const { mapState, setRoomId } = context;
   const navigate = useNavigate();
 
+  const onClick = () => {
+    setShouldShowModal(true);
+    create(context, () => navigate('/board'));
+  };
+
   const isValid = width && height && maxPoints && time;
   return (
     <form>

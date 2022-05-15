@@ -3,9 +3,11 @@ import {
   csCreateParams,
   csJoinParams,
   csMoveParams,
-  csQuizParams,
   scCreatedParams,
-  csRoundParams,
+  scRoundParams,
+  csQuizAnswerParams,
+  scQuizParams,
+  scGameOverParams,
 } from './dto';
 
 type WrapWithSocket<TFunction extends (...args: any) => any> = (
@@ -20,28 +22,33 @@ export type ClientSocket = Socket<ServerToClientEvents, ClientToServerEvents>; /
 type CreateCallback = (settingParams: csCreateParams) => void;
 type JoinCallback = (joinParams: csJoinParams) => void;
 type MoveCallback = (moveParams: csMoveParams) => void;
-type QuizResponseCallback = (quizResponseParams: csQuizParams) => void;
+type QuizAnswerCallback = (quizResponseParams: csQuizAnswerParams) => void;
 
 export type CreateHandler = WrapWithSocket<CreateCallback>;
 export type JoinHandler = WrapWithSocket<JoinCallback>;
 export type MoveHandler = WrapWithSocket<MoveCallback>;
-export type QuizResponseHandler = WrapWithSocket<QuizResponseCallback>;
+export type QuizAnswerHandler = WrapWithSocket<QuizAnswerCallback>;
 
 export type ClientToServerEvents = {
   create: CreateCallback;
   join: JoinCallback;
   move: MoveCallback;
-  quizResponse: QuizResponseCallback;
+  quizResponse: QuizAnswerCallback;
 };
 
 // frontend event handlers
 type CreatedCallback = (createdParams: scCreatedParams) => void;
-type RoundCallback = (roundParams: csRoundParams) => void;
+type RoundCallback = (roundParams: scRoundParams) => void;
+type QuizesCallback = (quizesParams: scQuizParams) => void;
+type GameOverCallback = (gameOverParams: scGameOverParams) => void;
 
 export type CreatedHandler = WrapWithSocket<CreatedCallback>;
 export type RoundHandler = RoundCallback;
+export type QuizDifficultyResponseHandler = QuizesCallback;
 
 export type ServerToClientEvents = {
   created: CreatedCallback;
   round: RoundCallback;
+  quiz: QuizesCallback;
+  gameOver: GameOverCallback;
 };

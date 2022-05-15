@@ -13,7 +13,7 @@ const initMapContext: () => MapContextType = () => {
     mapState: mapStateMock(),
     setMapconfig: (width: number, height: number, maxPoints: number, time: number) => {},
     setRoomId: roomId => {},
-    setParams: (params: csRoundParams) => {},
+    setParams: (params: csRoundParams, shouldShowModal: boolean) => {},
     setShouldShowModal: (shouldShowModal: boolean) => {},
   };
 };
