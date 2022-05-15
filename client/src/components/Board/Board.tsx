@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import { BoardFrontend, Coordinates, MapState } from '../types';
-import { MapContext } from '../../context/Context';
 import './Map.css';
-import { Socket } from 'socket.io-client';
+import { MapContextType } from '../../types';
 
 type RowProps = {
+  contextInstance: React.Context<MapContextType>;
   y: number;
   width: number;
   board: BoardFrontend;
@@ -15,8 +15,13 @@ type VerticalBarProps = BoxProps & { columns: BoardFrontend['vertical'] };
 type BoxProps = ObjectProps & { boxes: BoardFrontend['boxes'] };
 
 type ObjectProps = {
+  contextInstance: React.Context<MapContextType>;
   x: number;
   y: number;
+};
+
+export type BoardProps = {
+  contextInstance: React.Context<MapContextType>;
 };
 
 function Dot(props: ObjectProps) {
@@ -41,8 +46,8 @@ function horizontalClick(event: React.MouseEvent<HTMLDivElement>, mapState: MapS
   console.log('Horizontal click', y, x);
 }
 
-function HorizontalBar({ x, y, boxes, rows }: HorizontalBarProps) {
-  const { mapState } = useContext(MapContext);
+function HorizontalBar({ contextInstance, x, y, boxes, rows }: HorizontalBarProps) {
+  const { mapState } = useContext(contextInstance);
   const thisPosition: Coordinates = `${y},${x}`;
   if (rows[thisPosition] !== undefined) {
     // this bar is selected
@@ -93,8 +98,8 @@ function verticalClick(event: React.MouseEvent<HTMLDivElement>, mapState: MapSta
   });
 }
 
-function VerticalBar({ x, y, boxes, columns }: VerticalBarProps) {
-  const { mapState } = useContext(MapContext);
+function VerticalBar({ contextInstance, x, y, boxes, columns }: VerticalBarProps) {
+  const { mapState } = useContext(contextInstance);
   const thisPosition: Coordinates = `${y},${x}`;
   if (columns[thisPosition] !== undefined) {
     // this bar is selected
@@ -128,7 +133,7 @@ function VerticalBar({ x, y, boxes, columns }: VerticalBarProps) {
   }
 }
 
-function Box({ x, y, boxes }: BoxProps) {
+function Box({ contextInstance, x, y, boxes }: BoxProps) {
   const thisPosition: Coordinates = `${y},${x}`;
   if (boxes[thisPosition] !== undefined) {
     const boxPlayer = boxes[thisPosition];
@@ -144,13 +149,14 @@ function Box({ x, y, boxes }: BoxProps) {
   }
 }
 
-function DotRow({ width, y, board }: RowProps) {
+function DotRow({ contextInstance, width, y, board }: RowProps) {
   const cols = [];
   for (let x = 0; x < width; x++) {
-    cols.push(<Dot y={y} x={x} key={`dot:${y},${x}`} />);
+    cols.push(<Dot contextInstance={contextInstance} y={y} x={x} key={`dot:${y},${x}`} />);
     if (x !== width - 1) {
       cols.push(
         <HorizontalBar
+          contextInstance={contextInstance}
           boxes={board.boxes}
           rows={board.horizontal}
           y={y}
@@ -164,11 +170,12 @@ function DotRow({ width, y, board }: RowProps) {
   return <div className="map-row map-dot-row">{cols}</div>;
 }
 
-function SquareRow({ width, y, board }: RowProps) {
+function SquareRow({ contextInstance, width, y, board }: RowProps) {
   const cols = [];
   for (let x = 0; x < width; x++) {
     cols.push(
       <VerticalBar
+        contextInstance={contextInstance}
         boxes={board.boxes}
         columns={board.vertical}
         y={y}
@@ -177,26 +184,50 @@ function SquareRow({ width, y, board }: RowProps) {
       />,
     );
     if (x !== width - 1) {
-      cols.push(<Box boxes={board.boxes} y={y} x={x} key={`square:${y},${x}`} />);
+      cols.push(
+        <Box
+          contextInstance={contextInstance}
+          boxes={board.boxes}
+          y={y}
+          x={x}
+          key={`square:${y},${x}`}
+        />,
+      );
     }
   }
 
   return <div className="map-row map-square-row">{cols}</div>;
 }
 
-function Board() {
+function Board(props: BoardProps) {
   const {
     mapState: { board },
-  } = useContext(MapContext);
+  } = useContext(props.contextInstance);
 
   const rows = [];
 
   const width = board.width;
 
   for (let y = 0; y < board.height; y++) {
-    rows.push(<DotRow board={board} width={width} y={y} key={`dot_row:${y}`} />);
+    rows.push(
+      <DotRow
+        contextInstance={props.contextInstance}
+        board={board}
+        width={width}
+        y={y}
+        key={`dot_row:${y}`}
+      />,
+    );
     if (y !== board.height - 1) {
-      rows.push(<SquareRow board={board} width={width} y={y} key={`square_row:${y}`} />);
+      rows.push(
+        <SquareRow
+          contextInstance={props.contextInstance}
+          board={board}
+          width={width}
+          y={y}
+          key={`square_row:${y}`}
+        />,
+      );
     }
   }
 

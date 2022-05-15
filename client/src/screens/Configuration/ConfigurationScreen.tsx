@@ -1,8 +1,40 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MapContext } from '../../context/Context';
+import { MapContext, SecondPlayerMapContext } from '../../context/Context';
 import { scCreatedParams, MapContextType } from '../../types';
 import './Configuration.css';
+
+const createLocal = (
+  {
+    gameConfig: { maxPoints, time, width, height },
+    mapState: { socket },
+    setRoomId,
+  }: MapContextType,
+  secondPlayerMapState: MapContextType,
+  callback: () => void,
+) => {
+  socket?.emit('create', {
+    width,
+    height,
+    maxPoints,
+    maxTime: time,
+    quizParams: {
+      question: '',
+      answers: [],
+    },
+    isLocal: false,
+  });
+
+  socket?.on('created', (params: scCreatedParams) => {
+    console.log('received created', params.roomID);
+    setRoomId!(params.roomID);
+    secondPlayerMapState.setRoomId(params.roomID);
+    secondPlayerMapState.mapState.socket?.emit('join', {
+      roomID: params.roomID,
+    });
+    callback();
+  });
+};
 
 const create = (
   {
@@ -36,17 +68,18 @@ function ConfigurationScreen() {
   const [height, setHeight] = useState(5);
   const [maxPoints, setMaxPoints] = useState(10);
   const [time, setTime] = useState(10);
-  const [multiplayer, setMultiplayer] = useState(false);
   const context = useContext(MapContext);
-  const { mapState, setRoomId, setShouldShowModal } = context;
+  const setShouldShowModal = context.setShouldShowModal;
+  const secondPlayerContext = useContext(SecondPlayerMapContext);
+  const { mapState, setRoomId } = context;
   const navigate = useNavigate();
 
   const onClick = () => {
-    setShouldShowModal(true)
-    create(context, () => navigate('/board'))
-  }
+    setShouldShowModal(true);
+    create(context, () => navigate('/board'));
+  };
 
-  const isValid = true || (width && height && maxPoints && time);
+  const isValid = width && height && maxPoints && time;
   return (
     <form>
       <div className="background">
@@ -95,13 +128,8 @@ function ConfigurationScreen() {
                   type="text"
                   onChange={e => setTime(Number(e.target.value))}></input>
               </div>
-              <div className="inputRow">
-                <div>Ｍｕｌｔｉｐｌａｙｅｒ</div>
-                <input
-                  type="checkbox"
-                  onChange={e => setMultiplayer(e.target.checked)}></input>
-              </div>
             </div>
+<<<<<<< Updated upstream
             <div className="buttonContainer">
               <button
                 type="button"
@@ -110,6 +138,29 @@ function ConfigurationScreen() {
                 onClick={onClick}>
                 P l a y
               </button>
+=======
+            <div className="inputRow">
+              <div className="buttonContainer">
+                <button
+                  type="button"
+                  className="playButton"
+                  disabled={!isValid}
+                  onClick={() =>
+                    createLocal(context, secondPlayerContext, () => navigate('/boardLocal'))
+                  }>
+                  Ｌｏｃａｌ　ｇａｍｅ
+                </button>
+              </div>
+              <div className="buttonContainer">
+                <button
+                  type="button"
+                  className="playButton"
+                  disabled={!isValid}
+                  onClick={() => create(context, () => navigate('/board'))}>
+                  Ｎｅｔｗｏｒｋ
+                </button>
+              </div>
+>>>>>>> Stashed changes
             </div>
           </div>
         </div>

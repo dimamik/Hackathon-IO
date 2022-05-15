@@ -3,8 +3,9 @@ import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header/Header';
 import HomeScreen from './screens/HomeScreen/HomeScreen';
-import MapProvider from './context/Context';
+import MapProvider, { MapContext, SecondPlayerMapContext } from './context/Context';
 import BoardScreen from './screens/Board/BoardScreen';
+import LocalBoardScreen from './screens/Board/LocalBoardScreen';
 import ConfigurationScreen from './screens/Configuration/ConfigurationScreen';
 import QuestionComponents from './components/Modals/QuestionComponents';
 import AdditionalQuestionScreen from './screens/AdditionalQuestion/AdditionalQuestionScreen';
@@ -13,6 +14,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <BrowserRouter>
+
       <MapProvider>
         <Header />
         <div className="mainBackground">
@@ -26,6 +28,7 @@ function App() {
           </Routes>
           {/* <Footer /> */}
         </div>
+
       </MapProvider>
     </BrowserRouter>
   );
