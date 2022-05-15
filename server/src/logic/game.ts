@@ -1,5 +1,6 @@
 import rooms from '../db/rooms';
-import { BoardFrontend, Coordinates, scRoundParams, Move } from '../types';
+import { BoardFrontend, Coordinates, scRoundParams, Move, Board, Player } from '../types';
+import { startQuiz } from './quiz';
 import { validateMove } from './validate';
 
 export const startGame = (roomID: string) => {
@@ -34,6 +35,13 @@ export const playRound = (roomId: string, move: Move) => {
   // Validate move
   validateMove(board, move, boardHeight, boardWidth);
 
+  // Change current player
+  if (rooms[roomId].currentPlayer == rooms[roomId].players[0]) {
+    rooms[roomId].currentPlayer = rooms[roomId].players[1];
+  } else {
+    rooms[roomId].currentPlayer = rooms[roomId].players[0];
+  }
+
   // Do we need to activate quiz?
 
   // We don't need this - if BFS returns at least
@@ -45,7 +53,7 @@ export const playRound = (roomId: string, move: Move) => {
   // }
 
   // Make move on board
-  const [enclosedBoxes, newBoard]: [Array<Coordinates>, BoardFrontend] = makeMove(
+  const [enclosedBoxes, boardWithMoveMade]: [Array<Coordinates>, BoardFrontend] = makeMove(
     move,
     roomId,
     boardHeight,
@@ -56,6 +64,10 @@ export const playRound = (roomId: string, move: Move) => {
   // need to run the quiz
   if (enclosedBoxes.length > 0) {
     console.log(enclosedBoxes);
+    rooms[roomId].enclosedByMoveBoxes = enclosedBoxes;
+
+    startQuiz(rooms[roomId]);
+    return;
     // All the boxes that will be awarded in this quiz
     // are in the `enclosedBoxes` list, but they are
     // not drawn on the map yet
@@ -64,12 +76,12 @@ export const playRound = (roomId: string, move: Move) => {
   // Emit move to players
 
   rooms[roomId].players[0]?.socket?.emit('round', {
-    board: newBoard,
+    board: boardWithMoveMade,
     isMyMove: !(rooms[roomId].currentPlayer == rooms[roomId].players[0]),
   } as scRoundParams);
 
   rooms[roomId].players[1]?.socket?.emit('round', {
-    board: newBoard,
+    board: boardWithMoveMade,
     isMyMove: !(rooms[roomId].currentPlayer == rooms[roomId].players[1]),
   } as scRoundParams);
 
@@ -85,7 +97,7 @@ const makeMove = (
   roomId: string,
   boardHeight: number,
   boardWidth: number,
-): [Array<Coordinates>, BoardFrontend] => {
+): [Coordinates[], BoardFrontend] => {
   if (!rooms[roomId]) {
     throw new Error('Room does not exist');
   }
@@ -94,10 +106,15 @@ const makeMove = (
   const board = rooms[roomId].board;
 
   board.makeMove(rooms[roomId].currentPlayer, move);
-  const enclosedBoxes: Array<Coordinates> = board.getEnclosedBoxes(
-    move,
-    boardHeight,
-    boardWidth,
-  );
-  return [enclosedBoxes, board.toFrontendBoard()];
+  const enclosedBoxesArr = board.getEnclosedBoxes(move, boardHeight, boardWidth);
+
+  const enclosedBoxes: Board['boxes'] = {};
+
+  const nullPLayer: Player = { id: -1, socket: null };
+
+  enclosedBoxesArr.forEach(box => (enclosedBoxes[box] = nullPLayer));
+
+  board.addEnclosedBoxes(enclosedBoxes);
+
+  return [enclosedBoxesArr, board.toFrontendBoard()];
 };

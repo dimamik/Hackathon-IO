@@ -50,9 +50,12 @@ function BoardScreen() {
   });
 
   const closeModal = (correct: boolean) => {
-    if (currentQuestion && correct) {
-      const newPoints = currentTurnPoints + currentQuestion.points;
-      setCurrentTurnPoints(newPoints);
+    let newPoints = currentTurnPoints;
+    if (currentQuestion) {
+      if (correct) {
+        newPoints += currentQuestion.points;
+        setCurrentTurnPoints(newPoints);
+      }
       if (!nextQuestion() && mapState.roomID) {
         mapState.socket?.emit('quizResponse', {
           points: newPoints,
