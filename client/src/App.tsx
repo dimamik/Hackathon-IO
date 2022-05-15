@@ -7,6 +7,7 @@ import MapProvider from './context/Context';
 import BoardScreen from './screens/Board/BoardScreen';
 import ConfigurationScreen from './screens/Configuration/ConfigurationScreen';
 import QuestionComponents from './components/Modals/QuestionComponents';
+import GameOverComponts from './components/Modals/GameOverComponts';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
