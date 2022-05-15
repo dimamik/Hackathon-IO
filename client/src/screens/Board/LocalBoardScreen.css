@@ -1,0 +1,8 @@
+.multiple-boards-container {
+  display: grid;
+}
+
+.multiple-boards-container > div {
+  grid-row: 1;
+  grid-column: 1;
+}

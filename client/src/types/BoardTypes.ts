@@ -27,30 +27,32 @@ export interface MapContextType {
   setShouldShowModal: (shouldShow: boolean) => void;
 }
 
-export const mapStateMock: MapState = {
-  board: {
-    vertical: {
-      '2,4': 1,
-      '3,5': 0,
-      '2,7': 0,
+export const mapStateMock: () => MapState = () => {
+  return {
+    board: {
+      vertical: {
+        '2,4': 1,
+        '3,5': 0,
+        '2,7': 0,
+      },
+      horizontal: {
+        '4,3': 0,
+        '4,6': 1,
+        '5,7': 1,
+        '7,1': 1,
+      },
+      boxes: {
+        '5,3': 0,
+        '2,5': 1,
+        '4,4': -1,
+      },
+      height: 1,
+      width: 1,
     },
-    horizontal: {
-      '4,3': 0,
-      '4,6': 1,
-      '5,7': 1,
-      '7,1': 1,
-    },
-    boxes: {
-      '5,3': 0,
-      '2,5': 1,
-      '4,4': -1,
-    },
-    height: 1,
-    width: 1,
-  },
-  isMyMove: true,
-  roomID: '',
-  socket: io('http://localhost:4000'),
+    isMyMove: true,
+    roomID: '',
+    socket: io('http://localhost:4000'),
+  };
 };
 
 export const gameConfigMock: GameConfig = {
