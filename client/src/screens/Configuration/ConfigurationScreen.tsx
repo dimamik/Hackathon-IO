@@ -38,8 +38,13 @@ function ConfigurationScreen() {
   const [time, setTime] = useState(10);
   const [multiplayer, setMultiplayer] = useState(false);
   const context = useContext(MapContext);
-  const { mapState, setRoomId } = context;
+  const { mapState, setRoomId, setShouldShowModal } = context;
   const navigate = useNavigate();
+
+  const onClick = () => {
+    setShouldShowModal(true)
+    create(context, () => navigate('/board'))
+  }
 
   const isValid = true || (width && height && maxPoints && time);
   return (
@@ -102,7 +107,7 @@ function ConfigurationScreen() {
                 type="button"
                 className="playButton"
                 disabled={!isValid}
-                onClick={() => create(context, () => navigate('/board'))}>
+                onClick={onClick}>
                 P l a y
               </button>
             </div>

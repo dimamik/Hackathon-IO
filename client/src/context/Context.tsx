@@ -11,8 +11,9 @@ const initMapContext: MapContextType = {
   gameConfig: gameConfigMock,
   mapState: mapStateMock,
   setMapconfig: (width: number, height: number, maxPoints: number, time: number) => {},
-  setRoomId: roomId => {},
-  setParams: (params: csRoundParams) => {},
+  setRoomId: (roomId) => {},
+  setParams: (params: csRoundParams, shouldShowModal: boolean) => {},
+  setShouldShowModal: (shouldShowModal: boolean) => {},
 };
 
 export const MapContext = React.createContext<MapContextType>(initMapContext);
@@ -27,7 +28,7 @@ export default class MapProvider extends React.Component<Props> {
     config: gameConfigMock,
   };
 
-  setRoundParams = (params: csRoundParams) => {
+  setRoundParams = (params: csRoundParams, shouldShowModal: boolean) => {
     console.log(params);
     this.setState({
       mapState: {
@@ -35,9 +36,12 @@ export default class MapProvider extends React.Component<Props> {
         board: params.board,
         isMyMove: params.isMyMove,
       },
-      config: this.state.config,
-    });
-  };
+      config: {
+        ...this.state.config,
+        shouldShowModal
+      }
+    })
+  }
 
   setMapconfig = (width: number, height: number, maxPoints: number, time: number) => {
     this.setState({
@@ -62,6 +66,16 @@ export default class MapProvider extends React.Component<Props> {
     });
   };
 
+  setShouldShowModal = (shouldShowModal: boolean) => {
+    this.setState({
+      mapState: this.state.mapState,
+      config: {
+        ...this.state.config,
+        shouldShowModal
+      },
+    })
+  }
+
   render() {
     return (
       <MapContext.Provider
@@ -71,6 +85,7 @@ export default class MapProvider extends React.Component<Props> {
           setParams: this.setRoundParams,
           setMapconfig: this.setMapconfig,
           setRoomId: this.setRoomId,
+          setShouldShowModal: this.setShouldShowModal
         }}>
         {this.props.children}
       </MapContext.Provider>

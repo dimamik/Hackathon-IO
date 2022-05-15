@@ -20,24 +20,25 @@ export interface BoardProps {
 }
 
 function BoardScreen() {
-  const { mapState, setParams } = useContext(MapContext);
+  const { mapState, setParams, gameConfig } = useContext(MapContext);
 
   const [isQuestionOpen, setIsQuestionOpen] = useState(false);
   function toggleQuestionModal() {
     setIsQuestionOpen(!isQuestionOpen);
   }
-  const [isWaitingOpen, setIsWaitingOpen] = useState(true);
+
+  const [isWaitingOpen, setIsWaitingOpen] = useState(gameConfig.shouldShowModal);
   function toggleWaitingModal() {
     setIsWaitingOpen(!isWaitingOpen);
   }
-  const [isGameOver, setIsGameOver] = useState(true);
+  const [isGameOver, setIsGameOver] = useState(false);
   function toggleGameOverModal() {
     setIsGameOver(!isGameOver);
   }
 
   mapState.socket?.on('round', (ev: csRoundParams) => {
-    setParams(ev);
-    // TODO: wypierdolic modal z oczekiwaniem
+    setIsWaitingOpen(false);
+    setParams(ev, false);
   });
 
   return (
@@ -55,12 +56,11 @@ function BoardScreen() {
       <br />
       &nbsp;
       <br />
-      <button onClick={toggleWaitingModal}>Toggle modal</button>
       <Modal isOpen={isQuestionOpen} onRequestClose={toggleQuestionModal} className="mymodal">
         <Question />
       </Modal>
       <Modal isOpen={isWaitingOpen} onRequestClose={toggleWaitingModal} className="mymodal">
-        <WaitingForPlayer />
+        <WaitingForPlayer roomID={mapState.roomID} />
       </Modal>
       <Modal isOpen={isGameOver} onRequestClose={toggleGameOverModal} className="mymodal">
         <GameOver />
