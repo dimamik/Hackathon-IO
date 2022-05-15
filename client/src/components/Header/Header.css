@@ -1,34 +1,33 @@
 .header {
-    display: flex;
-    align-items: center;
-    background-color: #FF7EAB;
-    color: white;
-    padding: 10px;
-    justify-content: space-between;
-    height: 70px;
+  display: flex;
+  align-items: center;
+  background-color: #ff7eab;
+  color: white;
+  padding: 10px;
+  justify-content: space-between;
+  height: 70px;
 }
 
 .container {
-    display: flex;
-    color: white;
+  display: flex;
+  color: white;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .navbarIcon {
-    width: 50px;
-    height: 50px;
-    margin-right: 20px;
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
 }
 
 .appTitle {
-    border-bottom: 3px solid black;
+  border-bottom: 3px solid black;
 }
 
 .footer {
-    color: white;
-    text-align: center;
+  color: white;
+  text-align: center;
 }
-

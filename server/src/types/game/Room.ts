@@ -24,4 +24,3 @@ export class Room {
     this.players[1] = secondPlayer;
   }
 }
-

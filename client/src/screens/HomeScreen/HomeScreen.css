@@ -1,4 +1,4 @@
-.title-container{
+.title-container {
   text-align: center;
   color: white;
   padding: 20px;
@@ -7,7 +7,7 @@
   margin-top: 50px;
 }
 
-.home-screen-container{
+.home-screen-container {
   height: calc(100vh - 70px);
   background-size: cover;
   background-image: url('../../assets/images/homeScreenBackground.jpg');
@@ -17,10 +17,10 @@
   align-content: center;
 }
 
-.create-room-button{
+.create-room-button {
   margin-top: 50px;
   color: white;
-  background-color: rgb(215, 120, 160); 
+  background-color: rgb(215, 120, 160);
   padding: 10px;
   padding-left: 20px;
   padding-right: 20px;
@@ -30,28 +30,28 @@
   border-left: 2px solid white;
 }
 
-.create-room-inner{
+.create-room-inner {
   color: white;
   background: rgb(215, 120, 160);
-  border-right: 2px solid #D8A5D3;
-  border-bottom: 2px solid #D8A5D3;
-  border-left: 2px solid #D8A5D3;
-  border-top: 2px solid #D8A5D3;
+  border-right: 2px solid #d8a5d3;
+  border-bottom: 2px solid #d8a5d3;
+  border-left: 2px solid #d8a5d3;
+  border-top: 2px solid #d8a5d3;
   font-size: 40px;
 }
 
-.no-decor{
+.no-decor {
   text-decoration: none;
 }
 
-.room-id-hint-container{
+.room-id-hint-container {
   margin-top: 10%;
   margin-bottom: 15px;
   color: white;
   font-size: 30px;
 }
 
-.room-id-container{
+.room-id-container {
   font-size: 35px;
   background-color: rgb(220, 180, 210);
   display: flex;
@@ -64,26 +64,26 @@
   border-right: black 4px solid;
 }
 
-.room-id-input{
+.room-id-input {
   font-size: large;
   background: transparent;
   border: none;
   outline-width: 0;
-  color: white; 
+  color: white;
   background-color: rgb(220, 180, 210);
 }
 
-.input-spacer{
+.input-spacer {
   width: 4px;
   background-color: rgb(220, 180, 210);
 }
 
-.room-id-input:focus{
+.room-id-input:focus {
   outline-width: 0 !important;
   box-shadow: none !important;
 }
 
-.input-reset-container{
+.input-reset-container {
   display: flex;
   align-items: center;
   width: 25px;
@@ -104,4 +104,4 @@
   display: flex;
   align-items: center;
   justify-content: center;
-} 
+}
