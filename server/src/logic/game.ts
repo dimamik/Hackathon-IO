@@ -46,12 +46,16 @@ export const playRound = (roomId: string, move: Move) => {
   // }
 
   // Make move on board
-  const [enclosedBoxes, newBoard] : [Array<Coordinates>, BoardFrontend] =
-    makeMove(move, roomId, boardHeight, boardWidth);
+  const [enclosedBoxes, newBoard]: [Array<Coordinates>, BoardFrontend] = makeMove(
+    move,
+    roomId,
+    boardHeight,
+    boardWidth,
+  );
 
   // If at least one box has been enclosed, you only then
   // need to run the quiz
-  if(enclosedBoxes.length > 0){
+  if (enclosedBoxes.length > 0) {
     console.log(enclosedBoxes);
     // All the boxes that will be awarded in this quiz
     // are in the `enclosedBoxes` list, but they are
@@ -64,22 +68,25 @@ export const playRound = (roomId: string, move: Move) => {
     board: newBoard,
     isMyMove: !(rooms[roomId].currentPlayer == rooms[roomId].players[0]),
   } as csRoundParams);
-  
+
   rooms[roomId].players[1]?.socket.emit('round', {
     board: newBoard,
     isMyMove: !(rooms[roomId].currentPlayer == rooms[roomId].players[1]),
   } as csRoundParams);
 
-  if(rooms[roomId].currentPlayer == rooms[roomId].players[0]){
+  if (rooms[roomId].currentPlayer == rooms[roomId].players[0]) {
     rooms[roomId].currentPlayer = rooms[roomId].players[1];
-  }
-  else{
+  } else {
     rooms[roomId].currentPlayer = rooms[roomId].players[0];
   }
 };
 
-const makeMove = (move: Move, roomId: string, boardHeight: number, boardWidth: number)
-  : [Array<Coordinates>, BoardFrontend] => {
+const makeMove = (
+  move: Move,
+  roomId: string,
+  boardHeight: number,
+  boardWidth: number,
+): [Array<Coordinates>, BoardFrontend] => {
   if (!rooms[roomId]) {
     throw new Error('Room does not exist');
   }
@@ -88,6 +95,10 @@ const makeMove = (move: Move, roomId: string, boardHeight: number, boardWidth: n
   const board = rooms[roomId].board;
 
   board.makeMove(rooms[roomId].currentPlayer, move);
-  const enclosedBoxes: Array<Coordinates> = board.getEnclosedBoxes(move, boardHeight, boardWidth);
+  const enclosedBoxes: Array<Coordinates> = board.getEnclosedBoxes(
+    move,
+    boardHeight,
+    boardWidth,
+  );
   return [enclosedBoxes, board.toFrontendBoard()];
 };

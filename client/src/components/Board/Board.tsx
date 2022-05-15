@@ -19,14 +19,12 @@ type ObjectProps = {
   y: number;
 };
 
-
 function Dot(props: ObjectProps) {
   return <div className="map-dot" data-y={props.y} data-x={props.x} />;
 }
 
 function horizontalClick(event: React.MouseEvent<HTMLDivElement>, mapState: MapState) {
-  if(!mapState.isMyMove)
-    return;
+  if (!mapState.isMyMove) return;
   // send click event to the server
   const target = event.target as HTMLDivElement;
   const x = parseInt(target.getAttribute('data-x') as string);
@@ -38,14 +36,13 @@ function horizontalClick(event: React.MouseEvent<HTMLDivElement>, mapState: MapS
       coordinates: `${y},${x}`,
     },
     roomID: mapState.roomID!,
-
-  })
+  });
 
   console.log('Horizontal click', y, x);
 }
 
 function HorizontalBar({ x, y, boxes, rows }: HorizontalBarProps) {
-  const {mapState} = useContext(MapContext);
+  const { mapState } = useContext(MapContext);
   const thisPosition: Coordinates = `${y},${x}`;
   if (rows[thisPosition] !== undefined) {
     // this bar is selected
@@ -61,20 +58,16 @@ function HorizontalBar({ x, y, boxes, rows }: HorizontalBarProps) {
   } else {
     // this bar was not clicked before, but still we need to disable
     // clicks on borders of boxes
-    const upperPosition: Coordinates = `${y-1},${x}`;
-    if(boxes[upperPosition] !== undefined || boxes[thisPosition] !== undefined){
+    const upperPosition: Coordinates = `${y - 1},${x}`;
+    if (boxes[upperPosition] !== undefined || boxes[thisPosition] !== undefined) {
       // No onclick because it borders a box
       return (
-        <div
-          className={`map-bar map-horizontal-bar map-bar-selected`}
-          data-y={y}
-          data-x={x}
-        />
+        <div className={`map-bar map-horizontal-bar map-bar-selected`} data-y={y} data-x={x} />
       );
     }
     return (
       <div
-        onClick={(e) => horizontalClick(e, mapState)}
+        onClick={e => horizontalClick(e, mapState)}
         className={`map-bar map-horizontal-bar`}
         data-y={y}
         data-x={x}
@@ -84,8 +77,7 @@ function HorizontalBar({ x, y, boxes, rows }: HorizontalBarProps) {
 }
 
 function verticalClick(event: React.MouseEvent<HTMLDivElement>, mapState: MapState) {
-  if(!mapState.isMyMove)
-    return;
+  if (!mapState.isMyMove) return;
   // send click event to the server
   const target = event.target as HTMLDivElement;
   const x = parseInt(target.getAttribute('data-x') as string);
@@ -98,12 +90,11 @@ function verticalClick(event: React.MouseEvent<HTMLDivElement>, mapState: MapSta
       coordinates: `${y},${x}`,
     },
     roomID: mapState.roomID!,
-
-  })
+  });
 }
 
-function VerticalBar({ x, y, boxes, columns }: VerticalBarProps)  {
-  const {mapState} = useContext(MapContext);
+function VerticalBar({ x, y, boxes, columns }: VerticalBarProps) {
+  const { mapState } = useContext(MapContext);
   const thisPosition: Coordinates = `${y},${x}`;
   if (columns[thisPosition] !== undefined) {
     // this bar is selected
@@ -119,20 +110,16 @@ function VerticalBar({ x, y, boxes, columns }: VerticalBarProps)  {
   } else {
     // this bar was not clicked before, but still we need to disable
     // clicks on borders of boxes
-    const leftPosition: Coordinates = `${y},${x-1}`;
-    if(boxes[leftPosition] !== undefined || boxes[thisPosition] !== undefined){
+    const leftPosition: Coordinates = `${y},${x - 1}`;
+    if (boxes[leftPosition] !== undefined || boxes[thisPosition] !== undefined) {
       // No onclick because it borders a box
       return (
-        <div
-          className={`map-bar map-vertical-bar map-bar-selected`}
-          data-y={y}
-          data-x={x}
-        />
+        <div className={`map-bar map-vertical-bar map-bar-selected`} data-y={y} data-x={x} />
       );
     }
     return (
       <div
-        onClick={(e) => verticalClick(e, mapState)}
+        onClick={e => verticalClick(e, mapState)}
         className={`map-bar map-vertical-bar`}
         data-y={y}
         data-x={x}
@@ -163,7 +150,13 @@ function DotRow({ width, y, board }: RowProps) {
     cols.push(<Dot y={y} x={x} key={`dot:${y},${x}`} />);
     if (x !== width - 1) {
       cols.push(
-        <HorizontalBar boxes={board.boxes} rows={board.horizontal} y={y} x={x} key={`horizontal_bar:${y},${x}`} />,
+        <HorizontalBar
+          boxes={board.boxes}
+          rows={board.horizontal}
+          y={y}
+          x={x}
+          key={`horizontal_bar:${y},${x}`}
+        />,
       );
     }
   }
@@ -175,7 +168,13 @@ function SquareRow({ width, y, board }: RowProps) {
   const cols = [];
   for (let x = 0; x < width; x++) {
     cols.push(
-      <VerticalBar boxes={board.boxes} columns={board.vertical} y={y} x={x} key={`vertical_bar:${y},${x}`} />,
+      <VerticalBar
+        boxes={board.boxes}
+        columns={board.vertical}
+        y={y}
+        x={x}
+        key={`vertical_bar:${y},${x}`}
+      />,
     );
     if (x !== width - 1) {
       cols.push(<Box boxes={board.boxes} y={y} x={x} key={`square:${y},${x}`} />);
@@ -186,7 +185,9 @@ function SquareRow({ width, y, board }: RowProps) {
 }
 
 function Board() {
-  const { mapState: {board} } = useContext(MapContext);
+  const {
+    mapState: { board },
+  } = useContext(MapContext);
 
   const rows = [];
 
@@ -195,9 +196,7 @@ function Board() {
   for (let y = 0; y < board.height; y++) {
     rows.push(<DotRow board={board} width={width} y={y} key={`dot_row:${y}`} />);
     if (y !== board.height - 1) {
-      rows.push(
-        <SquareRow board={board} width={width} y={y} key={`square_row:${y}`} />,
-      );
+      rows.push(<SquareRow board={board} width={width} y={y} key={`square_row:${y}`} />);
     }
   }
 
