@@ -15,6 +15,7 @@ export type GameConfig = {
   height: number;
   time: number;
   maxPoints: number;
+  shouldShowModal: boolean,
 };
 
 export interface MapContextType {
@@ -22,7 +23,8 @@ export interface MapContextType {
   mapState: MapState;
   setRoomId: (roomId: string) => void;
   setMapconfig: (width: number, height: number, maxPoints: number, time: number) => void;
-  setParams: (params: csRoundParams) => void;
+  setParams: (params: csRoundParams, shouldShowModal: boolean) => void;
+  setShouldShowModal: (shouldShow: boolean) => void;
 }
 
 export const mapStateMock: MapState = {
@@ -56,4 +58,5 @@ export const gameConfigMock: GameConfig = {
   height: 10,
   maxPoints: 50,
   time: 100,
+  shouldShowModal: false,
 };
