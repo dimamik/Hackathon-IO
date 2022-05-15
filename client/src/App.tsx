@@ -17,7 +17,6 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(true);
 
   return (
-    
     <BrowserRouter>
       <MapProvider>
         <Header />
