@@ -48,24 +48,27 @@ function BoardScreen() {
     setIsWaitingOpen(false);
     setParams(ev, false);
   });
-  false;
-  const closeModal = (correct: boolean) => {
-    let newPoints = currentTurnPoints;
-    if (currentQuestion) {
-      if (correct) {
-        newPoints += currentQuestion.points;
-        setCurrentTurnPoints(newPoints);
-      }
-      if (!nextQuestion() && mapState.roomID) {
-        mapState.socket?.emit('quizResponse', {
-          points: newPoints,
-          roomID: mapState.roomID,
-        });
-        setQuizActive(false);
-      }
-    }
+
+  const closeModal = (correct: boolean, callback: () => void) => {
     setTimeout(() => {
       setIsQuestionOpen(false);
+      let newPoints = currentTurnPoints;
+      if (currentQuestion) {
+        if (correct) {
+          newPoints += currentQuestion.points;
+          setCurrentTurnPoints(newPoints);
+        }
+        if (!nextQuestion() && mapState.roomID) {
+          mapState.socket?.emit('quizResponse', {
+            points: newPoints,
+            roomID: mapState.roomID,
+          });
+          setQuizActive(false);
+          setCurrentQuestion(null);
+          setCurrentTurnPoints(0);
+        }
+      }
+      callback();
     }, 2000);
   };
 
@@ -73,7 +76,7 @@ function BoardScreen() {
     const newQuestions = questions.filter(question => question != currentQuestion);
     setQuestions(newQuestions);
     if (newQuestions.length > 0) {
-      const next = questions[0];
+      const next = newQuestions[0];
       setCurrentQuestion(next);
       setIsQuestionOpen(true);
       return true;

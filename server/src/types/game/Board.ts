@@ -19,8 +19,8 @@ export class Board {
   boxes: CoordinateMap<Player> = {};
   width: number;
   height: number;
-  firstPlayerScore: number;
-  secondPlayerScore: number;
+  firstPlayerScore: number = 0;
+  secondPlayerScore: number = 0;
 
   constructor(height: number, width: number) {
     this.width = width;
@@ -157,5 +157,6 @@ export class BoardFrontend {
     this.width = backendBoard.width;
     this.firstPlayerScore = backendBoard.firstPlayerScore;
     this.secondPlayerScore = backendBoard.firstPlayerScore;
+    console.log(this);
   }
 }
