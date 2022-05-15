@@ -234,14 +234,14 @@ function Board(props: BoardProps) {
 
   const playerDesc =
     playerID === 1 ? (
-      <span className="player-cyan-color">cyan</span>
+      <span className="player-cyan-color">ｃｙａｎ</span>
     ) : (
-      <span className="player-magenta-color">magenta</span>
+      <span className="player-magenta-color">ｍａｇｅｎｔａ</span>
     );
 
   return (
     <div className="map-container">
-      <div className="plays-as">You play as: {playerDesc}</div>
+      <div className="plays-as">Ｙｏｕ　ｐｌａｙ　ａｓ: {playerDesc}</div>
       {rows}
     </div>
   );

@@ -18,7 +18,9 @@ const initMapContext: () => MapContextType = () => {
     setRoomId: roomId => {
       return Promise.resolve(null);
     },
-    setParams: (params: scRoundParams, shouldShowModal: boolean) => {},
+    setParams: (params: scRoundParams, shouldShowModal: boolean) => {
+      return Promise.resolve(null);
+    },
     setShouldShowModal: (shouldShowModal: boolean) => {},
   };
 };
@@ -38,7 +40,7 @@ export default class MapProvider extends React.Component<Props> {
   };
 
   setPlayerID = (id: number) => {
-    const promise = new Promise(resolve => {
+    const promise = new Promise<null>(resolve => {
       this.setState(
         {
           mapState: {
@@ -55,18 +57,23 @@ export default class MapProvider extends React.Component<Props> {
   };
 
   setRoundParams = (params: scRoundParams, shouldShowModal: boolean) => {
-    console.log(params);
-    this.setState({
-      mapState: {
-        ...this.state.mapState,
-        board: params.board,
-        isMyMove: params.isMyMove,
+    const promise = new Promise<null>(resolve => {
+      this.setState({
+        mapState: {
+          ...this.state.mapState,
+          board: params.board,
+          isMyMove: params.isMyMove,
+        },
+        config: {
+          ...this.state.config,
+          shouldShowModal,
+        },
       },
-      config: {
-        ...this.state.config,
-        shouldShowModal,
-      },
-    });
+      () => {
+        resolve(null);
+      });
+    })
+    return promise;
   };
 
   setMapconfig = (width: number, height: number, maxPoints: number, time: number) => {
@@ -83,7 +90,7 @@ export default class MapProvider extends React.Component<Props> {
   };
 
   setRoomId = (roomID: string) => {
-    const promise = new Promise(resolve => {
+    const promise = new Promise<null>(resolve => {
       this.setState(
         {
           mapState: {

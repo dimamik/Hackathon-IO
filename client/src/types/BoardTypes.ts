@@ -25,7 +25,7 @@ export interface MapContextType {
   setRoomId: (roomId: string) => Promise<null>;
   setPlayerID: (id: number) => Promise<null>;
   setMapconfig: (width: number, height: number, maxPoints: number, time: number) => void;
-  setParams: (params: scRoundParams, shouldShowModal: boolean) => void;
+  setParams: (params: scRoundParams, shouldShowModal: boolean) => Promise<null>;
   setShouldShowModal: (shouldShow: boolean) => void;
 }
 
