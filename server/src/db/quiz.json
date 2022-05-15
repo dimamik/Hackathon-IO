@@ -1,82 +1,351 @@
 {
   "quizs": [
     {
-      "question": "Odpowiedz A jest poprawna (indeksy od 0)",
-      "answers": ["A", "B", "C", "D"],
-      "correctAnswer": 0,
+      "question": "Kto stworzył gita?",
+      "answers": ["Marek Gajęcki", "Linus Torvalds", "Guido van Rossum", "Eric Raymond"],
+      "correctAnswer": 1,
       "points": 1
     },
     {
-      "question": "Odpowiedz B jest poprawna (indeksy od 0)",
-      "answers": ["A", "B", "C", "D"],
+      "question": "Który z języków programowania nie wykorzystuje JVM?",
+      "answers": ["Kotlin", "Scala", "Java", "Assembler"],
+      "correctAnswer": 3,
+      "points": 1
+    },
+    {
+      "question": "Oryginalna implementacja GitHuba powstała w języku...",
+      "answers": ["Python", "Ruby", "Java", "C"],
       "correctAnswer": 1,
       "points": 3
     },
     {
-      "question": "Odpowiedz C jest poprawna (indeksy od 0)",
-      "answers": ["A", "B", "C", "D"],
+      "question": "Git jest napisany w języku...",
+      "answers": ["Assembly", "Fortran", "C", "Python"],
       "correctAnswer": 2,
-      "points": 5
+      "points": 1
     },
     {
-      "question": "Odpowiedz A jest poprawna (indeksy od 0)",
-      "answers": ["A", "B", "C", "D"],
+      "question": "Najpopularniejszy standard liczb zmiennoprzecinkowych to...",
+      "answers": ["RFC 2616", "802.11", "IEEE 802.3", "IEEE 754"],
+      "correctAnswer": 3,
+      "points": 3
+    },
+    {
+      "question": "Który z paradygmatów programowania jest najmniej wykorzystywany w języku Scala?",
+      "answers": [
+        "Programowanie logiczne",
+        "Programowanie funkcyjne",
+        "Programowanie proceduralne",
+        "Programowanie obiektowe"
+      ],
       "correctAnswer": 0,
       "points": 3
     },
     {
-      "question": "Odpowiedz B jest poprawna (indeksy od 0)",
-      "answers": ["A", "B", "C", "D"],
-      "correctAnswer": 1,
-      "points": 1
+      "question": "Który z fizycznych nośników jest dopuszczony przez protokół IP?",
+      "answers": ["Wielbłąd", "Osiołek", "Gołąb pocztowy", "Listonosz"],
+      "correctAnswer": 2,
+      "points": 3
     },
     {
-      "question": "Odpowiedz C jest poprawna (indeksy od 0)",
-      "answers": ["A", "B", "C", "D"],
+      "question": "Który z algorytmów grafowych wykorzystuje rekurencję jako podstawę swojego działania",
+      "answers": [
+        "Depth First Search",
+        "Algorytm Dijkstry",
+        "Algorytm Floyda-Warshalla",
+        "Breath First Search"
+      ],
+      "correctAnswer": 0,
+      "points": 3
+    },
+    {
+      "question": "Która ze struktur jest znana z najszybszej gwarantowanej złożoności obliczeniowej operacji dodawania oraz usuwania elementów z jej początku?",
+      "answers": ["Lista jednokierunkowa", "Kolejka", "Stos", "Kopiec"],
+      "correctAnswer": 2,
+      "points": 3
+    },
+    {
+      "question": "Które z narzędzi służy do konteneryzacji?",
+      "answers": ["QEMU", "VirtualBox", "Docker", "Parallels"],
+      "correctAnswer": 2,
+      "points": 3
+    },
+    {
+      "question": "Jaką architekturę wykorzystują procesory Apple M1?",
+      "answers": ["AVR 8-bit", "ARM", "AMD64", "RISC-V"],
+      "correctAnswer": 1,
+      "points": 3
+    },
+    {
+      "question": "Jak nazywa się wariant protokołu TLS przystosowany do użycia z UDP?",
+      "answers": ["ULS", "UDP-TLS", "UTLS", "DTLS"],
+      "correctAnswer": 3,
+      "points": 5
+    },
+    {
+      "question": "Jakie zalety ma wykorzystywanie protokołu UDP do przesyłania danych nad protokołem TCP?",
+      "answers": [
+        "Retransmisja danych w przypadku problemów z przesłaniem informacji",
+        "Szybkość przesyłania danych jest znacznie szybsza",
+        "Ustanowienie połączenia przed przesyłaniem danych",
+        "Gwarancja dotarcia informacji wysłanej do odbiorcy"
+      ],
+      "correctAnswer": 1,
+      "points": 3
+    },
+    {
+      "question": "Z którą warstwą w modelu OSI/ISO kojarzone są routery?",
+      "answers": [
+        "Warstwa transportowa",
+        "Warstwa łącza danych",
+        "Warstwa sieciowa",
+        "Warstwa fizyczna"
+      ],
       "correctAnswer": 2,
       "points": 5
     },
     {
-      "question": "Odpowiedz A jest poprawna (indeksy od 0)",
-      "answers": ["A", "B", "C", "D"],
-      "correctAnswer": 0,
-      "points": 1
-    },
-    {
-      "question": "Odpowiedz B jest poprawna (indeksy od 0)",
-      "answers": ["A", "B", "C", "D"],
+      "question": "Jaki język programowania jest najbardziej wykorzystywany do tworzenia aplikacji internetowych z podanych? ",
+      "answers": ["C++", "JavaScript", "Python", "Java"],
       "correctAnswer": 1,
       "points": 1
     },
     {
-      "question": "Odpowiedz C jest poprawna (indeksy od 0)",
-      "answers": ["A", "B", "C", "D"],
+      "question": "Jaką precyzję bitową liczb zmiennoprzecinkowych oferuje Python?",
+      "answers": ["32b", "64b", "8b", "16b"],
+      "correctAnswer": 1,
+      "points": 1
+    },
+    {
+      "question": "Który z podanych algorytmów sortowania jest algorytmem niestabilnym?",
+      "answers": ["Bucket sort", "Bubble sort", "QuickSort", "Merge sort"],
+      "correctAnswer": 2,
+      "points": 5
+    },
+    {
+      "question": "Który z podanych formatów plików jest najbardziej zbliżony strukturą do słownika w Pythonie?",
+      "answers": ["JSON", "XML", "CSV", "TXT"],
+      "correctAnswer": 0,
+      "points": 5
+    },
+    {
+      "question": "Który z protokół routingu nie wykorzystuje metody dystans-wektor do wyliczania wartości metryki?",
+      "answers": ["RIP", "Żaden z nich", "IGRP", "OSPF"],
+      "correctAnswer": 0,
+      "points": 5
+    },
+    {
+      "question": "Origynalna implementacja Pythona powstała w ... ?",
+      "answers": ["Assembler", "C++", "Fortran", "C"],
+      "correctAnswer": 3,
+      "points": 1
+    },
+    {
+      "question": "Jaką główną zaletę posiadają tablice Numpy w porównaniu z tablicami oferowanymi przez Python?",
+      "answers": [
+        "Wymuszenie jednego typu danych dla każdego elementu w tablicy",
+        "Redukcja wymaganej pamięci",
+        "-",
+        "Znaczne przyspieszenie prędkości operacji"
+      ],
+      "correctAnswer": 3,
+      "points": 3
+    },
+    {
+      "question": "Która z domen ulega podziałowi przez switcha należącego do warstwy łącza danych?",
+      "answers": ["Obie", "-", "Domena kolizijna", "Domena rozgłoszeniowa"],
+      "correctAnswer": 3,
+      "points": 3
+    },
+    {
+      "question": "Dlaczego występują błędy zaokrągleń w wyliczaniu wartości?",
+      "answers": [
+        " która może spowodować przekłamanie wartości bitów\"",
+        "\"Limitacja pamięciowa",
+        "Generalnie zła implementacja",
+        "Ograniczony czas na wyliczenie wartości"
+      ],
+      "correctAnswer": 1,
+      "points": 3
+    },
+    {
+      "question": "Który z podanych algorytmów sortowania wykona najwięcej porównań wartości niezależnie od podanego wejścia?",
+      "answers": ["Quick Sort", "Selection Sort", "Bubble Sort", "Merge Sort"],
+      "correctAnswer": 2,
+      "points": 3
+    },
+    {
+      "question": "Który z podanych wzorców projektowych jest wzorcem strukturalnym?",
+      "answers": ["Prototype", "Iterator", "Bridge", "Observer"],
+      "correctAnswer": 2,
+      "points": 3
+    },
+    {
+      "question": "Czego nie może zawierać interfejs w Javie?",
+      "answers": ["Pól", "Klas statycznych", "Implementacji", "Komentarzy"],
+      "correctAnswer": 0,
+      "points": 3
+    },
+    {
+      "question": "Jaki wzorzec projektowy najlepiej zastosować w celu utworzenia różnych sposobów na przejście po danej kolekcji?",
+      "answers": ["Memento", "Visitor", "Iterator", "State"],
+      "correctAnswer": 2,
+      "points": 5
+    },
+    {
+      "question": "\"Jakiej sekcji NIE ma w kole naukowym \"\"BIT\"\"?\"",
+      "answers": ["BIT JAVA SCRIPT", "BIT JAVA", "BIT MATHS", "BIT AI"],
+      "correctAnswer": 0,
+      "points": 1
+    },
+    {
+      "question": "który z tych protokołów zapobiega powtaniu pętli w sieci (w warstwie 2)?",
+      "answers": ["ARP", "STP", "UDP", "Ethernet"],
+      "correctAnswer": 1,
+      "points": 1
+    },
+    {
+      "question": "który z tych protokołów nie działa na protokole IPv6?",
+      "answers": ["TCP", "ARP", "UDP", "ICMP"],
+      "correctAnswer": 1,
+      "points": 1
+    },
+    {
+      "question": "którego z kierunków NIE MA na WIEiT'cie?",
+      "answers": [
+        "Data Science",
+        "Nowoczesne Technologie w Kryminalistyce",
+        "Elektronika",
+        "Cyberbezpieczeństwo i Telekomunikacja"
+      ],
+      "correctAnswer": 3,
+      "points": 1
+    },
+    {
+      "question": "Zjawisko zagłodzenia w programie współbieżnym jest",
+      "answers": [
+        " w którym proces czekający na dane zdarzenie nie zostaje wznowiony mimo",
+        "\"stanem",
+        "przejawem braku bezpieczeństwa programu współbieżnego",
+        " że występuje ono dowolną liczbę razy\""
+      ],
+      "correctAnswer": 1,
+      "points": 3
+    },
+    {
+      "question": "co oznacza kod 500 w odpowiedzi protokołu HTTP?",
+      "answers": ["server not found", "\"OK", "bad gateway", " dane w porządku\""],
+      "correctAnswer": 1,
+      "points": 1
+    },
+    {
+      "question": "Jaki jest kod odpowiedzi protokołu HTTP dla bad gateway error?",
+      "answers": ["500", "502", "203", "413"],
+      "correctAnswer": 1,
+      "points": 1
+    },
+    {
+      "question": "Jaką postać ma decymalna liczba 62 w formie binarnej",
+      "answers": ["11 0110", "1 110", "11 1101", "11 1110"],
+      "correctAnswer": 3,
+      "points": 1
+    },
+    {
+      "question": "Jaki podciąg elementów listy N-elementowej będzie posortowany po 3 operacjach bubble-sort w porządku rosnącym",
+      "answers": [
+        "Przynajmniej 3 elementy od początku",
+        "Dokładnie 3 elementy",
+        "Przynajmniej 3 elementy od końca",
+        "Nie ma gwarancji na konkretną długość podciągu"
+      ],
       "correctAnswer": 2,
       "points": 1
     },
     {
-      "question": "AAA",
-      "answers": ["A", "V", "v", "v"],
-      "points": 1,
-      "correctAnswer": 0
+      "question": "Jaka jest złożoność obliczeniowa operacji dodawania elementów do drzewa binarnego? N to liczba elementów w drzewie",
+      "answers": ["O(Nlog(N))", "O(log(N))", "O(N^2)", "O(N)"],
+      "correctAnswer": 1,
+      "points": 1
     },
     {
-      "question": "AAA",
-      "answers": ["A", "V", "v", "v"],
-      "points": 1,
-      "correctAnswer": 0
+      "question": "Jak rozwinąć JVM",
+      "answers": [
+        "Java Variable Mutator",
+        "Java Virtual Mirror",
+        "Java Virtual Machine",
+        "Java Vortex Mechanism"
+      ],
+      "correctAnswer": 2,
+      "points": 1
     },
     {
-      "question": "AAA",
-      "answers": ["A", "V", "v", "v"],
-      "points": 1,
-      "correctAnswer": 0
+      "question": "Który z poniższych języków jest JIT (just in time compilation)",
+      "answers": ["Fortan", "C++", "Redstone", "Javascript"],
+      "correctAnswer": 3,
+      "points": 1
     },
     {
-      "question": "AAABC",
-      "answers": ["A", "V", "v", "v"],
-      "points": 1,
-      "correctAnswer": 0
+      "question": "Ile maszyn chodzi na Javie",
+      "answers": ["3", "3 biliony", "3 miliony", "3 miliardy "],
+      "correctAnswer": 3,
+      "points": 1
+    },
+    {
+      "question": "Jaki jest pierwszy etap projektowania UI?",
+      "answers": [
+        "Wywiad z klientem",
+        "Tworzenie prototypów",
+        "Tworzenie mockupów",
+        "Tworzenie wireframe"
+      ],
+      "correctAnswer": 0,
+      "points": 3
+    },
+    {
+      "question": "Jaką postać ma decymalna liczba 62 w formie binarnej",
+      "answers": ["11 1110", "11 0110", "11 1101", "1 110"],
+      "correctAnswer": 0,
+      "points": 1
+    },
+    {
+      "question": "Jaki podciąg elementów listy N-elementowej będzie posortowany po 3 operacjach bubble-sort w porządku rosnącym",
+      "answers": [
+        "Dokładnie 3 elementy",
+        "Nie ma gwarancji na konkretną długość podciągu",
+        "Przynajmniej 3 elementy od początku",
+        "Przynajmniej 3 elementy od końca"
+      ],
+      "correctAnswer": 3,
+      "points": 1
+    },
+    {
+      "question": "Jaka jest złożoność obliczeniowa operacji dodawania elementów do drzewa binarnego? N to liczba elementów w drzewie",
+      "answers": ["O(N)", "O(Nlog(N))", "O(log(N))", "O(N^2)"],
+      "correctAnswer": 2,
+      "points": 1
+    },
+    {
+      "question": "Jak rozwinąć JVM",
+      "answers": [
+        "Java Vortex Mechanism",
+        "Java Variable Mutator",
+        "Java Virtual Mirror",
+        "Java Virtual Machine"
+      ],
+      "correctAnswer": 3,
+      "points": 1
+    },
+    {
+      "question": "Który z poniższych języków jest JIT (just in time compilation)",
+      "answers": ["Redstone", "Javascript", "Fortan", "C++"],
+      "correctAnswer": 1,
+      "points": 1
+    },
+    {
+      "question": "Ile maszyn chodzi na Javie",
+      "answers": ["3", "3 miliony", "3 biliony", "3 miliardy "],
+      "correctAnswer": 3,
+      "points": 1
     }
   ]
 }

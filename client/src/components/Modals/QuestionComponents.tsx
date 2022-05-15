@@ -3,17 +3,22 @@ import { Container, Row, Col } from 'react-bootstrap';
 import dolphin from '../../assets/images/dolphin.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './QuestionComponents.css';
+import { Quiz } from '../../types';
 
-function QuestionComponents() {
+interface Props {
+  quiz: Quiz | null;
+  closeModal: (correct: boolean) => void;
+}
 
-  const [questionValue, setQuestionValue] = useState('Kocham piwo?'); 
-  const [answer1Value, setAnswer1Value] = useState('tak'); 
-  const [answer2Value, setAnswer2Value] = useState(''); 
-  const [answer3Value, setAnswer3Value] = useState(''); 
-  const [answer4Value, setAnswer4Value] = useState(''); 
+function QuestionComponents(props: Props) {
+  const [showCorrect, setShowCorrect] = useState(false);
 
+  function onClick(index: number) {
+    setShowCorrect(true);
+    props.closeModal(index == props.quiz?.correctAnswer);
+  }
 
-  return (
+  return props.quiz ? (
     <Container fluid>
       <div className="questionNavbar">
         <div className="bar">
@@ -28,32 +33,31 @@ function QuestionComponents() {
             <p>Question</p>
           </div>
           <div className="question">
-            <p>{questionValue}</p>
+            <p>{props.quiz.question}</p>
           </div>
           <div className="dolphinContainer">
             <img src={dolphin} className="dolphin" />
           </div>
           <div className="answers">
-            <button type="button" className="button">
-              {answer1Value}
-            </button>
-
-            <button type="button" className="button">
-              {answer2Value}
-            </button>
-
-            <button type="button" className="button">
-              {answer3Value}
-            </button>
-
-            <button type="button" className="button">
-              {answer4Value}
-            </button>
+            {props.quiz.answers.map((answer, index) => {
+              return (
+                <button
+                  type="button"
+                  className={`button ${
+                    index === props.quiz?.correctAnswer && showCorrect
+                      ? 'correct'
+                      : 'incorrect'
+                  }`}
+                  onClick={() => onClick(index)}>
+                  {answer}
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
     </Container>
-  );
+  ) : null;
 }
 
 export default QuestionComponents;

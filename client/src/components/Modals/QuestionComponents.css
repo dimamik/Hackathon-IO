@@ -77,3 +77,11 @@
   width: 23%;
   height: fit-content;
 }
+
+.correct {
+  background-color: green;
+}
+
+.incorrect {
+  background-color: red;
+}

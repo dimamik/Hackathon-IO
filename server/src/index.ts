@@ -5,10 +5,10 @@ import { handleCreate } from './services/create';
 import { handleJoin } from './services/join';
 import { handleMove } from './services/move';
 import { handleQuizResponse } from './services/quizResponse';
-import { ServerSocket } from './types';
+import { Quiz, ServerSocket } from './types';
 import { getRandomQuiz, addQuiz } from './utils/quiz';
 
-console.log(getRandomQuiz(6));
+import cors from 'cors';
 
 const app = express();
 app.use(express.json());
@@ -38,12 +38,18 @@ httpServer.listen(4000, () => {
   console.log('Listening on port 4000');
 });
 
+app.use(
+  cors({
+    origin: '*',
+  }),
+);
+
 app.get('/', (_req, res) => {
   res.send('pong');
 });
 
-app.post('/add-question', (req, res) => {
-  console.log(req.body);
-  addQuiz(req.body);
-  res.json(req.body);
+app.post('/add_question', (req, res) => {
+  console.log(req.body.quiz);
+  addQuiz(req.body.quiz as Quiz);
+  res.send('Added');
 });

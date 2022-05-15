@@ -4,6 +4,7 @@ import { MapContext, SecondPlayerMapContext } from '../../context/Context';
 import { scCreatedParams, MapContextType } from '../../types';
 import './Configuration.css';
 
+
 const createLocal = (
   {
     gameConfig: { maxPoints, time, width, height },
