@@ -4,7 +4,7 @@ import { MapContext, SecondPlayerMapContext } from '../../context/Context';
 import { scCreatedParams, MapContextType } from '../../types';
 import './Configuration.css';
 import Sound from 'react-sound';
-import backgroundSound from '../../assets/sounds/backgroundSound.mp3'
+import backgroundSound from '../../assets/sounds/backgroundSound.mp3';
 
 const createLocal = (
   {
