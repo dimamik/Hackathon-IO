@@ -58,21 +58,23 @@ export default class MapProvider extends React.Component<Props> {
 
   setRoundParams = (params: scRoundParams, shouldShowModal: boolean) => {
     const promise = new Promise<null>(resolve => {
-      this.setState({
-        mapState: {
-          ...this.state.mapState,
-          board: params.board,
-          isMyMove: params.isMyMove,
+      this.setState(
+        {
+          mapState: {
+            ...this.state.mapState,
+            board: params.board,
+            isMyMove: params.isMyMove,
+          },
+          config: {
+            ...this.state.config,
+            shouldShowModal,
+          },
         },
-        config: {
-          ...this.state.config,
-          shouldShowModal,
+        () => {
+          resolve(null);
         },
-      },
-      () => {
-        resolve(null);
-      });
-    })
+      );
+    });
     return promise;
   };
 
