@@ -41,9 +41,11 @@ const create = (
     gameConfig: { maxPoints, time, width, height },
     mapState: { socket },
     setRoomId,
+    setShouldShowModal,
   }: MapContextType,
   callback: () => void,
 ) => {
+  setShouldShowModal(true);
   socket?.emit('create', {
     width,
     height,
@@ -73,11 +75,6 @@ function ConfigurationScreen() {
   const secondPlayerContext = useContext(SecondPlayerMapContext);
   const { mapState, setRoomId } = context;
   const navigate = useNavigate();
-
-  const onClick = () => {
-    setShouldShowModal(true);
-    create(context, () => navigate('/board'));
-  };
 
   const isValid = width && height && maxPoints && time;
   return (
@@ -129,16 +126,6 @@ function ConfigurationScreen() {
                   onChange={e => setTime(Number(e.target.value))}></input>
               </div>
             </div>
-<<<<<<< Updated upstream
-            <div className="buttonContainer">
-              <button
-                type="button"
-                className="playButton"
-                disabled={!isValid}
-                onClick={onClick}>
-                P l a y
-              </button>
-=======
             <div className="inputRow">
               <div className="buttonContainer">
                 <button
@@ -160,7 +147,6 @@ function ConfigurationScreen() {
                   Ｎｅｔｗｏｒｋ
                 </button>
               </div>
->>>>>>> Stashed changes
             </div>
           </div>
         </div>

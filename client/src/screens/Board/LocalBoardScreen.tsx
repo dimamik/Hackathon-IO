@@ -41,17 +41,17 @@ function LocalBoardScreen() {
   const secondPlayerBoard = <Board contextInstance={SecondPlayerMapContext} />;
 
   firstPlayerMapState.mapState.socket?.on('round', (ev: csRoundParams) => {
-    firstPlayerMapState.setParams(ev);
+    firstPlayerMapState.setParams(ev, false);
     // TODO: wypierdolic modal z oczekiwaniem
-    const displayStyle = ev.isMyMove ? '1' : '-1';
+    const displayStyle = ev.isMyMove ? '2' : '1';
     document
       .querySelector('#first-player-board-container')
       ?.setAttribute('style', `z-index: ${displayStyle};`);
   });
 
   secondPlayerMapState.mapState.socket?.on('round', (ev: csRoundParams) => {
-    secondPlayerMapState.setParams(ev);
-    const displayStyle = ev.isMyMove ? '1' : '-1';
+    secondPlayerMapState.setParams(ev, false);
+    const displayStyle = ev.isMyMove ? '2' : '1';
     document
       .querySelector('#second-player-board-container')
       ?.setAttribute('style', `z-index: ${displayStyle};`);
