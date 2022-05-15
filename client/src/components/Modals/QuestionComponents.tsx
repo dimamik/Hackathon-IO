@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
-import { Quiz } from '../../types';
 import dolphin from '../../assets/images/dolphin.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './QuestionComponents.css';
+import { Quiz } from '../../types';
 
 interface Props {
   quiz: Quiz | null;
