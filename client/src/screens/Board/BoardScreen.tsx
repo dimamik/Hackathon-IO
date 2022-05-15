@@ -7,6 +7,7 @@ import Question from '../../components/Modals/QuestionComponents';
 import './BoardScreen.css';
 import { csRoundParams } from '../../types';
 import WaitingForPlayer from '../../components/Modals/WaitingForPlayer';
+import GameOver from '../../components/Modals/GameOverComponts';
 import context from 'react-bootstrap/esm/AccordionContext';
 
 Modal.setAppElement('#root');
@@ -28,6 +29,10 @@ function BoardScreen() {
   const [isWaitingOpen, setIsWaitingOpen] = useState(true);
   function toggleWaitingModal() {
     setIsWaitingOpen(!isWaitingOpen);
+  }
+  const [isGameOver, setIsGameOver] = useState(true);
+  function toggleGameOverModal() {
+    setIsGameOver(!isGameOver);
   }
 
   mapState.socket?.on('round', (ev: csRoundParams) => {
@@ -56,6 +61,9 @@ function BoardScreen() {
       </Modal>
       <Modal isOpen={isWaitingOpen} onRequestClose={toggleWaitingModal} className="mymodal">
         <WaitingForPlayer />
+      </Modal>
+      <Modal isOpen={isGameOver} onRequestClose={toggleGameOverModal} className="mymodal">
+        <GameOver />
       </Modal>
     </div>
   );
