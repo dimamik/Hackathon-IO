@@ -7,6 +7,7 @@ import Question from '../../components/Modals/QuestionComponents';
 import './BoardScreen.css';
 import { csRoundParams } from '../../types';
 import WaitingForPlayer from '../../components/Modals/WaitingForPlayer';
+import context from 'react-bootstrap/esm/AccordionContext';
 
 Modal.setAppElement('#root');
 
