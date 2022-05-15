@@ -157,5 +157,6 @@ export class BoardFrontend {
     this.width = backendBoard.width;
     this.firstPlayerScore = backendBoard.firstPlayerScore;
     this.secondPlayerScore = backendBoard.firstPlayerScore;
+    console.log(this);
   }
 }
