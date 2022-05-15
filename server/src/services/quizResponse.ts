@@ -5,6 +5,13 @@ export const handleQuizResponse: QuizAnswerHandler = (socket, quizResponseParams
   const roomId = quizResponseParams.roomID;
   const room = rooms[roomId];
 
+  console.log('--=');
+
+  console.log(room.board.firstPlayerScore);
+  console.log(room.board.secondPlayerScore);
+  console.log(room.currentPlayer?.id);
+  console.log(quizResponseParams.points);
+
   if (room.currentPlayer?.id == 0) {
     room.board.firstPlayerScore += quizResponseParams.points;
   } else {
