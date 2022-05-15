@@ -22,7 +22,7 @@ export interface BoardProps {
 function BoardScreen() {
   const { mapState, setParams, gameConfig } = useContext(MapContext);
 
-  const [isQuestionOpen, setIsQuestionOpen] = useState(true);
+  const [isQuestionOpen, setIsQuestionOpen] = useState(false);
   function toggleQuestionModal() {
     setIsQuestionOpen(!isQuestionOpen);
   }
