@@ -24,6 +24,13 @@ function Header() {
                 </div>
               </Nav.Link>
             </LinkContainer>
+            <LinkContainer to="/add_question">
+              <Nav.Link>
+                <div className="container">
+                  <div>【&nbsp;A&nbsp;d&nbsp;d&nbsp;】</div>
+                </div>
+              </Nav.Link>
+            </LinkContainer>
           </div>
         </Nav>
       </div>
