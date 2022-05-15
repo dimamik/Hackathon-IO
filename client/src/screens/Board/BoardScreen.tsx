@@ -26,6 +26,7 @@ function BoardScreen() {
   const [currentTurnPoints, setCurrentTurnPoints] = useState(0);
   const [questions, setQuestions] = useState<Quiz[]>([]);
   const [quizActive, setQuizActive] = useState(false);
+  const [isWaitingOpen, setIsWaitingOpen] = useState(gameConfig.shouldShowModal);
 
   useEffect(() => {
     firstQuestion();
@@ -35,7 +36,6 @@ function BoardScreen() {
     setIsQuestionOpen(!isQuestionOpen);
   }
 
-  const [isWaitingOpen, setIsWaitingOpen] = useState(gameConfig.shouldShowModal);
   function toggleWaitingModal() {
     setIsWaitingOpen(!isWaitingOpen);
   }
@@ -51,10 +51,11 @@ function BoardScreen() {
 
   const closeModal = (correct: boolean) => {
     if (currentQuestion && correct) {
-      setCurrentTurnPoints(currentTurnPoints + currentQuestion.points);
+      const newPoints = currentTurnPoints + currentQuestion.points;
+      setCurrentTurnPoints(newPoints);
       if (!nextQuestion() && mapState.roomID) {
         mapState.socket?.emit('quizResponse', {
-          points: currentTurnPoints,
+          points: newPoints,
           roomID: mapState.roomID,
         });
         setQuizActive(false);

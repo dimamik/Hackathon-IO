@@ -38,7 +38,7 @@ export default class MapProvider extends React.Component<Props> {
   };
 
   setPlayerID = (id: number) => {
-    const promise = new Promise(resolve => {
+    const promise = new Promise<null>(resolve => {
       this.setState(
         {
           mapState: {
@@ -83,7 +83,7 @@ export default class MapProvider extends React.Component<Props> {
   };
 
   setRoomId = (roomID: string) => {
-    const promise = new Promise(resolve => {
+    const promise = new Promise<null>(resolve => {
       this.setState(
         {
           mapState: {
