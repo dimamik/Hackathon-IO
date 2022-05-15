@@ -4,11 +4,10 @@ import Board from '../../components/Board/Board';
 import PlayerStats from '../../components/Statistics/PlayerStats';
 import Modal from 'react-modal';
 import Question from '../../components/Modals/QuestionComponents';
-import './BoardScreen.css';
-import { csRoundParams } from '../../types';
+import { Quiz, scQuizParams, scRoundParams } from '../../types';
 import WaitingForPlayer from '../../components/Modals/WaitingForPlayer';
 import GameOver from '../../components/Modals/GameOverComponts';
-import context from 'react-bootstrap/esm/AccordionContext';
+import './BoardScreen.css';
 
 Modal.setAppElement('#root');
 
@@ -23,6 +22,10 @@ function BoardScreen() {
   const { mapState, setParams, gameConfig } = useContext(MapContext);
 
   const [isQuestionOpen, setIsQuestionOpen] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState<Quiz | null>(null);
+  const [currentTurnPoints, setCurrentTurnPoints] = useState(0);
+  const [questions, setQuestions] = useState<Quiz[]>([]);
+
   function toggleQuestionModal() {
     setIsQuestionOpen(!isQuestionOpen);
   }
@@ -36,9 +39,40 @@ function BoardScreen() {
     setIsGameOver(!isGameOver);
   }
 
-  mapState.socket?.on('round', (ev: csRoundParams) => {
+  mapState.socket?.on('round', (ev: scRoundParams) => {
     setIsWaitingOpen(false);
     setParams(ev, false);
+  });
+
+  const closeModal = (correct: boolean) => {
+    setTimeout(() => {
+      setIsQuestionOpen(false);
+      if (currentQuestion && correct) {
+        setCurrentTurnPoints(currentTurnPoints + currentQuestion?.points);
+        if (!nextQuestion() && mapState.roomID) {
+          mapState.socket?.emit('quizResponse', {
+            points: currentTurnPoints,
+            roomID: mapState.roomID,
+          });
+        }
+      }
+    }, 2000);
+  };
+
+  const nextQuestion = (): boolean => {
+    if (questions.length > 0) {
+      const next = questions[0];
+      setCurrentQuestion(next);
+      setQuestions(questions.filter(question => question != next));
+      setIsQuestionOpen(true);
+      return true;
+    }
+    return false;
+  };
+
+  mapState.socket?.on('quiz', (quizParams: scQuizParams) => {
+    setQuestions(quizParams.questions);
+    nextQuestion();
   });
 
   return (
@@ -52,12 +86,13 @@ function BoardScreen() {
             </div>
           </div>
         </div>
+        x
       </div>
       <br />
       &nbsp;
       <br />
       <Modal isOpen={isQuestionOpen} onRequestClose={toggleQuestionModal} className="mymodal">
-        <Question />
+        <Question quiz={currentQuestion} closeModal={closeModal} />
       </Modal>
       <Modal isOpen={isWaitingOpen} onRequestClose={toggleWaitingModal} className="mymodal">
         <WaitingForPlayer roomID={mapState.roomID} />

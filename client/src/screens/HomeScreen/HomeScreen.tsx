@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { MapContext } from '../../context/Context';
-import { csRoundParams } from '../../types';
+import { scRoundParams } from '../../types';
 import './HomeScreen.css';
 import reset from '../../assets/images/reset.jpeg';
 
@@ -22,7 +22,7 @@ function HomeScreen() {
       });
 
       // drugi gracz dostaje socket
-      socket?.on('round', (ev: csRoundParams) => {
+      socket?.on('round', (ev: scRoundParams) => {
         // teraz routuj do mapy
         setParams(ev, false);
         // setShouldShowModal(false)
