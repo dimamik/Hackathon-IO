@@ -4,7 +4,7 @@ import { MapContext, SecondPlayerMapContext } from '../../context/Context';
 import { scCreatedParams, MapContextType } from '../../types';
 import './Configuration.css';
 import Sound from 'react-sound';
-import backgroundSound from '../../assets/sounds/backgroundSound.mp3'
+import backgroundSound from '../../assets/sounds/backgroundSound.mp3';
 
 const createLocal = (
   {
@@ -20,10 +20,6 @@ const createLocal = (
     height,
     maxPoints,
     maxTime: time,
-    quizParams: {
-      question: '',
-      answers: [],
-    },
     isLocal: false,
   });
 
@@ -53,10 +49,6 @@ const create = (
     height,
     maxPoints,
     maxTime: time,
-    quizParams: {
-      question: '',
-      answers: [],
-    },
     isLocal: false,
   });
 
@@ -75,7 +67,6 @@ function ConfigurationScreen() {
   const context = useContext(MapContext);
   const setShouldShowModal = context.setShouldShowModal;
   const secondPlayerContext = useContext(SecondPlayerMapContext);
-  const { mapState, setRoomId } = context;
   const navigate = useNavigate();
 
   const isValid = width && height && maxPoints && time;

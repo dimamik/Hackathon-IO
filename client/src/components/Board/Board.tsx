@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { BoardFrontend, Coordinates, MapState } from '../types';
+import { BoardFrontend, Coordinates, MapState } from '../../types';
 import './Map.css';
 import { MapContextType } from '../../types';
 

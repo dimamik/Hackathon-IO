@@ -1,6 +1,6 @@
-import React from 'react';
+type Props = { roomID: string | null };
 
-function WaitingForPlayer({ roomID }) {
+function WaitingForPlayer({ roomID }: Props) {
   return (
     <div className="modalView">
       <div className="settingsWindow">

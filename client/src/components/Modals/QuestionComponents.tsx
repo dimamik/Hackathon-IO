@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
+import { Container } from 'react-bootstrap';
 import dolphin from '../../assets/images/dolphin.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './QuestionComponents.css';
@@ -17,6 +17,10 @@ function QuestionComponents(props: Props) {
     setShowCorrect(true);
     props.closeModal(index == props.quiz?.correctAnswer);
   }
+
+  useEffect(() => {
+    console.log('DUPA');
+  }, []);
 
   return props.quiz ? (
     <Container fluid>
@@ -42,6 +46,7 @@ function QuestionComponents(props: Props) {
             {props.quiz.answers.map((answer, index) => {
               return (
                 <button
+                  key={answer + index}
                   type="button"
                   className={`button ${
                     index === props.quiz?.correctAnswer && showCorrect

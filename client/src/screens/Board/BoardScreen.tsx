@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { MapContext } from '../../context/Context';
 import Board from '../../components/Board/Board';
 import PlayerStats from '../../components/Statistics/PlayerStats';
@@ -25,6 +25,11 @@ function BoardScreen() {
   const [currentQuestion, setCurrentQuestion] = useState<Quiz | null>(null);
   const [currentTurnPoints, setCurrentTurnPoints] = useState(0);
   const [questions, setQuestions] = useState<Quiz[]>([]);
+  const [quizActive, setQuizActive] = useState(false);
+
+  useEffect(() => {
+    firstQuestion();
+  }, [quizActive]);
 
   function toggleQuestionModal() {
     setIsQuestionOpen(!isQuestionOpen);
@@ -45,34 +50,44 @@ function BoardScreen() {
   });
 
   const closeModal = (correct: boolean) => {
+    if (currentQuestion && correct) {
+      setCurrentTurnPoints(currentTurnPoints + currentQuestion.points);
+      if (!nextQuestion() && mapState.roomID) {
+        mapState.socket?.emit('quizResponse', {
+          points: currentTurnPoints,
+          roomID: mapState.roomID,
+        });
+        setQuizActive(false);
+      }
+    }
     setTimeout(() => {
       setIsQuestionOpen(false);
-      if (currentQuestion && correct) {
-        setCurrentTurnPoints(currentTurnPoints + currentQuestion?.points);
-        if (!nextQuestion() && mapState.roomID) {
-          mapState.socket?.emit('quizResponse', {
-            points: currentTurnPoints,
-            roomID: mapState.roomID,
-          });
-        }
-      }
     }, 2000);
   };
 
   const nextQuestion = (): boolean => {
-    if (questions.length > 0) {
+    const newQuestions = questions.filter(question => question != currentQuestion);
+    setQuestions(newQuestions);
+    if (newQuestions.length > 0) {
       const next = questions[0];
       setCurrentQuestion(next);
-      setQuestions(questions.filter(question => question != next));
       setIsQuestionOpen(true);
       return true;
     }
     return false;
   };
 
+  const firstQuestion = () => {
+    if (quizActive) {
+      const next = questions[0];
+      setCurrentQuestion(next);
+      setIsQuestionOpen(true);
+    }
+  };
+
   mapState.socket?.on('quiz', (quizParams: scQuizParams) => {
     setQuestions(quizParams.questions);
-    nextQuestion();
+    setQuizActive(true);
   });
 
   return (

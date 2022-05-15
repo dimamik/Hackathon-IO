@@ -18,4 +18,6 @@ export const startQuiz = (room: Room): any => {
   currentPlayerSocket?.emit('quiz', {
     questions: quizes,
   });
+
+  console.log(quizes);
 };

@@ -1,7 +1,7 @@
 import { ClientSocket } from './sockets';
 import { io } from 'socket.io-client';
 import { BoardFrontend } from './types';
-import { csRoundParams } from './dto';
+import { scRoundParams } from './dto';
 
 export interface MapState {
   board: BoardFrontend;
@@ -23,7 +23,7 @@ export interface MapContextType {
   mapState: MapState;
   setRoomId: (roomId: string) => void;
   setMapconfig: (width: number, height: number, maxPoints: number, time: number) => void;
-  setParams: (params: csRoundParams, shouldShowModal: boolean) => void;
+  setParams: (params: scRoundParams, shouldShowModal: boolean) => void;
   setShouldShowModal: (shouldShow: boolean) => void;
 }
 

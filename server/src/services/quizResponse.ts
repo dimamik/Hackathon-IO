@@ -54,4 +54,8 @@ export const handleQuizResponse: QuizAnswerHandler = (socket, quizResponseParams
         : -1;
     room.players.forEach(player => player?.socket?.emit('gameOver', { winner }));
   }
+  console.group();
+  console.log(quizResponseParams);
+  console.log(room.board.boxes);
+  console.groupEnd();
 };

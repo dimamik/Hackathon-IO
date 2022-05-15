@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  MapContextType,
-  MapState,
-  mapStateMock,
-  csRoundParams,
-  gameConfigMock,
-} from '../types/';
+import { MapContextType, mapStateMock, scRoundParams, gameConfigMock } from '../types/';
 
 const initMapContext: () => MapContextType = () => {
   return {
@@ -13,7 +7,7 @@ const initMapContext: () => MapContextType = () => {
     mapState: mapStateMock(),
     setMapconfig: (width: number, height: number, maxPoints: number, time: number) => {},
     setRoomId: roomId => {},
-    setParams: (params: csRoundParams, shouldShowModal: boolean) => {},
+    setParams: (params: scRoundParams, shouldShowModal: boolean) => {},
     setShouldShowModal: (shouldShowModal: boolean) => {},
   };
 };
@@ -32,7 +26,7 @@ export default class MapProvider extends React.Component<Props> {
     config: gameConfigMock,
   };
 
-  setRoundParams = (params: csRoundParams, shouldShowModal: boolean) => {
+  setRoundParams = (params: scRoundParams, shouldShowModal: boolean) => {
     console.log(params);
     this.setState({
       mapState: {
