@@ -1,6 +1,6 @@
 import React from 'react'
 
-function WaitingForPlayer() {
+function WaitingForPlayer({roomID}) {
     return (
         <div className="modalView">
             <div className="settingsWindow">
@@ -18,7 +18,7 @@ function WaitingForPlayer() {
                         <div className="settingTitle">
                             <p>【Your game code:】</p>
                         </div>
-                        <div>code</div>
+                        <div>{roomID}</div>
                     </div>
                 </div>
             </div>

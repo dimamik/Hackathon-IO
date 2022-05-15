@@ -31,7 +31,6 @@ function BoardScreen() {
 
   mapState.socket?.on('round', (ev: csRoundParams) => {
     setParams(ev);
-    // TODO: wypierdolic modal z oczekiwaniem
   });
 
   return (
@@ -49,12 +48,11 @@ function BoardScreen() {
       <br />
       &nbsp;
       <br />
-      <button onClick={toggleWaitingModal}>Toggle modal</button>
       <Modal isOpen={isQuestionOpen} onRequestClose={toggleQuestionModal} className="mymodal">
         <Question />
       </Modal>
       <Modal isOpen={isWaitingOpen} onRequestClose={toggleWaitingModal} className="mymodal">
-        <WaitingForPlayer />
+        <WaitingForPlayer roomID={mapState.roomID} />
       </Modal>
     </div>
   );
