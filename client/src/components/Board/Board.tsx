@@ -188,6 +188,8 @@ function SquareRow({ width, y, board }: RowProps) {
 function Board() {
   const { mapState: {board} } = useContext(MapContext);
 
+  console.log("noard", board)
+
   const rows = [];
 
   const width = board.width;

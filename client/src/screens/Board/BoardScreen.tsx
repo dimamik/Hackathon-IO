@@ -18,19 +18,21 @@ export interface BoardProps {
 }
 
 function BoardScreen() {
-  const { mapState, setParams } = useContext(MapContext);
+  const { mapState, setParams, gameConfig } = useContext(MapContext);
 
   const [isQuestionOpen, setIsQuestionOpen] = useState(false);
   function toggleQuestionModal() {
     setIsQuestionOpen(!isQuestionOpen);
   }
-  const [isWaitingOpen, setIsWaitingOpen] = useState(true);
+
+  const [isWaitingOpen, setIsWaitingOpen] = useState(gameConfig.shouldShowModal);
   function toggleWaitingModal() {
     setIsWaitingOpen(!isWaitingOpen);
   }
 
   mapState.socket?.on('round', (ev: csRoundParams) => {
-    setParams(ev);
+    setIsWaitingOpen(false);
+    setParams(ev, false);
   });
 
   return (
