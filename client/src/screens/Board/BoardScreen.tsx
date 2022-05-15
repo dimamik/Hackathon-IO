@@ -82,7 +82,7 @@ function BoardScreen() {
         <div className="white-border">
           <div className="grey-border">
             <div className="violet-border">
-              <Board />
+              <Board contextInstance={MapContext} />
             </div>
           </div>
         </div>

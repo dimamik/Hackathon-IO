@@ -1,6 +1,5 @@
 import { BoardFrontend, Quiz, Move } from './types';
 
-
 export type csCreateParams = {
   width: number;
   height: number;

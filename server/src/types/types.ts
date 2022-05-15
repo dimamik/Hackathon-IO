@@ -18,13 +18,15 @@ export interface MapProps {
   width: number;
 }
 
-export type QuizParams = {
+export type Quiz = {
   question: string;
   answers: string[];
+  correctAnswer: number;
+  points: number;
 };
 
 export type ServerToClientDTO = {
   board: BoardFrontend;
   currentPlayer: Player;
-  quizParams: QuizParams;
+  quizParams: Quiz;
 };
