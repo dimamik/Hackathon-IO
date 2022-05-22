@@ -59,7 +59,7 @@ function LocalBoardScreen() {
 
   return (
     <div className="board-container">
-      <PlayerStats firstPlayerScore={0} secondPlayerScore={0}/>
+      <PlayerStats firstPlayerScore={0} secondPlayerScore={0} />
       <div className="grey-border">
         <div className="white-border">
           <div className="grey-border">
