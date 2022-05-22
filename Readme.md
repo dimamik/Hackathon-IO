@@ -28,9 +28,11 @@ yarn dev
 # Deployment
 
 ## server
+
 ```
 git subtree push --prefix server heroku master
 ```
 
 ## client
+
 Run `yarn build` locally, then manually upload dir to netlify.
