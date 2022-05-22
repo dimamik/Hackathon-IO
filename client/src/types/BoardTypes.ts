@@ -60,7 +60,7 @@ export const mapStateMock: () => MapState = () => {
     },
     isMyMove: true,
     roomID: '',
-    socket: io(process.env.SERVER ?? 'http://localhost:4000'),
+    socket: io(import.meta.env.VITE_BACKEND),
   };
 };
 
