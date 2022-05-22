@@ -10,6 +10,8 @@ import { getRandomQuiz, addQuiz } from './utils/quiz';
 
 import cors from 'cors';
 
+const PORT = process.env.PORT || 4000;
+
 const app = express();
 app.use(express.json());
 
@@ -34,8 +36,8 @@ io.on('connection', (socket: ServerSocket) => {
 
 // Add cors to http server
 
-httpServer.listen(4000, () => {
-  console.log('Listening on port 4000');
+httpServer.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
 });
 
 app.use(

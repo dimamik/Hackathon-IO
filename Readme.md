@@ -24,3 +24,10 @@ yarn dev
 ```shell
 yarn dev
 ```
+
+# Deployment
+
+## server
+```
+git subtree push --prefix server heroku master
+```
