@@ -24,7 +24,12 @@ export interface MapContextType {
   mapState: MapState;
   setRoomId: (roomId: string) => Promise<null>;
   setPlayerID: (id: number) => Promise<null>;
-  setMapconfig: (width: number, height: number, maxPoints: number, time: number) => void;
+  setMapconfig: (
+    width: number,
+    height: number,
+    maxPoints: number,
+    time: number,
+  ) => Promise<null>;
   setParams: (params: scRoundParams, shouldShowModal: boolean) => Promise<null>;
   setShouldShowModal: (shouldShow: boolean) => void;
 }
@@ -50,6 +55,8 @@ export const mapStateMock: () => MapState = () => {
       },
       height: 1,
       width: 1,
+      firstPlayerScore: 0,
+      secondPlayerScore: 0,
     },
     isMyMove: true,
     roomID: '',

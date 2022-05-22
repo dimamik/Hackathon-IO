@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  MapContextType,
-  MapState,
-  mapStateMock,
-  scRoundParams,
-  gameConfigMock,
-} from '../types/';
+import { MapContextType, mapStateMock, scRoundParams, gameConfigMock } from '../types/';
 
 const initMapContext: () => MapContextType = () => {
   return {
@@ -14,13 +8,10 @@ const initMapContext: () => MapContextType = () => {
     setPlayerID: (id: number) => {
       return Promise.resolve(null);
     },
-    setMapconfig: (width: number, height: number, maxPoints: number, time: number) => {},
-    setRoomId: roomId => {
-      return Promise.resolve(null);
-    },
-    setParams: (params: scRoundParams, shouldShowModal: boolean) => {
-      return Promise.resolve(null);
-    },
+    setMapconfig: (width: number, height: number, maxPoints: number, time: number) =>
+      Promise.resolve(null),
+    setRoomId: roomId => Promise.resolve(null),
+    setParams: (params: scRoundParams, shouldShowModal: boolean) => Promise.resolve(null),
     setShouldShowModal: (shouldShowModal: boolean) => {},
   };
 };
@@ -58,35 +49,41 @@ export default class MapProvider extends React.Component<Props> {
 
   setRoundParams = (params: scRoundParams, shouldShowModal: boolean) => {
     const promise = new Promise<null>(resolve => {
-      this.setState({
-        mapState: {
-          ...this.state.mapState,
-          board: params.board,
-          isMyMove: params.isMyMove,
+      this.setState(
+        {
+          mapState: {
+            ...this.state.mapState,
+            board: params.board,
+            isMyMove: params.isMyMove,
+          },
+          config: {
+            ...this.state.config,
+            shouldShowModal,
+          },
         },
-        config: {
-          ...this.state.config,
-          shouldShowModal,
+        () => {
+          resolve(null);
         },
-      },
-      () => {
-        resolve(null);
-      });
-    })
+      );
+    });
     return promise;
   };
 
   setMapconfig = (width: number, height: number, maxPoints: number, time: number) => {
-    this.setState({
-      mapState: this.state.mapState,
-      config: {
-        ...this.state.config,
-        width,
-        height,
-        maxPoints,
-        time,
-      },
+    const promise = new Promise<null>(resolve => {
+      this.setState({
+        mapState: this.state.mapState,
+        config: {
+          ...this.state.config,
+          width,
+          height,
+          maxPoints,
+          time,
+        },
+      });
+      resolve(null);
     });
+    return promise;
   };
 
   setRoomId = (roomID: string) => {
@@ -133,7 +130,4 @@ export default class MapProvider extends React.Component<Props> {
       </this.props.contextInstance.Provider>
     );
   }
-}
-function BoardFrontend(board: any, BoardFrontend: any) {
-  throw new Error('Function not implemented.');
 }

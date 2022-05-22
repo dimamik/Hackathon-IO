@@ -62,9 +62,9 @@ const create = (
 };
 
 function ConfigurationScreen() {
-  const [width, setWidth] = useState(5);
-  const [height, setHeight] = useState(5);
-  const [maxPoints, setMaxPoints] = useState(5);
+  const [width, setWidth] = useState(10);
+  const [height, setHeight] = useState(10);
+  const [maxPoints, setMaxPoints] = useState(50);
   const [time, setTime] = useState(10);
   const [isMaxPointsChecked, setMaxPointsChecked] = useState(false);
   const context = useContext(MapContext);
@@ -165,7 +165,16 @@ function ConfigurationScreen() {
                   type="button"
                   className="playButton"
                   disabled={!isValid}
-                  onClick={() => create(context, () => navigate('/board'))}>
+                  onClick={() => {
+                    context.setMapconfig(width, height, maxPoints, time);
+                    create(
+                      {
+                        ...context,
+                        gameConfig: { ...context.gameConfig, width, height, maxPoints, time },
+                      },
+                      () => navigate('/board'),
+                    );
+                  }}>
                   Ｎｅｔｗｏｒｋ
                 </button>
               </div>
