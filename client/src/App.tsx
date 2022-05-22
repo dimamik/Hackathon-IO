@@ -5,7 +5,7 @@ import Header from './components/Header/Header';
 import HomeScreen from './screens/HomeScreen/HomeScreen';
 import MapProvider, { MapContext, SecondPlayerMapContext } from './context/Context';
 import BoardScreen from './screens/Board/BoardScreen';
-import LocalBoardScreen from './screens/Board/LocalBoardScreen';
+// import LocalBoardScreen from './screens/Board/LocalBoardScreen';
 import ConfigurationScreen from './screens/Configuration/ConfigurationScreen';
 import QuestionComponents from './components/Modals/QuestionComponents';
 import GameOverComponts from './components/Modals/GameOverComponts';
@@ -33,7 +33,7 @@ function App() {
               <Route path="/" element={<HomeScreen />} />
               <Route path="/home" element={<HomeScreen />} />
               <Route path="/board" element={<BoardScreen />} />
-              <Route path="/boardLocal" element={<LocalBoardScreen />} />
+              {/* <Route path="/boardLocal" element={<LocalBoardScreen />} /> */}
               <Route path="/configuration" element={<ConfigurationScreen />} />
               <Route path="/add_question" element={<AdditionalQuestionScreen />} />
             </Routes>
