@@ -1,4 +1,6 @@
-# To run the server:
+The app is deployed to https://vaporwiet.netlify.app/
+
+# To run the server locally:
 
 ## Need to have:
 
