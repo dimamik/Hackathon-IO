@@ -1,4 +1,3 @@
-import React from 'react';
 import { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -37,10 +36,10 @@ function AdditionalQuestionScreen() {
 
     await axios({
       method: 'post',
-      url: 'http://localhost:4000/add_question',
+      url: `${import.meta.env.VITE_BACKEND}/add_question`,
       headers: {},
       data: {
-        quiz: quiz, // This is the body part
+        quiz,
       },
     });
 

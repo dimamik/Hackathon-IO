@@ -68,7 +68,6 @@ function ConfigurationScreen() {
   const [time, setTime] = useState(10);
   const [isMaxPointsChecked, setMaxPointsChecked] = useState(false);
   const context = useContext(MapContext);
-  const setShouldShowModal = context.setShouldShowModal;
   const secondPlayerContext = useContext(SecondPlayerMapContext);
   const navigate = useNavigate();
 
